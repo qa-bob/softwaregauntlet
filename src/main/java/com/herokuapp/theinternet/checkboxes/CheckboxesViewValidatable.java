@@ -1,8 +1,9 @@
 package com.herokuapp.theinternet.checkboxes;
 
 import com.herokuapp.theinternet.region.footer.TheInternetFooterValidatable;
+import com.herokuapp.theinternet.region.header.TheInternetHeaderValidatable;
 
-public interface CheckboxViewValidatable {
+public interface CheckboxesViewValidatable {
     String getTitle();
 
     Boolean isCheckbox1Selected();
@@ -14,4 +15,6 @@ public interface CheckboxViewValidatable {
     String getCheckbox2Label();
 
     TheInternetFooterValidatable inFooter();
+
+    TheInternetHeaderValidatable inHeader();
 }

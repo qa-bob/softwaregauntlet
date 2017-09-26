@@ -1,20 +1,20 @@
 package com.herokuapp.theinternet.checkboxes;
 
 import com.herokuapp.theinternet.region.footer.TheInternetFooterExpected;
-import com.herokuapp.theinternet.region.footer.TheInternetFooterValidatable;
+import com.herokuapp.theinternet.region.header.TheInternetHeaderExpected;
 
-public class CheckboxViewExpected implements CheckboxViewValidatable {
+public class CheckboxesViewExpected implements CheckboxesViewValidatable {
     private final boolean isCheckbox1Selected;
     private final boolean isCheckbox2Selected;
-    private CheckboxViewCopy copy;
+    private CheckboxesViewCopy copy;
 
-    private CheckboxViewExpected(int numberOfTimesCheckbox1Selected, int numberOfTimesCheckbox2Selected) {
+    private CheckboxesViewExpected(int numberOfTimesCheckbox1Selected, int numberOfTimesCheckbox2Selected) {
         this.isCheckbox1Selected = !(numberOfTimesCheckbox1Selected == 0 || (numberOfTimesCheckbox1Selected % 2) == 0);
         this.isCheckbox2Selected = (numberOfTimesCheckbox2Selected == 0 || (numberOfTimesCheckbox2Selected % 2) == 0);
     }
 
-    static CheckboxViewExpected getInstance(int numberOfTimesCheckbox1Selected, int numberOfTimesCheckbox2Selected) {
-        return new CheckboxViewExpected(numberOfTimesCheckbox1Selected, numberOfTimesCheckbox2Selected);
+    static CheckboxesViewExpected getInstance(int numberOfTimesCheckbox1Selected, int numberOfTimesCheckbox2Selected) {
+        return new CheckboxesViewExpected(numberOfTimesCheckbox1Selected, numberOfTimesCheckbox2Selected);
     }
 
     @Override
@@ -22,9 +22,9 @@ public class CheckboxViewExpected implements CheckboxViewValidatable {
         return getCopy().getTitle();
     }
 
-    private CheckboxViewCopy getCopy() {
+    private CheckboxesViewCopy getCopy() {
         if (copy == null) {
-            copy = CheckboxViewCopy.getInstance();
+            copy = CheckboxesViewCopy.getInstance();
         }
         return copy;
     }
@@ -52,5 +52,10 @@ public class CheckboxViewExpected implements CheckboxViewValidatable {
     @Override
     public TheInternetFooterExpected inFooter() {
         return TheInternetFooterExpected.getInstance();
+    }
+
+    @Override
+    public TheInternetHeaderExpected inHeader() {
+        return TheInternetHeaderExpected.getInstance();
     }
 }

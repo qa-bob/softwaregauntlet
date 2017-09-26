@@ -1,25 +1,28 @@
 package com.herokuapp.theinternet.checkboxes;
 
 import com.herokuapp.theinternet.region.footer.TheInternetFooter;
+import com.herokuapp.theinternet.region.header.TheInternetHeader;
+import com.softwareonpurpose.gauntlet.environment.Environment;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
 
-public class CheckboxView extends UiView implements CheckboxViewValidatable {
+public class CheckboxesView extends UiView implements CheckboxesViewValidatable {
     private static final String DESCRIPTION = "'Checkboxes' view";
-    private static final String VIEW_URI = "http://the-internet.herokuapp.com/checkboxes";
+    private static final String DOMAIN_URI = Environment.getInstance().getDomainUri();
+    private static final String VIEW_URI = String.format("%s/%s", DOMAIN_URI, "checkboxes");
 
     /**
      * @deprecated Exclusively for use by UiNavigator; NOT to be called explicitly
      */
     @SuppressWarnings("DeprecatedIsStillUsed")
-    public CheckboxView() {
+    public CheckboxesView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, UiElement.LocatorType.TAG, "body"));
     }
 
-    static CheckboxView directNav() {
-        instantiateView(CheckboxView.class).load();
-        return expect(CheckboxView.class);
+    static CheckboxesView directNav() {
+        instantiateView(CheckboxesView.class).load();
+        return expect(CheckboxesView.class);
     }
 
     @Override
@@ -63,6 +66,11 @@ public class CheckboxView extends UiView implements CheckboxViewValidatable {
         return TheInternetFooter.getInstance(this.getElement());
     }
 
+    @Override
+    public TheInternetHeader inHeader() {
+        return TheInternetHeader.getInstance(this.getElement());
+    }
+
     private String[] getFormText() {
         return getFormElement().getText().split("\n");
     }
@@ -81,12 +89,12 @@ public class CheckboxView extends UiView implements CheckboxViewValidatable {
         return UiElement.getInstance("Checkbox Form", UiElement.LocatorType.ID, "checkboxes", this.getElement());
     }
 
-    CheckboxView selectCheckbox(int ordinal, int numberOfSelections) {
-        CheckboxView view;
+    CheckboxesView selectCheckbox(int ordinal, int numberOfSelections) {
+        CheckboxesView view;
         for (int current = 1; current <= numberOfSelections; current += 1) {
-            view = expect(CheckboxView.class);
+            view = expect(CheckboxesView.class);
             view.getCheckboxElement(ordinal).click();
         }
-        return expect(CheckboxView.class);
+        return expect(CheckboxesView.class);
     }
 }
