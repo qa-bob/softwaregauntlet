@@ -4,7 +4,7 @@ import com.softwareonpurpose.gauntlet.GauntletTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test
+@Test(groups = {GauntletTest.Application.THE_INTERNET, GauntletTest.View.DROPDOWN})
 public class DropdownTest extends GauntletTest {
     @DataProvider
     public static Object[][] options() {
@@ -36,7 +36,7 @@ public class DropdownTest extends GauntletTest {
         confirm(DropdownViewValidator.getInstance(expected, actual).validate());
     }
 
-    @Test(groups = {TestType.RELEASE, TestType.DEV}, dataProvider = "multipleOptions")
+    @Test(groups = {TestType.RELEASE}, dataProvider = "multipleOptions")
     public void selectTwoOptionsSequentially(String firstOption, String secondOption) {
         DropdownViewExpected expected = DropdownViewExpected.getInstance(secondOption);
         DropdownView actual = DropdownView.directNav().inContent().select(firstOption).inContent().select(secondOption);
