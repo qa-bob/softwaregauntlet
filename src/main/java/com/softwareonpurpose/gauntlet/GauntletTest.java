@@ -82,6 +82,7 @@ public abstract class GauntletTest {
      * Names of Applications under test
      */
     public class Application {
+        public static final String THE_INTERNET = "the_internet";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -90,6 +91,9 @@ public abstract class GauntletTest {
      * Names of Views from applications under test
      */
     public class View {
+        public static final String CHECKBOXES = "checkboxes";
+        public static final String DROPDOWN = "dropdown";
+        public static final String DYNAMIC_CONTROLS = "dynamic_controls";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
