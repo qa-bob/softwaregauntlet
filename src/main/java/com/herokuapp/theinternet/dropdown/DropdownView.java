@@ -9,8 +9,7 @@ import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
 
 public class DropdownView extends UiView implements DropdownViewValidatable {
-    private static final String DOMAIN_URI = Environment.getInstance().getDomainUri();
-    private static final String VIEW_URI = String.format("%s/%s", DOMAIN_URI, "dropdown");
+    private static final String VIEW_URI = String.format("%s/%s", Environment.getInstance().getDomainUri(), "dropdown");
     private static final String DESCRIPTION = "'Dropdown' view";
     private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
     private static final String LOCATOR_VIEW = "body";
