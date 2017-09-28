@@ -6,6 +6,7 @@ import com.herokuapp.theinternet.region.header.TheInternetHeaderValidatable;
 
 public interface DropdownViewValidatable {
     String OPTION_ONE = "1";
+    String OPTION_TWO = "2";
 
     TheInternetHeaderValidatable inHeader();
 
