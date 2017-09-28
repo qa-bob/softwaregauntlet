@@ -4,4 +4,6 @@ public interface DropdownContentValidatable {
     String getSelectedOption();
 
     String getHeading();
+
+    Boolean isDefaultOptionEnabled();
 }

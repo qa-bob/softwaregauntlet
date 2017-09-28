@@ -21,5 +21,6 @@ public class DropdownContentValidator extends Validator {
     protected void executeVerifications() {
         verify("Title", expected.getHeading(), actual.getHeading());
         verify("Selected option", expected.getSelectedOption(), actual.getSelectedOption());
+        verify("'Please select an option' enabled", expected.isDefaultOptionEnabled(), actual.isDefaultOptionEnabled());
     }
 }
