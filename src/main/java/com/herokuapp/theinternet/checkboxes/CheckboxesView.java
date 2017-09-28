@@ -9,8 +9,7 @@ import com.softwareonpurpose.uinavigator.UiView;
 
 public class CheckboxesView extends UiView implements CheckboxesViewValidatable {
     private static final String DESCRIPTION = "'Checkboxes' view";
-    private static final String DOMAIN_URI = Environment.getInstance().getDomainUri();
-    private static final String VIEW_URI = String.format("%s/%s", DOMAIN_URI, "checkboxes");
+    private static final String VIEW_URI = String.format("%s/%s", Environment.getInstance().getDomainUri(), "checkboxes");
 
     /**
      * @deprecated Exclusively for use by UiNavigator; NOT to be called explicitly
