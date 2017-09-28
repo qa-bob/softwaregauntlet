@@ -7,7 +7,7 @@ import com.softwareonpurpose.gauntlet.GauntletTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test
+@Test(groups={GauntletTest.Application.THE_INTERNET, GauntletTest.View.CHECKBOXES})
 public class CheckboxesTest extends GauntletTest {
 
     @DataProvider
