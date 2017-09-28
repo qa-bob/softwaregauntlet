@@ -40,17 +40,24 @@ public class DropdownContent extends UiRegion implements DropdownContentValidata
         return UiElement.getInstance("Default Option", UiElement.LocatorType.TAG, "option", 1, getSelectElement());
     }
 
-    public DropdownView clickSelect() {
+    private DropdownView clickSelect() {
         getSelectElement().click();
         return DropdownView.expect(DropdownView.class);
     }
 
-    public DropdownView clickOption(String option) {
+    private DropdownView clickOption(String option) {
         getOptionElement(option).click();
         return DropdownView.expect(DropdownView.class);
     }
 
     private UiElement getOptionElement(String option) {
         return UiElement.getInstance(String.format("'%s' option", option), UiElement.LocatorType.TAG, "option", "value", option, getSelectElement());
+    }
+
+    public DropdownView select(String option) {
+        UiRegion.suppressConstructionLogging(true);
+        DropdownView dropdownView = clickSelect().inContent().clickOption(option);
+        UiRegion.suppressConstructionLogging(false);
+        return dropdownView;
     }
 }

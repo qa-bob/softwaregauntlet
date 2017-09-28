@@ -14,6 +14,14 @@ public class DropdownTest extends GauntletTest {
         };
     }
 
+    @DataProvider
+    public static Object[][] multipleOptions() {
+        return new Object[][]{
+                {DropdownViewValidatable.OPTION_ONE, DropdownViewValidatable.OPTION_TWO},
+                {DropdownViewValidatable.OPTION_TWO, DropdownViewValidatable.OPTION_ONE}
+        };
+    }
+
     @Test(groups = {TestType.EVT})
     public void smoke() {
         DropdownViewExpected expected = DropdownViewExpected.getInstance();
@@ -21,10 +29,17 @@ public class DropdownTest extends GauntletTest {
         confirm(DropdownViewValidator.getInstance(expected, actual).validate());
     }
 
-    @Test(groups = {TestType.RELEASE, TestType.DEV}, dataProvider = "options")
-    public void optionOne(String option) {
+    @Test(groups = {TestType.RELEASE}, dataProvider = "options")
+    public void selectOption(String option) {
         DropdownViewExpected expected = DropdownViewExpected.getInstance(option);
-        DropdownView actual = DropdownView.directNav().inContent().clickSelect().inContent().clickOption(option);
+        DropdownView actual = DropdownView.directNav().inContent().select(option);
+        confirm(DropdownViewValidator.getInstance(expected, actual).validate());
+    }
+
+    @Test(groups = {TestType.RELEASE, TestType.DEV}, dataProvider = "multipleOptions")
+    public void selectTwoOptionsSequentially(String firstOption, String secondOption) {
+        DropdownViewExpected expected = DropdownViewExpected.getInstance(secondOption);
+        DropdownView actual = DropdownView.directNav().inContent().select(firstOption).inContent().select(secondOption);
         confirm(DropdownViewValidator.getInstance(expected, actual).validate());
     }
 }
