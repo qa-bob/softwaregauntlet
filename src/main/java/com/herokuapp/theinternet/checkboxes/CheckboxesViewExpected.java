@@ -1,5 +1,6 @@
 package com.herokuapp.theinternet.checkboxes;
 
+import com.herokuapp.theinternet.checkboxes.content.CheckboxesContentExpected;
 import com.herokuapp.theinternet.region.footer.TheInternetFooterExpected;
 import com.herokuapp.theinternet.region.header.TheInternetHeaderExpected;
 
@@ -57,5 +58,10 @@ public class CheckboxesViewExpected implements CheckboxesViewValidatable {
     @Override
     public TheInternetHeaderExpected inHeader() {
         return TheInternetHeaderExpected.getInstance();
+    }
+
+    @Override
+    public CheckboxesContentExpected inContent() {
+        return CheckboxesContentExpected.getInstance();
     }
 }

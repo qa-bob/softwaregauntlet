@@ -17,4 +17,6 @@ public interface CheckboxesViewValidatable {
     TheInternetFooterValidatable inFooter();
 
     TheInternetHeaderValidatable inHeader();
+
+    CheckboxesContentValidatable inContent();
 }

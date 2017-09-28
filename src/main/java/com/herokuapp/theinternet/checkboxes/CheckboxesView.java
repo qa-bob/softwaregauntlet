@@ -1,5 +1,6 @@
 package com.herokuapp.theinternet.checkboxes;
 
+import com.herokuapp.theinternet.checkboxes.content.CheckboxesContent;
 import com.herokuapp.theinternet.region.footer.TheInternetFooter;
 import com.herokuapp.theinternet.region.header.TheInternetHeader;
 import com.softwareonpurpose.gauntlet.environment.Environment;
@@ -68,6 +69,11 @@ public class CheckboxesView extends UiView implements CheckboxesViewValidatable 
     @Override
     public TheInternetHeader inHeader() {
         return TheInternetHeader.getInstance(this.getElement());
+    }
+
+    @Override
+    public CheckboxesContent inContent() {
+        return CheckboxesContent.getInstance(this.getElement());
     }
 
     private String[] getFormText() {

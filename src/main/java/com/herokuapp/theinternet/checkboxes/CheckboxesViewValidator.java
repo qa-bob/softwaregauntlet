@@ -1,5 +1,6 @@
 package com.herokuapp.theinternet.checkboxes;
 
+import com.herokuapp.theinternet.checkboxes.content.CheckboxesContentValidator;
 import com.herokuapp.theinternet.region.footer.TheInternetFooterValidator;
 import com.herokuapp.theinternet.region.header.TheInternetHeaderValidator;
 import com.softwareonpurpose.uinavigator.UiRegion;
@@ -15,6 +16,7 @@ public class CheckboxesViewValidator extends Validator {
         this.actual = actual;
         UiRegion.suppressConstructionLogging(true);
         addChildValidator(TheInternetHeaderValidator.getInstance(expected.inHeader(), actual.inHeader(), this));
+        addChildValidator(CheckboxesContentValidator.getInstance(expected.inContent(), actual.inContent(), this));
         addChildValidator(TheInternetFooterValidator.getInstance(expected.inFooter(), actual.inFooter(), this));
         UiRegion.suppressConstructionLogging(false);
     }
