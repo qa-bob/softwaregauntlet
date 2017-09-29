@@ -33,35 +33,6 @@ public class CheckboxesView extends UiView implements CheckboxesViewValidatable 
     }
 
     @Override
-    public String getTitle() {
-        return getTitleElement().getText();
-    }
-
-    private UiElement getTitleElement() {
-        return UiElement.getInstance("Title", UiElement.LocatorType.TAG, "h3", this.getElement());
-    }
-
-    @Override
-    public Boolean isCheckbox1Selected() {
-        return isCheckboxSelected(1);
-    }
-
-    @Override
-    public Boolean isCheckbox2Selected() {
-        return isCheckboxSelected(2);
-    }
-
-    @Override
-    public String getCheckbox1Label() {
-        return getFormText()[0];
-    }
-
-    @Override
-    public String getCheckbox2Label() {
-        return getFormText()[1];
-    }
-
-    @Override
     public TheInternetFooter inFooter() {
         return TheInternetFooter.getInstance(this.getElement());
     }
@@ -76,30 +47,7 @@ public class CheckboxesView extends UiView implements CheckboxesViewValidatable 
         return CheckboxesContent.getInstance(this.getElement());
     }
 
-    private String[] getFormText() {
-        return getFormElement().getText().split("\n");
-    }
-
-    private Boolean isCheckboxSelected(int ordinal) {
-        String tip = getCheckboxElement(ordinal).getAttribute("checked");
-        return tip != null && tip.equals("true");
-    }
-
-    private UiElement getCheckboxElement(int ordinal) {
-        String description = String.format("Checkbox %d", ordinal);
-        return UiElement.getInstance(description, UiElement.LocatorType.TAG, "input", ordinal, getFormElement());
-    }
-
-    private UiElement getFormElement() {
-        return UiElement.getInstance("Checkbox Form", UiElement.LocatorType.ID, "checkboxes", this.getElement());
-    }
-
-    CheckboxesView selectCheckbox(int ordinal, int numberOfSelections) {
-        CheckboxesView view;
-        for (int current = 1; current <= numberOfSelections; current += 1) {
-            view = expect(CheckboxesView.class);
-            view.getCheckboxElement(ordinal).click();
-        }
-        return expect(CheckboxesView.class);
+    CheckboxesView select(int checkboxOrdinal, Integer numberOfClicks) {
+        return inContent().selectCheckbox(checkboxOrdinal, numberOfClicks);
     }
 }

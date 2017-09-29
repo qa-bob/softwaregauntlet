@@ -7,7 +7,7 @@ import com.softwareonpurpose.gauntlet.GauntletTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups={GauntletTest.Application.THE_INTERNET, GauntletTest.View.CHECKBOXES})
+@Test(groups = {GauntletTest.Application.THE_INTERNET, GauntletTest.View.CHECKBOXES})
 public class CheckboxesTest extends GauntletTest {
 
     @DataProvider
@@ -37,7 +37,7 @@ public class CheckboxesTest extends GauntletTest {
         Integer checkbox1Selections = testData.getCheckbox1Selections();
         Integer checkbox2Selections = testData.getCheckbox2Selections();
         CheckboxesViewExpected expected = CheckboxesViewExpected.getInstance(checkbox1Selections, checkbox2Selections);
-        CheckboxesView actual = CheckboxesView.directNav().selectCheckbox(1, checkbox1Selections).selectCheckbox(2, checkbox2Selections);
+        CheckboxesView actual = CheckboxesView.directNav().select(1, checkbox1Selections).select(2, checkbox2Selections);
         confirm(CheckboxesViewValidator.getInstance(expected, actual).validate());
     }
 }

@@ -27,10 +27,5 @@ public class CheckboxesViewValidator extends Validator {
 
     @Override
     protected void executeVerifications() {
-        verify("Title", expected.getTitle(), actual.getTitle());
-        verify("'Checkbox 1' label", expected.getCheckbox1Label(), actual.getCheckbox1Label());
-        verify("'Checkbox 2' label", expected.getCheckbox2Label(), actual.getCheckbox2Label());
-        verify("Checkbox 1", expected.isCheckbox1Selected(), actual.isCheckbox1Selected());
-        verify("Checkbox 2", expected.isCheckbox2Selected(), actual.isCheckbox2Selected());
     }
 }
