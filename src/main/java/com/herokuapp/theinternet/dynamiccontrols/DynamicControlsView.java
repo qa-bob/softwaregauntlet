@@ -1,5 +1,6 @@
 package com.herokuapp.theinternet.dynamiccontrols;
 
+import com.herokuapp.theinternet.dynamiccontrols.content.DynamicControlsContent;
 import com.herokuapp.theinternet.region.footer.TheInternetFooter;
 import com.herokuapp.theinternet.region.header.TheInternetHeader;
 import com.softwareonpurpose.gauntlet.environment.Environment;
@@ -41,5 +42,10 @@ public class DynamicControlsView extends UiView implements DynamicControlsViewVa
     @Override
     public TheInternetFooter inFooter() {
         return TheInternetFooter.getInstance(this.getElement());
+    }
+
+    @Override
+    public DynamicControlsContent inContent() {
+        return DynamicControlsContent.getInstance(this.getElement());
     }
 }

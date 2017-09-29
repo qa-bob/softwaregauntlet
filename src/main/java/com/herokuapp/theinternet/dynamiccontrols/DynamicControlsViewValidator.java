@@ -1,5 +1,6 @@
 package com.herokuapp.theinternet.dynamiccontrols;
 
+import com.herokuapp.theinternet.dynamiccontrols.content.DynamicControlsContentValidator;
 import com.herokuapp.theinternet.region.footer.TheInternetFooterValidator;
 import com.herokuapp.theinternet.region.header.TheInternetHeaderValidator;
 import com.softwareonpurpose.uinavigator.UiRegion;
@@ -12,6 +13,7 @@ public class DynamicControlsViewValidator extends Validator {
         super(DESCRIPTION, expected, actual);
         UiRegion.suppressConstructionLogging(true);
         addChildValidator(TheInternetHeaderValidator.getInstance(expected.inHeader(), actual.inHeader(), this));
+        addChildValidator(DynamicControlsContentValidator.getInstance(expected.inContent(), actual.inContent(), this));
         addChildValidator(TheInternetFooterValidator.getInstance(expected.inFooter(), actual.inFooter(), this));
         UiRegion.suppressConstructionLogging(false);
     }

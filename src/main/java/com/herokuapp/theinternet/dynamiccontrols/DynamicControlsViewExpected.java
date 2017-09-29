@@ -1,10 +1,11 @@
 package com.herokuapp.theinternet.dynamiccontrols;
 
+import com.herokuapp.theinternet.dynamiccontrols.content.DynamicControlsContentExpected;
 import com.herokuapp.theinternet.region.footer.TheInternetFooterExpected;
 import com.herokuapp.theinternet.region.header.TheInternetHeaderExpected;
 
 public class DynamicControlsViewExpected implements DynamicControlsViewValidatable {
-    public static DynamicControlsViewExpected getDefaultInstance() {
+    static DynamicControlsViewExpected getDefaultInstance() {
         return new DynamicControlsViewExpected();
     }
 
@@ -16,5 +17,10 @@ public class DynamicControlsViewExpected implements DynamicControlsViewValidatab
     @Override
     public TheInternetFooterExpected inFooter() {
         return TheInternetFooterExpected.getInstance();
+    }
+
+    @Override
+    public DynamicControlsContentExpected inContent() {
+        return DynamicControlsContentExpected.getInstance();
     }
 }
