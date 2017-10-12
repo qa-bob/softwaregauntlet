@@ -14,6 +14,7 @@
 package com.softwareonpurpose.gauntlet;
 
 import com.softwareonpurpose.uinavigator.UiHost;
+import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
 import com.softwareonpurpose.validator4test.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,14 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
+        String browser = System.getProperty("browser");
+        if (browser != null) {
+            switch (browser) {
+                case "ie":
+                    UiHost.setDriverInstantiation(DefaultIeInstantiation.getInstance());
+                default:
+            }
+        }
     }
 
     @BeforeMethod(alwaysRun = true)
