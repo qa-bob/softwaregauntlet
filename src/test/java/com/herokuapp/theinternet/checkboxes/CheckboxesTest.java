@@ -25,19 +25,23 @@ public class CheckboxesTest extends GauntletTest {
     @Test(groups = TestType.EVT)
     public void smoke() {
         DataEntityDescription dataEntityDescription = DataEntityDescription.getInstance().withCheckbox1Selections(0).withCheckbox2Selections(0);
+        given(dataEntityDescription);
         DataEntity testData = DataEntityProvider.getInstance().get(dataEntityDescription);
         CheckboxesViewExpected expected = CheckboxesViewExpected.getInstance(testData.getCheckbox1Selections(), testData.getCheckbox1Selections());
+        when();
         CheckboxesView actual = CheckboxesView.directNav();
-        confirm(CheckboxesViewValidator.getInstance(expected, actual).validate());
+        then(CheckboxesViewValidator.getInstance(expected, actual).validate());
     }
 
     @Test(groups = TestType.SPRINT, dependsOnMethods = "smoke", dataProvider = "scenarios")
     public void selectCheckboxes(DataEntityDescription dataScenario) {
+        given(dataScenario);
         DataEntity testData = DataEntityProvider.getInstance().get(dataScenario);
         Integer checkbox1Selections = testData.getCheckbox1Selections();
         Integer checkbox2Selections = testData.getCheckbox2Selections();
         CheckboxesViewExpected expected = CheckboxesViewExpected.getInstance(checkbox1Selections, checkbox2Selections);
+        when();
         CheckboxesView actual = CheckboxesView.directNav().select(1, checkbox1Selections).select(2, checkbox2Selections);
-        confirm(CheckboxesViewValidator.getInstance(expected, actual).validate());
+        then(CheckboxesViewValidator.getInstance(expected, actual).validate());
     }
 }

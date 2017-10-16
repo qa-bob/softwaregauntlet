@@ -1,6 +1,8 @@
 package com.herokuapp.data;
 
-public class DataEntityDescription implements DataEntityValidatable{
+import com.google.gson.Gson;
+
+public class DataEntityDescription implements DataEntityValidatable {
     private Integer checkbox1selections;
     private Integer checkbox2Selections;
 
@@ -26,5 +28,10 @@ public class DataEntityDescription implements DataEntityValidatable{
     public DataEntityDescription withCheckbox2Selections(Integer numberOfSelections) {
         checkbox2Selections = numberOfSelections;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }
