@@ -33,7 +33,7 @@ public class CheckboxesTest extends GauntletTest {
         then(CheckboxesViewValidator.getInstance(expected, actual).validate());
     }
 
-    @Test(groups = TestType.SPRINT, dependsOnMethods = "smoke", dataProvider = "scenarios")
+    @Test(groups = {TestType.SPRINT}, dependsOnMethods = "smoke", dataProvider = "scenarios")
     public void selectCheckboxes(DataEntityDescription dataScenario) {
         given(dataScenario);
         DataEntity testData = DataEntityProvider.getInstance().get(dataScenario);

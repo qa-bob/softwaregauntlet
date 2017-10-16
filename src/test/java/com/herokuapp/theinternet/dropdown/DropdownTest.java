@@ -25,21 +25,26 @@ public class DropdownTest extends GauntletTest {
     @Test(groups = {TestType.EVT})
     public void smoke() {
         DropdownViewExpected expected = DropdownViewExpected.getInstance();
+        when();
         DropdownView actual = DropdownView.directNav();
-        confirm(DropdownViewValidator.getInstance(expected, actual).validate());
+        then(DropdownViewValidator.getInstance(expected, actual).validate());
     }
 
     @Test(groups = {TestType.RELEASE}, dataProvider = "options")
     public void selectOption(String option) {
+        given(option);
         DropdownViewExpected expected = DropdownViewExpected.getInstance(option);
+        when();
         DropdownView actual = DropdownView.directNav().inContent().select(option);
-        confirm(DropdownViewValidator.getInstance(expected, actual).validate());
+        then(DropdownViewValidator.getInstance(expected, actual).validate());
     }
 
     @Test(groups = {TestType.RELEASE}, dataProvider = "multipleOptions")
     public void selectTwoOptionsSequentially(String firstOption, String secondOption) {
+        given(firstOption, secondOption);
         DropdownViewExpected expected = DropdownViewExpected.getInstance(secondOption);
+        when();
         DropdownView actual = DropdownView.directNav().inContent().select(firstOption).inContent().select(secondOption);
-        confirm(DropdownViewValidator.getInstance(expected, actual).validate());
+        then(DropdownViewValidator.getInstance(expected, actual).validate());
     }
 }

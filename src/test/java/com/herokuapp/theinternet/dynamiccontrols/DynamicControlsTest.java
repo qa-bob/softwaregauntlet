@@ -8,7 +8,8 @@ public class DynamicControlsTest extends GauntletTest {
     @Test(groups = {TestType.EVT, TestType.DEV})
     public void smoke() {
         DynamicControlsViewExpected expected = DynamicControlsViewExpected.getDefaultInstance();
+        when();
         DynamicControlsView actual = DynamicControlsView.directNav();
-        confirm(DynamicControlsViewValidator.getInstance(expected, actual).validate());
+        then(DynamicControlsViewValidator.getInstance(expected, actual).validate());
     }
 }

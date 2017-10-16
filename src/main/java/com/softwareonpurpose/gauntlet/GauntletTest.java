@@ -35,6 +35,11 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
+        Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
+        initializeUiHost();
+    }
+
+    private void initializeUiHost() {
         String browser = System.getProperty("browser");
         if (browser != null) {
             switch (browser) {
@@ -48,17 +53,28 @@ public abstract class GauntletTest {
     @BeforeMethod(alwaysRun = true)
     public void beginExecution(Method method) {
         testMethodName = method.getName();
-        getLogger().info(String.format("EXECUTING %s - %s...", getTestClass(), getTestMethodName()));
-        getLogger().info("STEPS:");
     }
 
     @AfterMethod(alwaysRun = true)
     public void terminateExecution() {
-        getLogger().info(String.format("TERMINATING %s - %s%n", getTestClass(), getTestMethodName()));
         UiHost.quitInstance();
     }
 
-    protected void confirm(String testResult) {
+    protected void given(Object... testDataDefinitions) {
+        for (Object testDataDefinition : testDataDefinitions) {
+            getLogger().info(String.format("GIVEN: %s", testDataDefinition.toString()));
+        }
+    }
+
+    protected void when() {
+        getLogger().info("WHEN:");
+    }
+
+    protected void then(String testResult) {
+        confirm(testResult);
+    }
+
+    private void confirm(String testResult) {
         Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n", getTestMethodName()));
     }
@@ -69,7 +85,7 @@ public abstract class GauntletTest {
 
     private Logger getLogger() {
         if (logger == null) {
-            logger = LoggerFactory.getLogger(getTestClass());
+            logger = LoggerFactory.getLogger("");
         }
         return logger;
     }
