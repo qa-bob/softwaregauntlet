@@ -30,7 +30,7 @@ public class DropdownTest extends GauntletTest {
         then(DropdownViewValidator.getInstance(expected, actual).validate());
     }
 
-    @Test(groups = {TestType.RELEASE}, dataProvider = "options")
+    @Test(groups = {TestType.RELEASE}, dependsOnMethods = "smoke", dataProvider = "options")
     public void selectOption(String option) {
         given(option);
         DropdownViewExpected expected = DropdownViewExpected.getInstance(option);
@@ -39,7 +39,7 @@ public class DropdownTest extends GauntletTest {
         then(DropdownViewValidator.getInstance(expected, actual).validate());
     }
 
-    @Test(groups = {TestType.RELEASE}, dataProvider = "multipleOptions")
+    @Test(groups = {TestType.RELEASE}, dependsOnMethods = "smoke", dataProvider = "multipleOptions")
     public void selectTwoOptionsSequentially(String firstOption, String secondOption) {
         given(firstOption, secondOption);
         DropdownViewExpected expected = DropdownViewExpected.getInstance(secondOption);
