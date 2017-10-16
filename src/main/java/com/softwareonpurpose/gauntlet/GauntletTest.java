@@ -67,7 +67,7 @@ public abstract class GauntletTest {
     }
 
     protected void when() {
-        getLogger().info("WHEN:");
+        getLogger().info("%nWHEN:");
     }
 
     protected void then(String testResult) {
