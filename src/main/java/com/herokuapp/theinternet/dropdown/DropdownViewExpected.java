@@ -15,6 +15,10 @@ public class DropdownViewExpected implements DropdownViewValidatable {
         return new DropdownViewExpected(null);
     }
 
+    public static DropdownViewExpected getInstance(String option) {
+        return new DropdownViewExpected(option);
+    }
+
     @Override
     public TheInternetHeaderExpected inHeader() {
         return TheInternetHeaderExpected.getInstance();
@@ -28,9 +32,5 @@ public class DropdownViewExpected implements DropdownViewValidatable {
     @Override
     public TheInternetFooterExpected inFooter() {
         return TheInternetFooterExpected.getInstance();
-    }
-
-    public static DropdownViewExpected getInstance(String option) {
-        return new DropdownViewExpected(option);
     }
 }
