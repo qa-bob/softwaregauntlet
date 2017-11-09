@@ -77,7 +77,8 @@ public abstract class GauntletTest {
         confirm(testResult);
     }
 
-    private void confirm(String testResult) {
+    @SuppressWarnings("WeakerAccess")
+    protected void confirm(String testResult) {
         Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n", getTestMethodName()));
     }

@@ -14,4 +14,8 @@ public interface DynamicControlsContentValidatable {
     String getCheckboxLabel();
 
     Boolean isCheckboxSelected();
+
+    Boolean isLoadingMessageDisplayed();
+
+    String getLoadingMessage();
 }

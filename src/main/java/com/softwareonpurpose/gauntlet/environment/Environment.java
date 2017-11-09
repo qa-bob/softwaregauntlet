@@ -1,7 +1,5 @@
 package com.softwareonpurpose.gauntlet.environment;
 
-import com.sun.javafx.runtime.SystemProperties;
-
 public class Environment {
 
     private static EnvironmentDefinition environment;
@@ -11,7 +9,7 @@ public class Environment {
 
     public static EnvironmentDefinition getInstance() {
         if (environment == null) {
-            String environmentProperty = SystemProperties.getProperty("env");
+            String environmentProperty = System.getProperty("env");
             String environment = environmentProperty == null ? "" : environmentProperty;
             switch (environment) {
                 default:

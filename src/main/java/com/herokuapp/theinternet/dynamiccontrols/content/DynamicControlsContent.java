@@ -1,7 +1,9 @@
 package com.herokuapp.theinternet.dynamiccontrols.content;
 
+import com.herokuapp.theinternet.dynamiccontrols.DynamicControlsView;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiRegion;
+import com.softwareonpurpose.uinavigator.UiView;
 
 public class DynamicControlsContent extends UiRegion implements DynamicControlsContentValidatable {
     private static final String DESCRIPTION = "'Dynamic Controls' content";
@@ -63,7 +65,31 @@ public class DynamicControlsContent extends UiRegion implements DynamicControlsC
         return isCheckboxDisplayed() && getCheckboxElement().isSelected();
     }
 
+    @Override
+    public Boolean isLoadingMessageDisplayed() {
+        return getLoadingMessageElement().isDisplayed();
+    }
+
+    @Override
+    public String getLoadingMessage() {
+        String text = getLoadingMessageElement().getText();
+        return text;
+    }
+
+    private UiElement getLoadingMessageElement() {
+        return UiElement.getInstance("'Loading' message", UiElement.LocatorType.ID, "loading", this.getElement());
+    }
+
     private UiElement getCheckboxElement() {
         return UiElement.getInstance("Checkbox", UiElement.LocatorType.TAG, "input", this.getElement());
+    }
+
+    public DynamicControlsView clickRemove() {
+        getRemoveButtonElement().click();
+        return UiView.expect(DynamicControlsView.class);
+    }
+
+    private UiElement getRemoveButtonElement() {
+        return UiElement.getInstance("'Remove' button", UiElement.LocatorType.ID, "btn", this.getElement());
     }
 }

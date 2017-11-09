@@ -1,8 +1,14 @@
 package com.herokuapp.theinternet.dynamiccontrols.content;
 
 public class DynamicControlsContentExpected implements DynamicControlsContentValidatable {
-    public static DynamicControlsContentExpected getInstance() {
-        return new DynamicControlsContentExpected();
+    private final Boolean isLoadingMessageDisplayed;
+
+    private DynamicControlsContentExpected(Boolean isLoadingMessageDisplayed) {
+        this.isLoadingMessageDisplayed = isLoadingMessageDisplayed;
+    }
+
+    public static DynamicControlsContentExpected getInstance(Boolean isLoadingMessageDisplayed) {
+        return new DynamicControlsContentExpected(isLoadingMessageDisplayed);
     }
 
     @Override
@@ -38,5 +44,15 @@ public class DynamicControlsContentExpected implements DynamicControlsContentVal
     @Override
     public Boolean isCheckboxSelected() {
         return false;
+    }
+
+    @Override
+    public Boolean isLoadingMessageDisplayed() {
+        return isLoadingMessageDisplayed;
+    }
+
+    @Override
+    public String getLoadingMessage() {
+        return isLoadingMessageDisplayed ? "Wait for it..." : null;
     }
 }

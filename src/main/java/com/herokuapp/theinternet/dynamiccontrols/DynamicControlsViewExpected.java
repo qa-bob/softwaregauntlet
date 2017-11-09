@@ -5,8 +5,18 @@ import com.herokuapp.theinternet.region.footer.TheInternetFooterExpected;
 import com.herokuapp.theinternet.region.header.TheInternetHeaderExpected;
 
 public class DynamicControlsViewExpected implements DynamicControlsViewValidatable {
+    private final Boolean isLoadingMessageDisplayed;
+
+    private DynamicControlsViewExpected(Boolean isLoadingMessageDisplayed) {
+        this.isLoadingMessageDisplayed = isLoadingMessageDisplayed;
+    }
+
     static DynamicControlsViewExpected getDefaultInstance() {
-        return new DynamicControlsViewExpected();
+        return new DynamicControlsViewExpected(false);
+    }
+
+    static DynamicControlsViewExpected getRemovalTransitionInstance() {
+        return new DynamicControlsViewExpected(true);
     }
 
     @Override
@@ -21,6 +31,6 @@ public class DynamicControlsViewExpected implements DynamicControlsViewValidatab
 
     @Override
     public DynamicControlsContentExpected inContent() {
-        return DynamicControlsContentExpected.getInstance();
+        return DynamicControlsContentExpected.getInstance(isLoadingMessageDisplayed);
     }
 }

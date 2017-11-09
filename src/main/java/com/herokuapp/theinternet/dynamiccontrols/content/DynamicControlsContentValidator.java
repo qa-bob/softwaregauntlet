@@ -26,5 +26,7 @@ public class DynamicControlsContentValidator extends Validator {
         verify("Is checkbox displayed", expected.isCheckboxDisplayed(), actual.isCheckboxDisplayed());
         verify("'Checkbox' label", expected.getCheckboxLabel(), actual.getCheckboxLabel());
         verify("Is checkbox selected", expected.isCheckboxSelected(), actual.isCheckboxSelected());
+        verify("Is 'Loading' message displayed", expected.isLoadingMessageDisplayed(), actual.isLoadingMessageDisplayed());
+        verify("'Loading' message", expected.getLoadingMessage(), actual.getLoadingMessage());
     }
 }
