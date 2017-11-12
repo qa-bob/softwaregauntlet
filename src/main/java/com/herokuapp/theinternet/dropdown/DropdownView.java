@@ -14,10 +14,6 @@ public class DropdownView extends UiView implements DropdownViewValidatable {
     private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
     private static final String LOCATOR_VIEW = "body";
 
-    /**
-     * @deprecated Exclusively for use by UiNavigator; NOT to be called explicitly
-     */
-    @SuppressWarnings("DeprecatedIsStillUsed")
     public DropdownView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VIEW));
     }

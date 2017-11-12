@@ -14,10 +14,6 @@ public class DynamicControlsView extends UiView implements DynamicControlsViewVa
     private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
     private static final String LOCATOR_VALUE = "body";
 
-    /**
-     * @deprecated Exclusively for use by UiNavigator; NOT to be called explicitly
-     */
-    @SuppressWarnings("DeprecatedIsStillUsed")
     public DynamicControlsView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }

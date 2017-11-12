@@ -12,10 +12,6 @@ public class CheckboxesView extends UiView implements CheckboxesViewValidatable 
     private static final String DESCRIPTION = "'Checkboxes' view";
     private static final String VIEW_URI = String.format("%s/%s", Environment.getInstance().getDomainUri(), "checkboxes");
 
-    /**
-     * @deprecated Exclusively for use by UiNavigator; NOT to be called explicitly
-     */
-    @SuppressWarnings("DeprecatedIsStillUsed")
     public CheckboxesView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, UiElement.LocatorType.TAG, "body"));
     }
