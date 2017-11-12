@@ -13,6 +13,7 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet;
 
+import com.softwareonpurpose.traceability4test.CoverageReport;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
 import com.softwareonpurpose.validator4test.Validator;
@@ -29,12 +30,14 @@ public abstract class GauntletTest {
     private static final int oneSecond = 1000;
     private static final int oneMinute = oneSecond * 60;
     protected static final int defaultTimeout = oneMinute * 1;  //  move the multiplier to a properties file
+    private final CoverageReport report;
     private final String className;
     private Logger logger;
     private String testMethodName;
 
     protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
+        report = CoverageReport.getInstance(String.format("%s.coverage.rpt", className));
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
     }
@@ -53,11 +56,14 @@ public abstract class GauntletTest {
     @BeforeMethod(alwaysRun = true)
     public void beginExecution(Method method) {
         testMethodName = method.getName();
+        report.addEntry(testMethodName);
     }
 
     @AfterMethod(alwaysRun = true)
     public void terminateExecution() {
         UiHost.quitInstance();
+        report.write();
+        CoverageReport.reset();
     }
 
     protected void given(Object... testDataDefinitions) {
@@ -80,7 +86,8 @@ public abstract class GauntletTest {
     @SuppressWarnings("WeakerAccess")
     protected void confirm(String testResult) {
         Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
-        getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n", getTestMethodName()));
+        getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
+                getTestMethodName()));
     }
 
     private String getTestMethodName() {
@@ -102,9 +109,11 @@ public abstract class GauntletTest {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
-        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) test executable in Production
+        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) test executable in
+        // Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
-        public static final String SPRINT = "sprint";           //  Test verifying acceptance criteria for current sprint
+        public static final String SPRINT = "sprint";           //  Test verifying acceptance criteria for current
+        // sprint
     }
 
     /**
