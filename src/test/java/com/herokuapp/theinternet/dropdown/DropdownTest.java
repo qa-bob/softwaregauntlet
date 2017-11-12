@@ -8,18 +8,13 @@ import org.testng.annotations.Test;
 public class DropdownTest extends GauntletTest {
     @DataProvider
     public static Object[][] options() {
-        return new Object[][]{
-                {DropdownViewValidatable.OPTION_ONE},
-                {DropdownViewValidatable.OPTION_TWO}
-        };
+        return new Object[][]{{DropdownViewValidatable.OPTION_ONE}, {DropdownViewValidatable.OPTION_TWO}};
     }
 
     @DataProvider
     public static Object[][] multipleOptions() {
-        return new Object[][]{
-                {DropdownViewValidatable.OPTION_ONE, DropdownViewValidatable.OPTION_TWO},
-                {DropdownViewValidatable.OPTION_TWO, DropdownViewValidatable.OPTION_ONE}
-        };
+        return new Object[][]{{DropdownViewValidatable.OPTION_ONE, DropdownViewValidatable.OPTION_TWO},
+                {DropdownViewValidatable.OPTION_TWO, DropdownViewValidatable.OPTION_ONE}};
     }
 
     @Test(groups = {TestType.EVT})
