@@ -12,12 +12,14 @@ public class CheckboxesTest extends GauntletTest {
 
     @DataProvider
     public static Object[][] scenarios() {
-        return new Object[][]{{DataEntityDescription.getInstance().withCheckbox1Selections(2).withCheckbox2Selections
-                (0)}, {DataEntityDescription.getInstance().withCheckbox1Selections(3).withCheckbox2Selections(0)},
-                {DataEntityDescription.getInstance().withCheckbox1Selections(8).withCheckbox2Selections(0)},
-                {DataEntityDescription.getInstance().withCheckbox1Selections(0).withCheckbox2Selections(1)},
-                {DataEntityDescription.getInstance().withCheckbox1Selections(3).withCheckbox2Selections(2)},
-                {DataEntityDescription.getInstance().withCheckbox1Selections(6).withCheckbox2Selections(6)}};
+        return new Object[][]{
+                {DataEntityDescription.getInstance().withCheckbox1Selections(2).withCheckbox2Selections(0)}
+                , {DataEntityDescription.getInstance().withCheckbox1Selections(3).withCheckbox2Selections(0)}
+                , {DataEntityDescription.getInstance().withCheckbox1Selections(8).withCheckbox2Selections(0)}
+                , {DataEntityDescription.getInstance().withCheckbox1Selections(0).withCheckbox2Selections(1)}
+                , {DataEntityDescription.getInstance().withCheckbox1Selections(3).withCheckbox2Selections(2)}
+                , {DataEntityDescription.getInstance().withCheckbox1Selections(6).withCheckbox2Selections(6)}
+        };
     }
 
     @Test(groups = {TestType.EVT})
