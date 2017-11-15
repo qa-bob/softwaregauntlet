@@ -19,6 +19,7 @@ public class DropdownTest extends GauntletTest {
 
     @Test(groups = {TestType.EVT})
     public void smoke() {
+        setRequirements("SysID9000.US8010");
         DropdownViewExpected expected = DropdownViewExpected.getInstance();
         when();
         DropdownView actual = DropdownView.directNav();
@@ -27,6 +28,7 @@ public class DropdownTest extends GauntletTest {
 
     @Test(groups = {TestType.RELEASE}, dependsOnMethods = "smoke", dataProvider = "options")
     public void selectOption(String option) {
+        setRequirements("SysID9010.US8011|US8012|SysID9011.US8013");
         given(option);
         DropdownViewExpected expected = DropdownViewExpected.getInstance(option);
         when();
@@ -36,6 +38,7 @@ public class DropdownTest extends GauntletTest {
 
     @Test(groups = {TestType.RELEASE}, dependsOnMethods = "smoke", dataProvider = "multipleOptions")
     public void selectTwoOptionsSequentially(String firstOption, String secondOption) {
+        setRequirements("US8014|SysID9013.US8016|SysID9011.US8017");
         given(firstOption, secondOption);
         DropdownViewExpected expected = DropdownViewExpected.getInstance(secondOption);
         when();

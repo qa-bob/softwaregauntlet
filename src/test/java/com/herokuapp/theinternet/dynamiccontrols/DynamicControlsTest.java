@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 public class DynamicControlsTest extends GauntletTest {
     @Test(groups = {TestType.EVT})
     public void smoke() {
+        setRequirements(null);
         DynamicControlsViewExpected expected = DynamicControlsViewExpected.getDefaultInstance();
         when();
         DynamicControlsView actual = DynamicControlsView.directNav();
@@ -15,6 +16,7 @@ public class DynamicControlsTest extends GauntletTest {
 
     @Test(groups = {TestType.SPRINT}, dependsOnMethods = "smoke")
     public void transitionOnRemoval() {
+        setRequirements("SysID9020.US8024|SysID9025.US8050|US8034");
         DynamicControlsViewExpected expected = DynamicControlsViewExpected.getRemovalTransitionInstance();
         when();
         DynamicControlsView actual = DynamicControlsView.directNav().inContent().clickRemove();

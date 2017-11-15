@@ -36,7 +36,7 @@ public class CheckboxesTest extends GauntletTest {
 
     @Test(groups = {TestType.SPRINT}, dependsOnMethods = "smoke", dataProvider = "scenarios")
     public void selectCheckboxes(DataEntityDescription dataScenario) {
-        setRequirements("SysID9000.US8000|SysID9000.US8001|SysID9001.US8002");
+        setRequirements("SysID9000.US8000|SysID9000.US8001|SysID9001.US8002|US8004");
         given(dataScenario);
         DataEntity testData = DataEntityProvider.getInstance().get(dataScenario);
         Integer checkbox1Selections = testData.getCheckbox1Selections();
