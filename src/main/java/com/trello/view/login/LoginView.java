@@ -10,14 +10,15 @@ public class LoginView extends UiView implements LoginViewValidatable {
     private static final String DESCRIPTION = "'Login' view";
     private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
     private static final String LOCATOR_VALUE = "body";
-    private static final String VIEW_URI = "https://trello.com/";
+    private static final String VIEW_URI = "https://trello.com/login";
 
-    protected LoginView() {
+    @SuppressWarnings("WeakerAccess")
+    public LoginView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 
     public static LoginView directNav() {
-        UiView.instantiateView(LoginView.class).load();
+        new LoginView().load();
         return UiView.expect(LoginView.class);
     }
 
@@ -29,11 +30,11 @@ public class LoginView extends UiView implements LoginViewValidatable {
         return confirmed;
     }
 
-    public LandingView login(TrelloUser user) {
+    public void login(TrelloUser user) {
         getUsernameElement().set(user.getUsername());
         getPasswordElement().set(user.getPassword());
         getLoginButtonElement().click();
-        return UiView.expect(LandingView.class);
+        UiView.expect(LandingView.class);
     }
 
     private UiElement getUsernameElement() {

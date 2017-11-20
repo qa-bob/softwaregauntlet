@@ -10,7 +10,7 @@ public class LandingView extends UiView implements LandingViewValidatable {
     private static final String LOCATOR_VALUE = "body";
     private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
 
-    protected LandingView() {
+    public LandingView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 

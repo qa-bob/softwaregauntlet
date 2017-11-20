@@ -1,6 +1,6 @@
 package com.trello.data.card;
 
-public class TrelloCard implements TrelloCardValidatable{
+public class TrelloCard implements TrelloCardValidatable {
     private final String title;
     private final String list;
     private final String id;
@@ -9,6 +9,14 @@ public class TrelloCard implements TrelloCardValidatable{
         this.id = id;
         this.title = title;
         this.list = list;
+    }
+
+    static TrelloCard getInstance() {
+        return new TrelloCard("#1", "TEK User Story", "Acceptance");
+    }
+
+    public static TrelloCard getInstance(String id, String title, String list) {
+        return new TrelloCard(id, title, list);
     }
 
     @Override
@@ -28,9 +36,5 @@ public class TrelloCard implements TrelloCardValidatable{
 
     public TrelloCardDefinition toDefinition() {
         return TrelloCardDefinition.getInstance().withTitle(title).withInList(list);
-    }
-
-    static TrelloCard getInstance() {
-        return new TrelloCard("#1", "TEK User Story", "Acceptance");
     }
 }

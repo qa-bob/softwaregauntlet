@@ -10,10 +10,10 @@ import com.trello.data.user.TrelloUserProvider;
 import com.trello.view.login.LoginView;
 import org.testng.annotations.Test;
 
-@Test(groups={GauntletTest.Application.TRELLO, GauntletTest.View.CARD_MOVE})
-public class CardMoveTest extends GauntletTest{
-    @Test(groups={TestType.EVT})
-    public void smoke(){
+@Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.CARD_MOVE})
+public class CardMoveTest extends GauntletTest {
+    @Test(groups = {TestType.DEV})
+    public void move() {
         TrelloCard testCard = TrelloCardProvider.getInstance().get();
         String expectedList = "Done";
         TrelloCardDefinition expected = testCard.toDefinition().withInList(expectedList);

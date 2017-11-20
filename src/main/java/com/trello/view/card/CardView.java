@@ -11,7 +11,7 @@ public class CardView extends UiView implements CardViewValidatable {
     private static final String LOCATOR_TYPE = UiElement.LocatorType.CLASS;
     private static final String LOCATOR_VALUE = "window";
 
-    protected CardView() {
+    public CardView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 

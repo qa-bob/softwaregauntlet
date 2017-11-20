@@ -11,7 +11,7 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
     private static final String DESCRIPTION = "'Move Card' modal";
     private static final String VIEW_URI = "https://trello.com/c/aMBOItYP/1-tek-user-story";
 
-    protected CardMoveModal() {
+    public CardMoveModal() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 
@@ -32,8 +32,16 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
     }
 
     void move(String list) {
-        //  'Done' list ID = "5a12fe5ee8d49dd598dea9c6"
-        UiElement.getInstance("'List' select", UiElement.LocatorType.CLASS, "js-select-list", this.getElement()).set(list);
+        getListSelectElement().set(list);
+        getMoveButtonElement().click();
         UiView.expect(CardMoveModal.class);
+    }
+
+    private UiElement getMoveButtonElement() {
+        return UiElement.getInstance("'Move' button", UiElement.LocatorType.CLASS, "js-submit", this.getElement());
+    }
+
+    private UiElement getListSelectElement() {
+        return UiElement.getInstance("'List' select", UiElement.LocatorType.CLASS, "js-select-list", this.getElement());
     }
 }
