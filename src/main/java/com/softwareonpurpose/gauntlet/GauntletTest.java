@@ -161,6 +161,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Application {
+        public static final String TRELLO = "trello";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -170,6 +171,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class View {
+        public static final String CARD_MOVE = "card_move";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
