@@ -17,7 +17,7 @@ public class LandingView extends UiView implements LandingViewValidatable {
     @Override
     protected boolean confirmElementStates() {
         boolean confirmed = UiHost.getInstance().getUri().equals(VIEW_URI);
-        confirmed &= UiElement.getInstance("Member boards view", UiElement.LocatorType.CLASS, "member-boards-view", this.getElement()).isDisplayed();
+        confirmed &= UiElement.getInstance("Member boards view", UiElement.LocatorType.CLASS, "js-boards-page", this.getElement()).isDisplayed();
         return confirmed;
     }
 }

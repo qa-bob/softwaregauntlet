@@ -4,4 +4,6 @@ public interface TrelloUserValidatable {
     String getPassword();
 
     String getUsername();
+
+    String getInitials();
 }

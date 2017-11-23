@@ -14,4 +14,9 @@ public class TrelloUser implements TrelloUserValidatable{
     public String getUsername() {
         return "cstockto@teksystems.com";
     }
+
+    @Override
+    public String getInitials() {
+        return "T";
+    }
 }

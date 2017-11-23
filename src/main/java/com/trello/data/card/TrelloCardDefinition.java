@@ -4,6 +4,8 @@ public class TrelloCardDefinition implements TrelloCardValidatable {
     private String title;
     private String list;
     private String id;
+    private String board;
+    private String position;
 
     public static TrelloCardDefinition getInstance() {
         return new TrelloCardDefinition();
@@ -24,6 +26,16 @@ public class TrelloCardDefinition implements TrelloCardValidatable {
         return id;
     }
 
+    @Override
+    public String getPosition() {
+        return position;
+    }
+
+    @Override
+    public String getBoard() {
+        return board;
+    }
+
     public TrelloCardDefinition withInList(String list) {
         this.list = list;
         return this;
@@ -34,8 +46,8 @@ public class TrelloCardDefinition implements TrelloCardValidatable {
         return this;
     }
 
-    public TrelloCardDefinition withId(String id) {
-        this.id = id;
+    public TrelloCardValidatable withList(String list) {
+        this.list = list;
         return this;
     }
 }

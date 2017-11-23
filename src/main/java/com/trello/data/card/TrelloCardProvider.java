@@ -18,7 +18,7 @@ public class TrelloCardProvider {
     }
 
     private List<TrelloCard> getCards() {
-        return Collections.singletonList(TrelloCard.getInstance("#1", "TEK User Story", "Done"));
+        return Collections.singletonList(TrelloCard.getInstance("#1", "TEK User Story", "Application Project", "Done", "1"));
     }
 
     public TrelloCard get() {

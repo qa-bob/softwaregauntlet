@@ -6,4 +6,8 @@ public interface TrelloCardValidatable {
     String getTitle();
 
     String getId();
+
+    String getPosition();
+
+    String getBoard();
 }

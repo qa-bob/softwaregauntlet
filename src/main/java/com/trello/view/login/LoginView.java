@@ -26,7 +26,7 @@ public class LoginView extends UiView implements LoginViewValidatable {
     protected boolean confirmElementStates() {
         boolean confirmed = UiHost.getInstance().getUri().equals(VIEW_URI);
         confirmed &= "Landing-Marquee".equals(this.getElement().getAttribute("data-track-group"));
-        confirmed &= UiElement.getInstance("'Login' button", UiElement.LocatorType.CLASS, "global-header-section-button", this.getElement()).isDisplayed();
+        confirmed &= getLoginButtonElement().isDisplayed();
         return confirmed;
     }
 

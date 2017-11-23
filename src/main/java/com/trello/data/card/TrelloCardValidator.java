@@ -13,13 +13,13 @@ public class TrelloCardValidator extends Validator {
         this.expected = expected;
     }
 
+    public static TrelloCardValidator getInstance(TrelloCardDefinition expected, TrelloCard actual) {
+        return new TrelloCardValidator(expected, actual);
+    }
+
     @Override
     protected void executeVerifications() {
         verify("Title", expected.getTitle(), actual.getTitle());
         verify("List", expected.getList(), actual.getList());
-    }
-
-    public static TrelloCardValidator getInstance(TrelloCardDefinition expected, TrelloCard actual) {
-        return new TrelloCardValidator(expected, actual);
     }
 }

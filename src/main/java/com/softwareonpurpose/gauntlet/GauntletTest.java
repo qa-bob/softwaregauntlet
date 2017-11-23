@@ -172,6 +172,7 @@ public abstract class GauntletTest {
     @SuppressWarnings("unused")
     public class View {
         public static final String CARD_MOVE = "card_move";
+        public static final String CARD = "card";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
