@@ -8,13 +8,9 @@ import com.trello.view.region.header.TrelloHeaderValidator;
 
 public class LandingViewValidator extends Validator {
     private static final String DESCRIPTION = "'Landing' view";
-    private final LandingViewValidatable expected;
-    private final LandingViewValidatable actual;
 
     private LandingViewValidator(LandingViewExpected expected, LandingView actual) {
         super(DESCRIPTION, expected, actual);
-        this.expected = expected;
-        this.actual = actual;
         UiRegion.suppressConstructionLogging(true);
         addChildValidator(TrelloHeaderValidator.getInstance(expected.inHeader(), actual.inHeader(), this));
         addChildValidator(LandingContentValidator.getInstance(expected.inContent(), actual.inContent(), this));
