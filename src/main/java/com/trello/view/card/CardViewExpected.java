@@ -7,6 +7,7 @@ import com.trello.data.user.TrelloUser;
 public class CardViewExpected implements CardViewValidatable {
     private final TrelloCardValidatable card;
     private final TrelloUser user;
+    private CardViewCopy copy;
 
     private CardViewExpected(TrelloUser user, TrelloCardValidatable card) {
         this.user = user;
@@ -24,12 +25,19 @@ public class CardViewExpected implements CardViewValidatable {
 
     @Override
     public String getShowDetailsLink() {
-        return "Show Details";
+        return getCopy().getShowDetailsLinkCopy();
+    }
+
+    private CardViewCopy getCopy() {
+        if (copy == null) {
+            copy = CardViewCopy.getInstance();
+        }
+        return copy;
     }
 
     @Override
     public String addCommentButtonLabel() {
-        return "Save";
+        return getCopy().getCommentButtonLabel();
     }
 
     @Override
@@ -64,7 +72,7 @@ public class CardViewExpected implements CardViewValidatable {
 
     @Override
     public String getListMessage() {
-        return String.format("in list %s", card.getList());
+        return String.format("%s %s", getCopy().getListMessage(), card.getList());
     }
 
     @Override
@@ -74,7 +82,7 @@ public class CardViewExpected implements CardViewValidatable {
 
     @Override
     public String getAddCommentLabel() {
-        return "Add Comment";
+        return getCopy().getAddCommentsLabel();
     }
 
     @Override
