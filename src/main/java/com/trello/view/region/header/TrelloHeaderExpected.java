@@ -1,6 +1,8 @@
 package com.trello.view.region.header;
 
 public class TrelloHeaderExpected implements TrelloHeaderValidatable {
+    private TrelloHeaderCopy copy;
+
     public static TrelloHeaderExpected getInstance() {
         return new TrelloHeaderExpected();
     }
@@ -42,7 +44,14 @@ public class TrelloHeaderExpected implements TrelloHeaderValidatable {
 
     @Override
     public String getBoardsButtonLabel() {
-        return "Boards";
+        return getCopy().getBoardsButtonLabel();
+    }
+
+    private TrelloHeaderCopy getCopy() {
+        if (copy == null) {
+            copy = TrelloHeaderCopy.getInstance();
+        }
+        return copy;
     }
 
     @Override
