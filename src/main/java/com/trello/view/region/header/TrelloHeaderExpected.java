@@ -16,12 +16,12 @@ public class TrelloHeaderExpected implements TrelloHeaderValidatable {
     }
 
     @Override
-    public Boolean isNotificationsButtonDisplayed() {
+    public Boolean isNotifyButtonDisplayed() {
         return true;
     }
 
     @Override
-    public Boolean isOpenInformationButtonDisplayed() {
+    public Boolean isInfoButtonDisplayed() {
         return true;
     }
 

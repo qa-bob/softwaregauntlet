@@ -1,9 +1,16 @@
 package com.trello.data.user;
 
-public interface TrelloUserValidatable {
-    String getPassword();
+import com.google.gson.Gson;
 
-    String getUsername();
+public abstract class TrelloUserValidatable {
+    abstract String getPassword();
 
-    String getInitials();
+    abstract String getUsername();
+
+    abstract String getInitials();
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

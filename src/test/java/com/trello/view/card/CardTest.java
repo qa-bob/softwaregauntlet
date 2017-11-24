@@ -15,6 +15,9 @@ public class CardTest extends GauntletTest {
         TrelloUser user = TrelloUserProvider.getInstance().get();
         TrelloCard card = TrelloCardProvider.getInstance().get();
         CardViewExpected expected = CardViewExpected.getInstance(user, card);
+        given(user);
+        given(card);
+        when();
         LoginView.directNav().login(user);
         CardView actual = CardView.directNav();
         then(CardViewValidator.getInstance(expected, actual).validate());

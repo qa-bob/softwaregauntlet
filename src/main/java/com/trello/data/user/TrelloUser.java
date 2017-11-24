@@ -1,22 +1,26 @@
 package com.trello.data.user;
 
-public class TrelloUser implements TrelloUserValidatable{
+public class TrelloUser extends TrelloUserValidatable {
+    private final String username = "cstockto@teksystems.com";
+    private final String password = "T3kSystem$";
+    private final String initials = "T";
+
     public static TrelloUser getInstance() {
         return new TrelloUser();
     }
 
     @Override
     public String getPassword() {
-        return "T3kSystem$";
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return "cstockto@teksystems.com";
+        return username;
     }
 
     @Override
     public String getInitials() {
-        return "T";
+        return initials;
     }
 }

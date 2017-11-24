@@ -3,7 +3,8 @@ package com.trello.view.region.header;
 import com.softwareonpurpose.validator4test.Validator;
 
 public class TrelloHeaderValidator extends Validator {
-    private static final String DESCRIPTION = "'Footer' region";
+    private static final String DESCRIPTION = "'Header' region";
+    private final static String IS_DISPLAYED = "Is %s displayed?";
     private final TrelloHeaderValidatable expected;
     private final TrelloHeaderValidatable actual;
 
@@ -20,16 +21,22 @@ public class TrelloHeaderValidator extends Validator {
 
     @Override
     protected void executeVerifications() {
-        verify("Is logo displayed?", expected.isLogoDisplayed(), actual.isLogoDisplayed());
-        verify("Is 'Boards' button displayed?", expected.isBoardsButtonDisplayed(), actual.isBoardsButtonDisplayed());
-        verify("Is 'Search' displayed?", expected.isSearchDisplayed(), actual.isSearchDisplayed());
-        verify("Is 'Search' icon displayed?", expected.isSearchIconDisplayed(), actual.isSearchIconDisplayed());
-        verify("Is 'Create' button displayed?", expected.isCreateButtonDisplayed(), actual.isCreateButtonDisplayed());
-        verify("Is 'Open information' button displayed?", expected.isOpenInformationButtonDisplayed(), actual
-                .isOpenInformationButtonDisplayed());
-        verify("Is 'Notifications' button displayed?", expected.isNotificationsButtonDisplayed(), actual
-                .isNotificationsButtonDisplayed());
-        verify("Is 'Open member menu' button displayed?", expected.isOpenMemberButtonDisplayed(), actual
-                .isOpenMemberButtonDisplayed());
+        String logoVerification = String.format(IS_DISPLAYED, "logo");
+        String boardsButtonVerification = String.format(IS_DISPLAYED, "'Boards' button");
+        String searchVerification = String.format(IS_DISPLAYED, "Search");
+        String searchIconVerification = String.format(IS_DISPLAYED, "'Search' icon");
+        String createButtonVerification = String.format(IS_DISPLAYED, "'Create' button");
+        String infoButtonVerification = String.format(IS_DISPLAYED, "'Open information' button");
+        String notifyButtonVerification = String.format(IS_DISPLAYED, "'Notifications' button");
+        String membersButtonVerification = String.format(IS_DISPLAYED, "'Open member menu' button");
+
+        verify(logoVerification, expected.isLogoDisplayed(), actual.isLogoDisplayed());
+        verify(boardsButtonVerification, expected.isBoardsButtonDisplayed(), actual.isBoardsButtonDisplayed());
+        verify(searchVerification, expected.isSearchDisplayed(), actual.isSearchDisplayed());
+        verify(searchIconVerification, expected.isSearchIconDisplayed(), actual.isSearchIconDisplayed());
+        verify(createButtonVerification, expected.isCreateButtonDisplayed(), actual.isCreateButtonDisplayed());
+        verify(infoButtonVerification, expected.isInfoButtonDisplayed(), actual.isInfoButtonDisplayed());
+        verify(notifyButtonVerification, expected.isNotifyButtonDisplayed(), actual.isNotifyButtonDisplayed());
+        verify(membersButtonVerification, expected.isOpenMemberButtonDisplayed(), actual.isOpenMemberButtonDisplayed());
     }
 }

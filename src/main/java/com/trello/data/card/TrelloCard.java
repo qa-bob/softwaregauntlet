@@ -1,6 +1,6 @@
 package com.trello.data.card;
 
-public class TrelloCard implements TrelloCardValidatable {
+public class TrelloCard extends TrelloCardValidatable {
     private final String title;
     private final String list;
     private final String id;

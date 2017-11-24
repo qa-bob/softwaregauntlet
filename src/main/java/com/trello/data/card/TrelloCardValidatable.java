@@ -1,13 +1,20 @@
 package com.trello.data.card;
 
-public interface TrelloCardValidatable {
-    String getList();
+import com.google.gson.Gson;
 
-    String getTitle();
+public abstract class TrelloCardValidatable {
+    public abstract String getList();
 
-    String getId();
+    abstract String getTitle();
 
-    String getPosition();
+    abstract String getId();
 
-    String getBoard();
+    public abstract String getPosition();
+
+    public abstract String getBoard();
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

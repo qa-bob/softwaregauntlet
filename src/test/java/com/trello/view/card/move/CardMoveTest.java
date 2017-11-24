@@ -15,6 +15,9 @@ public class CardMoveTest extends GauntletTest {
         TrelloUser user = TrelloUserProvider.getInstance().get();
         TrelloCard card = TrelloCardProvider.getInstance().get();
         CardMoveModalExpected expected = CardMoveModalExpected.getInstance(card);
+        given(user);
+        given(card);
+        when();
         LoginView.directNav().login(user);
         CardMoveModal actual = CardView.directNav().clickMove();
         then(CardMoveModalValidator.getInstance(expected, actual).validate());
@@ -26,6 +29,9 @@ public class CardMoveTest extends GauntletTest {
         TrelloCard card = TrelloCardProvider.getInstance().get();
         String expectedList = "Done";
         TrelloCardDefinition expected = card.toDefinition().withInList(expectedList);
+        given(user);
+        given(card);
+        when();
         LoginView.directNav().login(user);
         CardView.directNav().clickMove().move(expectedList);
         TrelloCard actual = TrelloCardProvider.getInstance().get(card);

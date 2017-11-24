@@ -5,9 +5,9 @@ public interface TrelloHeaderValidatable {
 
     Boolean isOpenMemberButtonDisplayed();
 
-    Boolean isNotificationsButtonDisplayed();
+    Boolean isNotifyButtonDisplayed();
 
-    Boolean isOpenInformationButtonDisplayed();
+    Boolean isInfoButtonDisplayed();
 
     Boolean isCreateButtonDisplayed();
 

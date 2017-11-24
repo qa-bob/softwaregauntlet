@@ -33,13 +33,13 @@ public class TrelloHeader extends UiRegion implements TrelloHeaderValidatable {
     }
 
     @Override
-    public Boolean isNotificationsButtonDisplayed() {
+    public Boolean isNotifyButtonDisplayed() {
         return UiElement.getInstance("'Notifications' button", UiElement.LocatorType.CLASS, "header-notifications",
                 this.getElement()).isDisplayed();
     }
 
     @Override
-    public Boolean isOpenInformationButtonDisplayed() {
+    public Boolean isInfoButtonDisplayed() {
         return UiElement.getInstance("'Open information' button", UiElement.LocatorType.CLASS, "header-info", this
                 .getElement()).isDisplayed();
     }
