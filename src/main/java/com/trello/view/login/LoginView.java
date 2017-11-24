@@ -48,4 +48,74 @@ public class LoginView extends UiView implements LoginViewValidatable {
     private UiElement getLoginButtonElement() {
         return UiElement.getInstance("'Login' button", UiElement.LocatorType.ID, "login", this.getElement());
     }
+
+    @Override
+    public String getTitle() {
+        return UiElement.getInstance("Title", UiElement.LocatorType.TAG, "h1", this.getElement()).getText();
+    }
+
+    @Override
+    public String getUsernameLabel() {
+        String description = "'Username' label";
+        return UiElement.getInstance(description, UiElement.LocatorType.TAG, "label", getUsernameContainer()).getText();
+    }
+
+    private UiElement getUsernameContainer() {
+        String description = "'Username' container";
+        return UiElement.getInstance(description, UiElement.LocatorType.ID, "login-form", this.getElement());
+    }
+
+    @Override
+    public String getPasswordLabel() {
+        String desc = "'Password' label";
+        return UiElement.getInstance(desc, UiElement.LocatorType.TAG, "label", 2, getUsernameContainer()).getText();
+    }
+
+    @Override
+    public String getPasswordPlaceholder() {
+        String description = "'Password' placeholder";
+        return UiElement.getInstance(description, UiElement.LocatorType.NAME, "password", this.getElement()).getTip();
+    }
+
+    @Override
+    public String getLoginButtonLabel() {
+        String desc = "'Login' button label";
+        return UiElement.getInstance(desc, UiElement.LocatorType.ID, "login", this.getElement()).getAttribute("value");
+    }
+
+    @Override
+    public String getForgotPasswordMessage() {
+        UiElement element = getForgetPasswordMessageElement();
+        return element.getText();
+    }
+
+    private UiElement getForgetPasswordMessageElement() {
+        String desc = "'Forgot password' message";
+        String locatorValue = "login-forget-password";
+        return UiElement.getInstance(desc, UiElement.LocatorType.CLASS, locatorValue, this.getElement());
+    }
+
+    @Override
+    public String getResetLinkText() {
+        String desc = "'Reset' link text";
+        return UiElement.getInstance(desc, UiElement.LocatorType.TAG, "a", getForgetPasswordMessageElement()).getText();
+    }
+
+    @Override
+    public String getSsoLoginText() {
+        String desc = "'Sso login' link text";
+        UiElement parent = getLoginPasswordContainerElement();
+        return UiElement.getInstance(desc, UiElement.LocatorType.TAG, "p", parent).getText();
+    }
+
+    private UiElement getLoginPasswordContainerElement() {
+        String desc = "'Login password' container";
+        return UiElement.getInstance(desc, UiElement.LocatorType.CLASS, "login-password-container", this.getElement());
+    }
+
+    @Override
+    public String getCreateAccountLinkText() {
+        String desc = "'Create account' link text";
+        return UiElement.getInstance(desc, UiElement.LocatorType.ID, "signup", this.getElement()).getText();
+    }
 }
