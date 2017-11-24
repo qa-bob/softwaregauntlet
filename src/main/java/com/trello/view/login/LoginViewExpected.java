@@ -1,52 +1,61 @@
 package com.trello.view.login;
 
 public class LoginViewExpected implements LoginViewValidatable {
+    private LoginViewCopy copy;
+
     public static LoginViewExpected getInstance() {
         return new LoginViewExpected();
     }
 
     @Override
     public String getTitle() {
-        return "Log in to Trello";
+        return getCopy().getTitle();
+    }
+
+    private LoginViewCopy getCopy() {
+        if (copy == null) {
+            copy = LoginViewCopy.getInstance();
+        }
+        return copy;
     }
 
     @Override
     public String getUsernameLabel() {
-        return "Email (or username)";
+        return getCopy().getUsernameLabel();
     }
 
     @Override
     public String getPasswordLabel() {
-        return "Password";
+        return getCopy().getPasswordLabel();
     }
 
     @Override
     public String getPasswordPlaceholder() {
-        return "e.g., ••••••••••••";
+        return getCopy().getPasswordPlaceholder();
     }
 
     @Override
     public String getLoginButtonLabel() {
-        return "Log In";
+        return getCopy().getLoginButtonLabel();
     }
 
     @Override
     public String getForgotPasswordMessage() {
-        return "Forgot your password? Reset it.";
+        return getCopy().getForgotPasswordMessage();
     }
 
     @Override
     public String getResetLinkText() {
-        return "Reset it.";
+        return getCopy().getResetLinkText();
     }
 
     @Override
     public String getSsoLoginText() {
-        return "Log in with SSO";
+        return getCopy().getSsoLoginText();
     }
 
     @Override
     public String getCreateAccountLinkText() {
-        return "Create a Trello account.";
+        return getCopy().getCreateAccountLinkText();
     }
 }
