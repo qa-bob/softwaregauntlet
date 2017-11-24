@@ -4,6 +4,7 @@ import com.trello.data.card.TrelloCardValidatable;
 
 public class CardMoveModalExpected implements CardMoveModalValidatable {
     private final TrelloCardValidatable expectedCard;
+    private CardMoveModalCopy copy;
 
     private CardMoveModalExpected(TrelloCardValidatable expectedCard) {
         this.expectedCard = expectedCard;
@@ -15,12 +16,19 @@ public class CardMoveModalExpected implements CardMoveModalValidatable {
 
     @Override
     public String getTitle() {
-        return "Move Card";
+        return getCopy().getTitle();
+    }
+
+    private CardMoveModalCopy getCopy() {
+        if (copy == null) {
+            copy = CardMoveModalCopy.getInstance();
+        }
+        return copy;
     }
 
     @Override
     public String getMoveButtonLabel() {
-        return "Move";
+        return getCopy().getMoveButtonLabel();
     }
 
     @Override
@@ -30,7 +38,7 @@ public class CardMoveModalExpected implements CardMoveModalValidatable {
 
     @Override
     public String getPositionLabel() {
-        return "Position";
+        return getCopy().getPositionLabel();
     }
 
     @Override
@@ -40,7 +48,7 @@ public class CardMoveModalExpected implements CardMoveModalValidatable {
 
     @Override
     public String getListLabel() {
-        return "List";
+        return getCopy().getListLabel();
     }
 
     @Override
@@ -50,6 +58,6 @@ public class CardMoveModalExpected implements CardMoveModalValidatable {
 
     @Override
     public String getBoardLabel() {
-        return "Board";
+        return getCopy().getBoardLabel();
     }
 }
