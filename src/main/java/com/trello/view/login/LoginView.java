@@ -30,11 +30,11 @@ public class LoginView extends UiView implements LoginViewValidatable {
         return confirmed;
     }
 
-    public void login(TrelloUser user) {
+    public LandingView login(TrelloUser user) {
         getUsernameElement().set(user.getUsername());
         getPasswordElement().set(user.getPassword());
         getLoginButtonElement().click();
-        UiView.expect(LandingView.class);
+        return UiView.expect(LandingView.class);
     }
 
     private UiElement getUsernameElement() {
