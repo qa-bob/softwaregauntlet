@@ -10,7 +10,7 @@ public class TrelloCopy {
     private TrelloCopy() {
         copySource = new Properties();
         Object language = System.getProperties().get("lang");
-        String languageCode = language == null ? "en" : language.toString();
+        String languageCode = "".equals(language) ? "en" : language.toString();
         String copySourcePath = String.format(".\\src\\main\\resources\\%s_copy.properties", languageCode);
         try {
             copySource.load(new FileInputStream(copySourcePath));
