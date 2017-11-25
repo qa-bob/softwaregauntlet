@@ -1,53 +1,54 @@
 package com.trello.view.login;
 
+import com.trello.copy.TrelloCopy;
+
 public class LoginViewCopy {
-    private static final String VIEW_TITLE = "Log in to Trello";
-    private static final String USERNAME_LABEL = "Email (or username)";
-    private static final String PASSWORD_LABEL = "Password";
-    private static final String PASSWORD_PLACEHOLDER = "e.g., ••••••••••••";
-    private static final String LOGIN_BUTTON_LABEL = "Log In";
-    private static final String FORGOT_PASSWORD_MESSAGE = "Forgot your password? Reset it.";
-    private static final String RESET_LINK_TEXT = "Reset it.";
-    private static final String SSO_LOGIN_TEXT = "Log in with SSO";
-    private static final String CREATE_ACCOUNT_LINK_TEXT = "Create a Trello account.";
+    private TrelloCopy source;
 
     public static LoginViewCopy getInstance() {
         return new LoginViewCopy();
     }
 
     public String getTitle() {
-        return VIEW_TITLE;
+        return String.format("%s %s %s", getSource().getLogIn(), getSource().getTo(), getSource().getAppName());
+    }
+
+    private TrelloCopy getSource() {
+        if (source == null) {
+            source = TrelloCopy.getInstance();
+        }
+        return source;
     }
 
     String getUsernameLabel() {
-        return USERNAME_LABEL;
+        return getSource().getEmailUsername();
     }
 
     String getPasswordLabel() {
-        return PASSWORD_LABEL;
+        return getSource().getPassword();
     }
 
     String getPasswordPlaceholder() {
-        return PASSWORD_PLACEHOLDER;
+        return String.format("%s %s", getSource().getForExample(), getSource().getPasswordExample());
     }
 
     String getLoginButtonLabel() {
-        return LOGIN_BUTTON_LABEL;
+        return getSource().getLogInCapitalized();
     }
 
     String getForgotPasswordMessage() {
-        return FORGOT_PASSWORD_MESSAGE;
+        return String.format("%s? %s.", getSource().getForgotPassword(), getSource().getReset());
     }
 
     String getResetLinkText() {
-        return RESET_LINK_TEXT;
+        return String.format("%s.", getSource().getReset());
     }
 
     String getSsoLoginText() {
-        return SSO_LOGIN_TEXT;
+        return String.format("%s %s", getSource().getLogIn(), getSource().withSso());
     }
 
     String getCreateAccountLinkText() {
-        return CREATE_ACCOUNT_LINK_TEXT;
+        return String.format("%s %s %s.", getSource().getCreate(), getSource().getAppName(), getSource().getAccount());
     }
 }

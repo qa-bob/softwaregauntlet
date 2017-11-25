@@ -1,33 +1,38 @@
 package com.trello.view.card.move;
 
+import com.trello.copy.TrelloCopy;
+
 public class CardMoveModalCopy {
-    private static final String MOVE_MODAL_TITLE = "Move Card";
-    private static final String MOVE_BUTTON_LABEL = "Move";
-    private static final String POSITION_LABEL = "Position";
-    private static final String LIST_LABEL = "List";
-    private static final String BOARD_LABEL = "Board";
+    private TrelloCopy source;
 
     public static CardMoveModalCopy getInstance() {
         return new CardMoveModalCopy();
     }
 
     public String getTitle() {
-        return MOVE_MODAL_TITLE;
+        return String.format("%s %s", getSource().getMove(), getSource().getCard());
+    }
+
+    private TrelloCopy getSource() {
+        if (source == null) {
+            source = TrelloCopy.getInstance();
+        }
+        return source;
     }
 
     String getMoveButtonLabel() {
-        return MOVE_BUTTON_LABEL;
+        return getSource().getMove();
     }
 
     String getPositionLabel() {
-        return POSITION_LABEL;
+        return getSource().getPosition();
     }
 
     String getListLabel() {
-        return LIST_LABEL;
+        return getSource().getList();
     }
 
     String getBoardLabel() {
-        return BOARD_LABEL;
+        return getSource().getBoard();
     }
 }

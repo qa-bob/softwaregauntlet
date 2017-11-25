@@ -1,28 +1,34 @@
 package com.trello.view.card;
 
-class CardViewCopy {
-    private static final String SHOW_DETAILS_LINK = "Show Details";
-    private static final String COMMENT_BUTTON_LABEL = "Save";
-    private static final String IN_LIST = "in list";
-    private static final String ADD_COMMENTS_LABEL = "Add Comment";
+import com.trello.copy.TrelloCopy;
 
-    String getShowDetailsLinkCopy() {
-        return SHOW_DETAILS_LINK;
-    }
+class CardViewCopy {
+    private TrelloCopy source;
 
     public static CardViewCopy getInstance() {
         return new CardViewCopy();
     }
 
+    String getShowDetailsLinkCopy() {
+        return getSource().getShowDetails();
+    }
+
+    private TrelloCopy getSource() {
+        if (source == null) {
+            source = TrelloCopy.getInstance();
+        }
+        return source;
+    }
+
     String getCommentButtonLabel() {
-        return COMMENT_BUTTON_LABEL;
+        return getSource().getSave();
     }
 
     String getListMessage() {
-        return IN_LIST;
+        return getSource().getInList();
     }
 
     String getAddCommentsLabel() {
-        return ADD_COMMENTS_LABEL;
+        return getSource().getAddComment();
     }
 }
