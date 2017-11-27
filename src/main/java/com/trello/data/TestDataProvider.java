@@ -1,7 +1,9 @@
 package com.trello.data;
 
 import com.trello.data.card.TrelloCard;
+import com.trello.data.card.TrelloCardDefinition;
 import com.trello.data.card.TrelloCardRepository;
+import com.trello.data.card.TrelloCardValidatable;
 
 public class TestDataProvider {
     private static TestDataProvider provider;
@@ -18,15 +20,15 @@ public class TestDataProvider {
         return provider;
     }
 
-    public TrelloCard get(TrelloCard card) {
+    public TrelloCard get(TrelloCardValidatable card) {
         TrelloCard identified = repository.get(card);
-        while (identified == null) {
-            identified = repository.add(card);
-        }
-        return identified;
+        return identified == null ? repository.add(TrelloCardDefinition.getInstance().withInList("To Do").withTitle
+                ("TEK User Story")) : identified;
     }
 
     public TrelloCard get() {
-        return repository.get();
+        TrelloCard identified = repository.get();
+        return identified == null ? repository.add(TrelloCardDefinition.getInstance().withInList("To Do").withTitle
+                ("TEK User Story")) : identified;
     }
 }

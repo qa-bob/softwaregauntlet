@@ -4,8 +4,12 @@ import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiRegion;
 import com.softwareonpurpose.uinavigator.UiView;
 import com.trello.data.card.TrelloCard;
+import com.trello.data.card.TrelloCardValidatable;
 import com.trello.view.board.BoardView;
+import com.trello.view.board.list.card.CardRegion;
 import com.trello.view.card.CardView;
+
+import java.util.List;
 
 public class CardList extends UiRegion implements CardListValidatable {
     private static final String DESCRIPTION = "'Card list' region";
@@ -21,11 +25,17 @@ public class CardList extends UiRegion implements CardListValidatable {
     }
 
     @Override
-    public BoardView addCard(TrelloCard card) {
+    public BoardView addCard(TrelloCardValidatable card) {
         getAddACardElement().click();
         getNewCardTextboxElement().set(card.getTitle());
         getSaveButtonElement().click();
+        getCloseGadgetElement().click();
+        BoardView.directNav();
         return UiView.expect(BoardView.class);
+    }
+
+    private UiElement getCloseGadgetElement() {
+        return UiElement.getInstance("'Close' gadget", UiElement.LocatorType.CLASS, "icon-close", this.getElement());
     }
 
     private UiElement getSaveButtonElement() {
@@ -43,8 +53,19 @@ public class CardList extends UiRegion implements CardListValidatable {
         return UiElement.getInstance(description, UiElement.LocatorType.CLASS, "open-card-composer", this.getElement());
     }
 
-    @Override
-    public CardView clickCard(TrelloCard card) {
+    public CardView clickCard(TrelloCardValidatable card) {
+        List<UiElement> elements = UiElement.getList("Card", UiElement.LocatorType.CLASS, "list-card", this
+                .getElement());
+        int ordinal = 0;
+        for (UiElement element : elements) {
+            ordinal++;
+            CardRegion candidate = CardRegion.getInstance(ordinal, this.getElement());
+            TrelloCard regionCard = candidate.toData();
+            if (regionCard.equivalent(card)) {
+                candidate.click();
+                return UiView.expect(CardView.class);
+            }
+        }
         return null;
     }
 

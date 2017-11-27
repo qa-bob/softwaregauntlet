@@ -20,15 +20,15 @@ public abstract class TrelloCardValidatable {
         return new Gson().toJson(this);
     }
 
-    boolean equivalent(TrelloCard comparator) {
+    public boolean equivalent(TrelloCardValidatable comparator) {
         if (comparator == null || getId().equals(comparator.getId())) {
             return true;
         }
-        boolean equivalent = comparator.getList() == null || getList().equals(comparator.getList());
-        equivalent &= comparator.getTitle() == null || getTitle().equals(comparator.getTitle());
-        equivalent &= comparator.getPosition() == null || getPosition().equals(comparator.getPosition());
-        equivalent &= comparator.getBoard() == null || getBoard().equals(comparator.getBoard());
-        equivalent &= comparator.getNumber() == null || getNumber().equals(comparator.getNumber());
+        boolean equivalent = comparator.getList() == null || comparator.getList().equals(getList());
+        equivalent &= comparator.getTitle() == null || comparator.getTitle().equals(getTitle());
+        equivalent &= comparator.getPosition() == null || comparator.getPosition().equals(getPosition());
+        equivalent &= comparator.getBoard() == null || comparator.getBoard().equals(getBoard());
+        equivalent &= comparator.getNumber() == null || comparator.getNumber().equals(getNumber());
         return equivalent;
     }
 }

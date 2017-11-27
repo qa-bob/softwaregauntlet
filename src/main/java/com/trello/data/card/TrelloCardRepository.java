@@ -15,15 +15,11 @@ public class TrelloCardRepository {
     private List<Integer> queueNumbers = new ArrayList<>();
 
     private TrelloCardRepository() {
-        List<TrelloCard> uiCards = new ArrayList<>();
         TrelloUser user = TrelloUserRepository.getInstance().query();
         LoginView.directNav().login(user);
-        int cardCount = BoardView.directNav().getCardCount();
-        for (int cardOrdinal = 1; cardOrdinal <= cardCount; cardOrdinal++) {
-            uiCards.add(BoardView.directNav().clickCard(cardOrdinal).toData());
-        }
-        this.cards = uiCards;
-        BoardView.directNav().logout();
+        BoardView board = BoardView.directNav();
+        cards = board.getCards();
+        board.logout();
         UiHost.quitInstance();
     }
 
@@ -34,7 +30,7 @@ public class TrelloCardRepository {
         return repository;
     }
 
-    public TrelloCard get(TrelloCard card) {
+    public TrelloCard get(TrelloCardValidatable card) {
         Integer queueNumber = takeANumber();
         waitYourTurn(queueNumber);
         for (TrelloCard candidate : cards) {
@@ -62,11 +58,11 @@ public class TrelloCardRepository {
         return queueNumber;
     }
 
-    public TrelloCard add(TrelloCard card) {
+    public TrelloCard add(TrelloCardDefinition card) {
         TrelloUser user = TrelloUserRepository.getInstance().query();
         LoginView.directNav().login(user);
-        String lisName = "To Do";
-        TrelloCard identifiedCard = BoardView.directNav().inList(lisName).addCard(card).inList(lisName).clickCard
+        String listName = "To Do";
+        TrelloCard identifiedCard = BoardView.directNav().inList(listName).addCard(card).inList(listName).clickCard
                 (card).toData();
         BoardView.directNav().logout();
         UiHost.quitInstance();

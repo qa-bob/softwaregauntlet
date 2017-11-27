@@ -1,13 +1,10 @@
 package com.trello.view.board.list;
 
-import com.trello.data.card.TrelloCard;
+import com.trello.data.card.TrelloCardValidatable;
 import com.trello.view.board.BoardViewValidatable;
-import com.trello.view.card.CardView;
 
 public interface CardListValidatable {
-    BoardViewValidatable addCard(TrelloCard card);
-
-    CardView clickCard(TrelloCard card);
+    BoardViewValidatable addCard(TrelloCardValidatable card);
 
     String getName();
 }

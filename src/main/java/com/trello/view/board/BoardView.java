@@ -3,9 +3,12 @@ package com.trello.view.board;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
+import com.trello.data.card.TrelloCard;
 import com.trello.view.board.list.CardList;
+import com.trello.view.board.list.card.CardRegion;
 import com.trello.view.card.CardView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardView extends UiView implements BoardViewValidatable {
@@ -28,6 +31,7 @@ public class BoardView extends UiView implements BoardViewValidatable {
     protected boolean confirmElementStates() {
         boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);
         confirmed &= this.getElement().isDisplayed();
+        confirmed &= getAvatarElement().isDisplayed();
         return confirmed;
     }
 
@@ -45,22 +49,35 @@ public class BoardView extends UiView implements BoardViewValidatable {
         return null;
     }
 
-    public CardView clickCard(int ordinal) {
-        UiElement.getInstance("Card", UiElement.LocatorType.CLASS, "list-card", ordinal, this.getElement()).click();
-        return UiView.expect(CardView.class);
-    }
-
-    public int getCardCount() {
-        return UiElement.getList("Card", UiElement.LocatorType.CLASS, "list-card", this.getElement()).size();
-    }
-
     public void logout() {
-        UiElement.getInstance("Avatar", UiElement.LocatorType.CLASS, "header-avatar", this.getElement()).click();
+        getAvatarElement().click();
         BoardView view = UiView.expect(BoardView.class);
         view.clickLogout();
     }
 
+    private UiElement getAvatarElement() {
+        return UiElement.getInstance("Avatar", UiElement.LocatorType.CLASS, "header-avatar", this.getElement());
+    }
+
     private void clickLogout() {
         UiElement.getInstance("'Logout' link", UiElement.LocatorType.CLASS, "js-logout", this.getElement()).click();
+    }
+
+    public List<TrelloCard> getCards() {
+        List<TrelloCard> cards = new ArrayList<>();
+        List<TrelloCard> regionCards = new ArrayList<>();
+        List<UiElement> elements = UiElement.getList("Card", UiElement.LocatorType.CLASS, "list-card", this
+                .getElement());
+        int ordinal = 0;
+        //noinspection unused
+        for (UiElement element : elements) {
+            ordinal++;
+            regionCards.add(CardRegion.getInstance(ordinal, this.getElement()).toData());
+        }
+        for (TrelloCard regionCard : regionCards) {
+            cards.add(CardView.directNav(regionCard).toData());
+        }
+        BoardView.directNav().logout();
+        return cards;
     }
 }

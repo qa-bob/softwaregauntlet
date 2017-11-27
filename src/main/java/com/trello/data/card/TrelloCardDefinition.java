@@ -47,7 +47,7 @@ public class TrelloCardDefinition extends TrelloCardValidatable {
         return this;
     }
 
-    TrelloCardDefinition withTitle(String title) {
+    public TrelloCardDefinition withTitle(String title) {
         this.title = title;
         return this;
     }

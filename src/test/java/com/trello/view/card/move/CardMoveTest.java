@@ -26,10 +26,11 @@ public class CardMoveTest extends GauntletTest {
         then(CardMoveModalValidator.getInstance(expected, actual).validate());
     }
 
-    @Test(groups = {}, dependsOnMethods = "smoke")
+    @Test(groups = {TestType.RELEASE}, dependsOnMethods = "smoke")
     public void move() {
         TrelloUser user = TrelloUserRepository.getInstance().query();
-        TrelloCard card = TestDataProvider.getInstance().get();
+        TrelloCardDefinition cardDefinition = TrelloCardDefinition.getInstance().withInList("To Do");
+        TrelloCard card = TestDataProvider.getInstance().get(cardDefinition);
         String expectedList = "Done";
         TrelloCardDefinition expected = card.toDefinition().withInList(expectedList);
         given(user);
