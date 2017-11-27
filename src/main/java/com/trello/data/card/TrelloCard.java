@@ -6,21 +6,20 @@ public class TrelloCard extends TrelloCardValidatable {
     private final String id;
     private final String board;
     private final String position;
+    private final String number;
 
-    private TrelloCard(String id, String title, String board, String list, String position) {
+    private TrelloCard(String id, String number, String title, String board, String list, String position) {
         this.id = id;
+        this.number = number;
         this.title = title;
         this.list = list;
         this.board = board;
         this.position = position;
     }
 
-    static TrelloCard getInstance() {
-        return new TrelloCard("#1", "TEK User Story", "Application Project", "Acceptance", "1");
-    }
-
-    public static TrelloCard getInstance(String id, String title, String board, String list, String position) {
-        return new TrelloCard(id, title, board, list, position);
+    public static TrelloCard getInstance(String id, String number, String title, String board, String list, String
+            position) {
+        return new TrelloCard(id, number, title, board, list, position);
     }
 
     @Override
@@ -46,6 +45,11 @@ public class TrelloCard extends TrelloCardValidatable {
     @Override
     public String getBoard() {
         return board;
+    }
+
+    @Override
+    public String getNumber() {
+        return number;
     }
 
     public TrelloCardDefinition toDefinition() {

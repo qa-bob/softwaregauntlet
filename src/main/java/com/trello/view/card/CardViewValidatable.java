@@ -7,12 +7,6 @@ public interface CardViewValidatable {
 
     String addCommentButtonLabel();
 
-    Boolean isAddCardIconDisplayed();
-
-    Boolean isEmojiIconDisplayed();
-
-    Boolean isMentionIconDisplayed();
-
     String getMemberInitials();
 
     String getEditDescriptionHref();
@@ -21,9 +15,14 @@ public interface CardViewValidatable {
 
     String getListMessage();
 
-    Boolean isCardIconDisplayed();
-
     String getAddCommentLabel();
 
     Boolean isAddCommentIconDisplayed();
+
+    String getId();
+
+    String getNumber();
+
+    String getTitle();
+
 }

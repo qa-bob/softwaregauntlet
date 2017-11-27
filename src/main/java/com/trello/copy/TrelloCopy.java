@@ -11,7 +11,7 @@ public class TrelloCopy {
         copySource = new Properties();
         Object language = System.getProperties().get("lang");
         String languageCode = "".equals(language) ? "en" : language.toString();
-        String copySourcePath = String.format(".\\src\\main\\resources\\%s_copy.properties", languageCode);
+        String copySourcePath = String.format("./src/main/resources/%s_copy.properties", languageCode);
         try {
             copySource.load(new FileInputStream(copySourcePath));
         } catch (IOException e) {

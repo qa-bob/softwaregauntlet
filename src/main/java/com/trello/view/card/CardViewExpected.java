@@ -20,7 +20,16 @@ public class CardViewExpected implements CardViewValidatable {
 
     @Override
     public String getShowDetailsHref() {
-        return "https://trello.com/c/aMBOItYP/1-tek-user-story#";
+        return getDetailHref();
+    }
+
+    private String getDetailHref() {
+        String hrefFormat = "https://trello.com/c/%s/%s-%s#";
+        return String.format(hrefFormat, card.getId(), card.getNumber(), formatForUrl(card.getTitle()));
+    }
+
+    private String formatForUrl(String title) {
+        return title.toLowerCase().replace(" ", "-");
     }
 
     @Override
@@ -41,28 +50,13 @@ public class CardViewExpected implements CardViewValidatable {
     }
 
     @Override
-    public Boolean isAddCardIconDisplayed() {
-        return true;
-    }
-
-    @Override
-    public Boolean isEmojiIconDisplayed() {
-        return true;
-    }
-
-    @Override
-    public Boolean isMentionIconDisplayed() {
-        return true;
-    }
-
-    @Override
     public String getMemberInitials() {
         return user.getInitials();
     }
 
     @Override
     public String getEditDescriptionHref() {
-        return "https://trello.com/c/aMBOItYP/1-tek-user-story#";
+        return getDetailHref();
     }
 
     @Override
@@ -76,11 +70,6 @@ public class CardViewExpected implements CardViewValidatable {
     }
 
     @Override
-    public Boolean isCardIconDisplayed() {
-        return true;
-    }
-
-    @Override
     public String getAddCommentLabel() {
         return getCopy().getAddCommentsLabel();
     }
@@ -88,5 +77,20 @@ public class CardViewExpected implements CardViewValidatable {
     @Override
     public Boolean isAddCommentIconDisplayed() {
         return true;
+    }
+
+    @Override
+    public String getId() {
+        return card.getId();
+    }
+
+    @Override
+    public String getNumber() {
+        return card.getNumber();
+    }
+
+    @Override
+    public String getTitle() {
+        return card.getTitle();
     }
 }

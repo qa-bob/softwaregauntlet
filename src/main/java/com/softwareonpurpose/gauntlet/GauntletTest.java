@@ -177,6 +177,7 @@ public abstract class GauntletTest {
         public static final String CARD = "card";
         public static final String LANDING = "landing";
         public static final String LOGIN = "login";
+        public static final String BOARD = "board";
 
         //  public final static String VIEW_NAME = "[view name]";
     }

@@ -19,16 +19,13 @@ public class CardViewValidator extends Validator {
 
     @Override
     protected void executeVerifications() {
-        verify("Is 'Card' icon displayed?", expected.isCardIconDisplayed(), actual.isCardIconDisplayed());
+        String commentVerifyDesc = "Is 'Add comment' icon displayed?";
         verify("'List' label", expected.getListMessage(), actual.getListMessage());
         verify("List", expected.getList(), actual.getList());
         verify("'Edit description' href", expected.getEditDescriptionHref(), actual.getEditDescriptionHref());
-        verify("Is 'Add comment' icon displayed?", expected.isAddCommentIconDisplayed(), actual.isAddCommentIconDisplayed());
+        verify(commentVerifyDesc, expected.isAddCommentIconDisplayed(), actual.isAddCommentIconDisplayed());
         verify("'Add comment' label", expected.getAddCommentLabel(), actual.getAddCommentLabel());
         verify("Member initials", expected.getMemberInitials(), actual.getMemberInitials());
-        verify("Is 'Mention' icon displayed?", expected.isMentionIconDisplayed(), actual.isMentionIconDisplayed());
-        verify("Is 'Emoji' icon displayed?", expected.isEmojiIconDisplayed(), actual.isEmojiIconDisplayed());
-        verify("Is 'Add card' icon displayed?", expected.isAddCardIconDisplayed(), actual.isAddCardIconDisplayed());
         verify("'Add comment' button label", expected.addCommentButtonLabel(), actual.addCommentButtonLabel());
         verify("'Show details' link", expected.getShowDetailsLink(), actual.getShowDetailsLink());
         verify("'Show details' href", expected.getShowDetailsHref(), actual.getShowDetailsHref());
