@@ -4,6 +4,7 @@ import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
 import com.trello.data.card.TrelloCard;
+import com.trello.data.card.TrelloCardValidatable;
 import com.trello.view.card.move.CardMoveModal;
 
 public class CardView extends UiView implements CardViewValidatable {
@@ -18,7 +19,7 @@ public class CardView extends UiView implements CardViewValidatable {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 
-    public static CardView directNav(TrelloCard card) {
+    public static CardView directNav(TrelloCardValidatable card) {
         String cardId = card.getId();
         String cardNumber = card.getNumber();
         String cardTitle = card.getTitle().toLowerCase().replace(" ", "-");

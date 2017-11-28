@@ -51,8 +51,4 @@ public class TrelloCard extends TrelloCardValidatable {
     public String getNumber() {
         return number;
     }
-
-    public TrelloCardDefinition toDefinition() {
-        return TrelloCardDefinition.getInstance().withTitle(title).withInList(list);
-    }
 }

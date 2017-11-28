@@ -4,6 +4,7 @@ import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiRegion;
 import com.softwareonpurpose.uinavigator.UiView;
 import com.trello.data.card.TrelloCard;
+import com.trello.data.card.TrelloCardDefinition;
 import com.trello.data.card.TrelloCardValidatable;
 import com.trello.view.board.BoardView;
 import com.trello.view.board.list.card.CardRegion;
@@ -54,6 +55,7 @@ public class CardList extends UiRegion implements CardListValidatable {
     }
 
     public CardView clickCard(TrelloCardValidatable card) {
+        TrelloCardDefinition cardListIgnored = card.toDefinition().withInList(null);
         List<UiElement> elements = UiElement.getList("Card", UiElement.LocatorType.CLASS, "list-card", this
                 .getElement());
         int ordinal = 0;
@@ -61,7 +63,7 @@ public class CardList extends UiRegion implements CardListValidatable {
             ordinal++;
             CardRegion candidate = CardRegion.getInstance(ordinal, this.getElement());
             TrelloCard regionCard = candidate.toData();
-            if (regionCard.equivalent(card)) {
+            if (regionCard.equivalent(cardListIgnored)) {
                 candidate.click();
                 return UiView.expect(CardView.class);
             }

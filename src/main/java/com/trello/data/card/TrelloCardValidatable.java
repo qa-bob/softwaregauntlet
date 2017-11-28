@@ -21,8 +21,10 @@ public abstract class TrelloCardValidatable {
     }
 
     public boolean equivalent(TrelloCardValidatable comparator) {
-        if (comparator == null || getId().equals(comparator.getId())) {
+        if (comparator == null) {
             return true;
+        } else if (comparator.getId() != null) {
+            return comparator.getId().equals(getId());
         }
         boolean equivalent = comparator.getList() == null || comparator.getList().equals(getList());
         equivalent &= comparator.getTitle() == null || comparator.getTitle().equals(getTitle());
@@ -30,5 +32,10 @@ public abstract class TrelloCardValidatable {
         equivalent &= comparator.getBoard() == null || comparator.getBoard().equals(getBoard());
         equivalent &= comparator.getNumber() == null || comparator.getNumber().equals(getNumber());
         return equivalent;
+    }
+
+    public TrelloCardDefinition toDefinition() {
+        return TrelloCardDefinition.getInstance().withTitle(getTitle()).withInList(getList()).withId(getId())
+                .withPosition(getPosition()).withBoard(getBoard()).withNumber(getNumber());
     }
 }

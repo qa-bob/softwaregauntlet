@@ -77,7 +77,6 @@ public class BoardView extends UiView implements BoardViewValidatable {
         for (TrelloCard regionCard : regionCards) {
             cards.add(CardView.directNav(regionCard).toData());
         }
-        BoardView.directNav().logout();
         return cards;
     }
 }

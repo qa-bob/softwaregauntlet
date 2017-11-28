@@ -38,7 +38,7 @@ public class CardMoveTest extends GauntletTest {
         when();
         LoginView.directNav().login(user);
         CardView.directNav(card).clickMove().move(expectedList);
-        TrelloCard actual = TestDataProvider.getInstance().get(card);
+        TrelloCard actual = TestDataProvider.getInstance().get(expected);
         then(TrelloCardValidator.getInstance(expected, actual).validate());
     }
 }

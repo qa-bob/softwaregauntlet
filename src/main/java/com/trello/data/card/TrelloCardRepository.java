@@ -1,9 +1,10 @@
 package com.trello.data.card;
 
-import com.softwareonpurpose.uinavigator.UiHost;
+import com.softwareonpurpose.uinavigator.UiRegion;
 import com.trello.data.user.TrelloUser;
 import com.trello.data.user.TrelloUserRepository;
 import com.trello.view.board.BoardView;
+import com.trello.view.card.CardView;
 import com.trello.view.login.LoginView;
 
 import java.util.ArrayList;
@@ -19,8 +20,7 @@ public class TrelloCardRepository {
         LoginView.directNav().login(user);
         BoardView board = BoardView.directNav();
         cards = board.getCards();
-        board.logout();
-        UiHost.quitInstance();
+        BoardView.directNav().logout();
     }
 
     public static TrelloCardRepository getInstance() {
@@ -31,15 +31,37 @@ public class TrelloCardRepository {
     }
 
     public TrelloCard get(TrelloCardValidatable card) {
+        if (card == null || card.getId() == null) {
+            return queryForAvailableCard(card);
+        } else {
+            return getLatestIdentifiedCard(card);
+        }
+    }
+
+    private TrelloCard getLatestIdentifiedCard(TrelloCardValidatable card) {
+        UiRegion.suppressConstructionLogging(true);
+        TrelloCard existingCard = null;
+        if (card.getId() != null) {
+            existingCard = CardView.directNav(card).toData();
+        }
+        UiRegion.suppressConstructionLogging(false);
+        return existingCard;
+    }
+
+    private TrelloCard queryForAvailableCard(TrelloCardValidatable card) {
+        UiRegion.suppressConstructionLogging(true);
         Integer queueNumber = takeANumber();
         waitYourTurn(queueNumber);
         for (TrelloCard candidate : cards) {
             if (candidate.equivalent(card)) {
                 cards.remove(candidate);
                 discardNumber(queueNumber);
+                UiRegion.suppressConstructionLogging(false);
                 return candidate;
             }
         }
+        UiRegion.suppressConstructionLogging(false);
+        discardNumber(queueNumber);
         return null;
     }
 
@@ -59,13 +81,13 @@ public class TrelloCardRepository {
     }
 
     public TrelloCard add(TrelloCardDefinition card) {
+        UiRegion.suppressConstructionLogging(true);
         TrelloUser user = TrelloUserRepository.getInstance().query();
         LoginView.directNav().login(user);
-        String listName = "To Do";
-        TrelloCard identifiedCard = BoardView.directNav().inList(listName).addCard(card).inList(listName).clickCard
-                (card).toData();
+        TrelloCard identifiedCard = BoardView.directNav().inList(card.getList()).addCard(card).inList(card.getList())
+                .clickCard(card).toData();
         BoardView.directNav().logout();
-        UiHost.quitInstance();
+        UiRegion.suppressConstructionLogging(false);
         return identifiedCard;
     }
 

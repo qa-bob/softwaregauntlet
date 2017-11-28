@@ -51,4 +51,24 @@ public class TrelloCardDefinition extends TrelloCardValidatable {
         this.title = title;
         return this;
     }
+
+    TrelloCardDefinition withId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    TrelloCardDefinition withPosition(String position) {
+        this.position = position;
+        return this;
+    }
+
+    TrelloCardDefinition withBoard(String board) {
+        this.board = board;
+        return this;
+    }
+
+    TrelloCardDefinition withNumber(String number) {
+        this.number = number;
+        return this;
+    }
 }

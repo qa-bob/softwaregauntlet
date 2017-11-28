@@ -35,12 +35,14 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
 
     @Override
     public String getPosition() {
-        return UiElement.getInstance("Position", UiElement.LocatorType.CLASS, "js-pos-value", this.getElement()).getText();
+        return UiElement.getInstance("Position", UiElement.LocatorType.CLASS, "js-pos-value", this.getElement())
+                .getText();
     }
 
     @Override
     public String getPositionLabel() {
-        return UiElement.getInstance("'Position' label", UiElement.LocatorType.CLASS, "label", 3, this.getElement()).getText();
+        return UiElement.getInstance("'Position' label", UiElement.LocatorType.CLASS, "label", 3, this.getElement())
+                .getText();
     }
 
     @Override
@@ -50,17 +52,20 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
 
     @Override
     public String getListLabel() {
-        return UiElement.getInstance("'List' label", UiElement.LocatorType.CLASS, "label", 2, this.getElement()).getText();
+        return UiElement.getInstance("'List' label", UiElement.LocatorType.CLASS, "label", 2, this.getElement())
+                .getText();
     }
 
     @Override
     public String getBoard() {
-        return UiElement.getInstance("Board", UiElement.LocatorType.CLASS, "js-board-value", this.getElement()).getText();
+        return UiElement.getInstance("Board", UiElement.LocatorType.CLASS, "js-board-value", this.getElement())
+                .getText();
     }
 
     @Override
     public String getBoardLabel() {
-        return UiElement.getInstance("'Board' label", UiElement.LocatorType.CLASS, "label", 1, this.getElement()).getText();
+        return UiElement.getInstance("'Board' label", UiElement.LocatorType.CLASS, "label", 1, this.getElement())
+                .getText();
     }
 
     private UiElement getTitleElement() {
@@ -69,8 +74,13 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
 
     void move(String list) {
         getListSelectElement().set(list);
-        getMoveButtonElement().click();
+        CardMoveModal modal = UiView.expect(CardMoveModal.class);
+        modal.clickMoveButton();
         UiView.expect(CardView.class);
+    }
+
+    private void clickMoveButton() {
+        getMoveButtonElement().click();
     }
 
     private UiElement getMoveButtonElement() {
