@@ -51,42 +51,51 @@ public class LoginView extends UiView implements LoginViewValidatable {
 
     @Override
     public String getTitle() {
-        return UiElement.getInstance("Title", UiElement.LocatorType.TAG, "h1", this.getElement()).getText();
+        return getTitleElement().getText();
+    }
+
+    private UiElement getTitleElement() {
+        return UiElement.getInstance("Title", UiElement.LocatorType.TAG, "h1", this.getElement());
     }
 
     @Override
     public String getUsernameLabel() {
-        String description = "'Username' label";
-        return UiElement.getInstance(description, UiElement.LocatorType.TAG, "label", getUsernameContainer()).getText();
+        return getUsernameLabelElement().getText();
     }
 
-    private UiElement getUsernameContainer() {
+    private UiElement getUsernameLabelElement() {
+        String description = "'Username' label";
+        return UiElement.getInstance(description, UiElement.LocatorType.TAG, "label", getUsernameContainerElement());
+    }
+
+    private UiElement getUsernameContainerElement() {
         String description = "'Username' container";
         return UiElement.getInstance(description, UiElement.LocatorType.ID, "login-form", this.getElement());
     }
 
     @Override
     public String getPasswordLabel() {
-        String desc = "'Password' label";
-        return UiElement.getInstance(desc, UiElement.LocatorType.TAG, "label", 2, getUsernameContainer()).getText();
+        return getPasswordLabelElement().getText();
+    }
+
+    private UiElement getPasswordLabelElement() {
+        return UiElement.getInstance("'Password' label", UiElement.LocatorType.TAG, "label", 2,
+                getUsernameContainerElement());
     }
 
     @Override
     public String getPasswordPlaceholder() {
-        String description = "'Password' placeholder";
-        return UiElement.getInstance(description, UiElement.LocatorType.NAME, "password", this.getElement()).getTip();
+        return getPasswordElement().getTip();
     }
 
     @Override
     public String getLoginButtonLabel() {
-        String desc = "'Login' button label";
-        return UiElement.getInstance(desc, UiElement.LocatorType.ID, "login", this.getElement()).getAttribute("value");
+        return getLoginButtonElement().getAttribute("value");
     }
 
     @Override
     public String getForgotPasswordMessage() {
-        UiElement element = getForgetPasswordMessageElement();
-        return element.getText();
+        return getForgetPasswordMessageElement().getText();
     }
 
     private UiElement getForgetPasswordMessageElement() {
@@ -97,15 +106,22 @@ public class LoginView extends UiView implements LoginViewValidatable {
 
     @Override
     public String getResetLinkText() {
-        String desc = "'Reset' link text";
-        return UiElement.getInstance(desc, UiElement.LocatorType.TAG, "a", getForgetPasswordMessageElement()).getText();
+        return getResetLinkElement().getText();
+    }
+
+    private UiElement getResetLinkElement() {
+        String description = "'Reset' link text";
+        return UiElement.getInstance(description, UiElement.LocatorType.TAG, "a", getForgetPasswordMessageElement());
     }
 
     @Override
     public String getSsoLoginText() {
-        String desc = "'Sso login' link text";
-        UiElement parent = getLoginPasswordContainerElement();
-        return UiElement.getInstance(desc, UiElement.LocatorType.TAG, "p", parent).getText();
+        return getSsoLoginElement().getText();
+    }
+
+    private UiElement getSsoLoginElement() {
+        String description = "'Sso login' link text";
+        return UiElement.getInstance(description, UiElement.LocatorType.TAG, "p", getLoginPasswordContainerElement());
     }
 
     private UiElement getLoginPasswordContainerElement() {
@@ -115,7 +131,11 @@ public class LoginView extends UiView implements LoginViewValidatable {
 
     @Override
     public String getCreateAccountLinkText() {
-        String desc = "'Create account' link text";
-        return UiElement.getInstance(desc, UiElement.LocatorType.ID, "signup", this.getElement()).getText();
+        return getAccountLinkElement().getText();
+    }
+
+    private UiElement getAccountLinkElement() {
+        String description = "'Create account' link text";
+        return UiElement.getInstance(description, UiElement.LocatorType.ID, "signup", this.getElement());
     }
 }
