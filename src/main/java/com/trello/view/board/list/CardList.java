@@ -3,7 +3,6 @@ package com.trello.view.board.list;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiRegion;
 import com.softwareonpurpose.uinavigator.UiView;
-import com.trello.data.card.TrelloCard;
 import com.trello.data.card.TrelloCardDefinition;
 import com.trello.data.card.TrelloCardValidatable;
 import com.trello.view.board.BoardView;
@@ -26,12 +25,28 @@ public class CardList extends UiRegion implements CardListValidatable {
     }
 
     public BoardView addCard(TrelloCardValidatable card) {
-        getAddACardElement().click();
-        getNewCardTextboxElement().set(card.getTitle());
-        getSaveButtonElement().click();
-        getCloseGadgetElement().click();
+        clickAddCard();
+        setCardTitle(card.getTitle());
+        clickSaveButton();
+        clickCloseGadget();
         BoardView.directNav();
         return UiView.expect(BoardView.class);
+    }
+
+    private void clickCloseGadget() {
+        getCloseGadgetElement().click();
+    }
+
+    private void clickSaveButton() {
+        getSaveButtonElement().click();
+    }
+
+    private void setCardTitle(String title) {
+        getNewCardTextboxElement().set(title);
+    }
+
+    private void clickAddCard() {
+        getAddACardElement().click();
     }
 
     private UiElement getCloseGadgetElement() {
@@ -54,15 +69,13 @@ public class CardList extends UiRegion implements CardListValidatable {
     }
 
     public CardView clickCard(TrelloCardValidatable card) {
-        TrelloCardDefinition cardListIgnored = card.toDefinition().withInList(null);
-        List<UiElement> elements = UiElement.getList("Card", UiElement.LocatorType.CLASS, "list-card", this
-                .getElement());
+        TrelloCardDefinition cardWithoutList = card.toDefinition().withInList(null);
+        List<UiElement> elements = getCardElements();
         int ordinal = 0;
         for (UiElement element : elements) {
             ordinal++;
             CardRegion candidate = CardRegion.getInstance(ordinal, this.getElement());
-            TrelloCard regionCard = candidate.toData();
-            if (regionCard.equivalent(cardListIgnored)) {
+            if (candidate.toData().equivalent(cardWithoutList)) {
                 candidate.click();
                 return UiView.expect(CardView.class);
             }
@@ -70,9 +83,16 @@ public class CardList extends UiRegion implements CardListValidatable {
         return null;
     }
 
+    private List<UiElement> getCardElements() {
+        return UiElement.getList("Card", UiElement.LocatorType.CLASS, "list-card", this.getElement());
+    }
+
     @Override
     public String getName() {
-        return UiElement.getInstance("'List' name", UiElement.LocatorType.CLASS, "list-header", this.getElement())
-                .getText();
+        return getNameElement().getText();
+    }
+
+    private UiElement getNameElement() {
+        return UiElement.getInstance("'List' name", UiElement.LocatorType.CLASS, "list-header", this.getElement());
     }
 }
