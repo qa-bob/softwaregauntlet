@@ -1,10 +1,6 @@
 package com.trello.data.user;
 
 public class TrelloUserDefinition extends TrelloUserValidatable {
-    @Override
-    String getPassword() {
-        return null;
-    }
 
     @Override
     String getUsername() {

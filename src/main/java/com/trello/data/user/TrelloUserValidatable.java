@@ -3,7 +3,6 @@ package com.trello.data.user;
 import com.google.gson.Gson;
 
 public abstract class TrelloUserValidatable {
-    abstract String getPassword();
 
     abstract String getUsername();
 
@@ -19,8 +18,12 @@ public abstract class TrelloUserValidatable {
         if (comparator == null) {
             return true;
         }
-        boolean equivalent = comparator.getUsername() == null || comparator.getUsername().equals(getUsername());
-        equivalent &= comparator.getInitials() == null || comparator.getInitials().equals(getInitials());
+        boolean equivalent = isEquivalent(getUsername(), comparator.getUsername());
+        equivalent &= isEquivalent(getInitials(), comparator.getInitials());
         return equivalent;
+    }
+
+    private boolean isEquivalent(String thisValue, String comparator) {
+        return comparator == null || comparator.equals(thisValue);
     }
 }

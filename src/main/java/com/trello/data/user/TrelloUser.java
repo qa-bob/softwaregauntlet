@@ -6,7 +6,6 @@ public class TrelloUser extends TrelloUserValidatable {
         return new TrelloUser();
     }
 
-    @Override
     public String getPassword() {
         return "T3kSystem$";
     }
