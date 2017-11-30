@@ -26,8 +26,9 @@ public class TestDataProvider {
     public TrelloCard get(TrelloCardValidatable card) {
         TrelloCard identified = repository.query(card);
         if (identified == null) {
-            String title = "TEK User Story";
-            identified = repository.add(TrelloCardDefinition.getInstance().withInList("To Do").withTitle(title));
+            String title = card.getTitle() == null ? "TEK User Story" : card.getTitle();
+            String list = card.getList() == null ? "To Do" : card.getList();
+            identified = repository.add(TrelloCardDefinition.getInstance().withInList(list).withTitle(title));
         }
         getLogger().info("TEST CARD ACQUIRED:");
         getLogger().info("");
