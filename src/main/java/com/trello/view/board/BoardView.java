@@ -7,6 +7,7 @@ import com.trello.data.card.TrelloCard;
 import com.trello.view.board.list.CardList;
 import com.trello.view.board.list.card.CardRegion;
 import com.trello.view.card.CardView;
+import com.trello.view.region.header.TrelloHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,11 @@ public class BoardView extends UiView implements BoardViewValidatable {
             }
         }
         return null;
+    }
+
+    @Override
+    public TrelloHeader inHeader() {
+        return TrelloHeader.getInstance(this.getElement());
     }
 
     public void logout() {

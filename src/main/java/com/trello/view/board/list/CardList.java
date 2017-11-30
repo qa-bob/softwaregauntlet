@@ -25,7 +25,6 @@ public class CardList extends UiRegion implements CardListValidatable {
         return new CardList(ordinal, parent);
     }
 
-    @Override
     public BoardView addCard(TrelloCardValidatable card) {
         getAddACardElement().click();
         getNewCardTextboxElement().set(card.getTitle());
