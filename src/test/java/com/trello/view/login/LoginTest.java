@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 public class LoginTest extends GauntletTest {
     @Test(groups = {TestType.EVT})
     public void smoke() {
-        given("Any scenario");
         LoginViewExpected expected = LoginViewExpected.getInstance();
         when();
         LoginView actual = LoginView.directNav();
