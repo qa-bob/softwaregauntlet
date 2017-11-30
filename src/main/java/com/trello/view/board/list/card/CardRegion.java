@@ -30,8 +30,11 @@ public class CardRegion extends UiRegion implements CardRegionValidatable {
     }
 
     private String getTitle() {
-        return UiElement.getInstance("Title", UiElement.LocatorType.CLASS, "list-card-title", this.getElement())
-                .getText();
+        return getTitleElement().getText();
+    }
+
+    private UiElement getTitleElement() {
+        return UiElement.getInstance("Title", UiElement.LocatorType.CLASS, "list-card-title", this.getElement());
     }
 
     private String getId() {
@@ -42,9 +45,8 @@ public class CardRegion extends UiRegion implements CardRegionValidatable {
     }
 
     private String getNumber() {
-        String baseUri = String.format("%s/%s", CARD_URI, getId());
         String href = this.getElement().getHref();
-        int idIndexStart = baseUri.length() + 1;
+        int idIndexStart = String.format("%s/%s", CARD_URI, getId()).length() + 1;
         int idIndexEnd = href.indexOf("-", idIndexStart);
         return href.substring(idIndexStart, idIndexEnd);
     }
