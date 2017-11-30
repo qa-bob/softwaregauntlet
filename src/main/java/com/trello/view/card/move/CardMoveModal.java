@@ -17,7 +17,7 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
 
     @Override
     protected boolean confirmElementStates() {
-        boolean confirmed = UiHost.getInstance().getUri().equals("https://trello.com/c/aMBOItYP/1-tek-user-story");
+        boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);
         confirmed &= getTitleElement().isDisplayed();
         confirmed &= "Move Card".equals(getTitle());
         return confirmed;
@@ -35,14 +35,20 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
 
     @Override
     public String getPosition() {
-        return UiElement.getInstance("Position", UiElement.LocatorType.CLASS, "js-pos-value", this.getElement())
-                .getText();
+        return getPositionElement().getText();
+    }
+
+    private UiElement getPositionElement() {
+        return UiElement.getInstance("Position", UiElement.LocatorType.CLASS, "js-pos-value", this.getElement());
     }
 
     @Override
     public String getPositionLabel() {
-        return UiElement.getInstance("'Position' label", UiElement.LocatorType.CLASS, "label", 3, this.getElement())
-                .getText();
+        return getPositionLabelElement().getText();
+    }
+
+    private UiElement getPositionLabelElement() {
+        return UiElement.getInstance("'Position' label", UiElement.LocatorType.CLASS, "label", 3, this.getElement());
     }
 
     @Override
@@ -52,20 +58,29 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
 
     @Override
     public String getListLabel() {
-        return UiElement.getInstance("'List' label", UiElement.LocatorType.CLASS, "label", 2, this.getElement())
-                .getText();
+        return getListLabelElement().getText();
+    }
+
+    private UiElement getListLabelElement() {
+        return UiElement.getInstance("'List' label", UiElement.LocatorType.CLASS, "label", 2, this.getElement());
     }
 
     @Override
     public String getBoard() {
-        return UiElement.getInstance("Board", UiElement.LocatorType.CLASS, "js-board-value", this.getElement())
-                .getText();
+        return getBoardElement().getText();
+    }
+
+    private UiElement getBoardElement() {
+        return UiElement.getInstance("Board", UiElement.LocatorType.CLASS, "js-board-value", this.getElement());
     }
 
     @Override
     public String getBoardLabel() {
-        return UiElement.getInstance("'Board' label", UiElement.LocatorType.CLASS, "label", 1, this.getElement())
-                .getText();
+        return getBoardLabelElement().getText();
+    }
+
+    private UiElement getBoardLabelElement() {
+        return UiElement.getInstance("'Board' label", UiElement.LocatorType.CLASS, "label", 1, this.getElement());
     }
 
     private UiElement getTitleElement() {
