@@ -26,12 +26,18 @@ public class TestDataProvider {
     public TrelloCard get(TrelloCardValidatable card) {
         TrelloCard identified = repository.query(card);
         if (identified == null) {
-            String title = card.getTitle() == null ? "TEK User Story" : card.getTitle();
-            String list = card.getList() == null ? "To Do" : card.getList();
-            identified = repository.add(TrelloCardDefinition.getInstance().withInList(list).withTitle(title));
+            identified = addCard(card);
         }
         getLogger().info("TEST CARD ACQUIRED:");
         getLogger().info("");
+        return identified;
+    }
+
+    private TrelloCard addCard(TrelloCardValidatable card) {
+        TrelloCard identified;
+        String title = card.getTitle() == null ? "TEK User Story" : card.getTitle();
+        String list = card.getList() == null ? "To Do" : card.getList();
+        identified = repository.add(TrelloCardDefinition.getInstance().withInList(list).withTitle(title));
         return identified;
     }
 
