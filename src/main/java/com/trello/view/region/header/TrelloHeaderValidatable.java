@@ -1,7 +1,6 @@
 package com.trello.view.region.header;
 
 public interface TrelloHeaderValidatable {
-    String getOpenMemberButtonLabel();
 
     Boolean isOpenMemberButtonDisplayed();
 
@@ -15,11 +14,7 @@ public interface TrelloHeaderValidatable {
 
     Boolean isSearchDisplayed();
 
-    String getBoardsButtonLabel();
-
     Boolean isBoardsButtonDisplayed();
-
-    Boolean isBackupButtonDisplayed();
 
     Boolean isLogoDisplayed();
 }

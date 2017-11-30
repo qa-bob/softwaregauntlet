@@ -1,15 +1,9 @@
 package com.trello.view.region.header;
 
 public class TrelloHeaderExpected implements TrelloHeaderValidatable {
-    private TrelloHeaderCopy copy;
 
     public static TrelloHeaderExpected getInstance() {
         return new TrelloHeaderExpected();
-    }
-
-    @Override
-    public String getOpenMemberButtonLabel() {
-        return "T";
     }
 
     @Override
@@ -43,24 +37,7 @@ public class TrelloHeaderExpected implements TrelloHeaderValidatable {
     }
 
     @Override
-    public String getBoardsButtonLabel() {
-        return getCopy().getBoardsButtonLabel();
-    }
-
-    private TrelloHeaderCopy getCopy() {
-        if (copy == null) {
-            copy = TrelloHeaderCopy.getInstance();
-        }
-        return copy;
-    }
-
-    @Override
     public Boolean isBoardsButtonDisplayed() {
-        return true;
-    }
-
-    @Override
-    public Boolean isBackupButtonDisplayed() {
         return true;
     }
 

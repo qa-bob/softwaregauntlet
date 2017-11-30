@@ -16,12 +16,6 @@ public class TrelloHeader extends UiRegion implements TrelloHeaderValidatable {
         return new TrelloHeader(parent);
     }
 
-    @Override
-    public String getOpenMemberButtonLabel() {
-        return UiElement.getInstance("'Open members button' label", UiElement.LocatorType.CLASS, "member-initials",
-                getOpenMembersButtonElement()).getText();
-    }
-
     private UiElement getOpenMembersButtonElement() {
         return UiElement.getInstance("'Open members' button", UiElement.LocatorType.CLASS, "header-avatar", this
                 .getElement());
@@ -62,11 +56,6 @@ public class TrelloHeader extends UiRegion implements TrelloHeaderValidatable {
                 .isDisplayed();
     }
 
-    @Override
-    public String getBoardsButtonLabel() {
-        return getBoardsButtonElement().getText();
-    }
-
     private UiElement getBoardsButtonElement() {
         String description = "'Boards' button";
         return UiElement.getInstance(description, UiElement.LocatorType.CLASS, "header-boards", this.getElement());
@@ -75,12 +64,6 @@ public class TrelloHeader extends UiRegion implements TrelloHeaderValidatable {
     @Override
     public Boolean isBoardsButtonDisplayed() {
         return getBoardsButtonElement().isDisplayed();
-    }
-
-    @Override
-    public Boolean isBackupButtonDisplayed() {
-        return UiElement.getInstance("'Back' button", UiElement.LocatorType.CLASS, "header-back-button", this
-                .getElement()).isDisplayed();
     }
 
     @Override
