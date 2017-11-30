@@ -30,7 +30,7 @@ public class CardView extends UiView implements CardViewValidatable {
 
     @Override
     protected boolean confirmElementStates() {
-        boolean confirmed = UiHost.getInstance().getUri().equals("https://trello.com/c/aMBOItYP/1-tek-user-story");
+        boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);
         confirmed &= getMoveElement().isDisplayed();
         return confirmed;
     }
@@ -59,8 +59,8 @@ public class CardView extends UiView implements CardViewValidatable {
     }
 
     private UiElement getAddCommentButtonElement() {
-        return UiElement.getInstance("'Add comment' button", UiElement.LocatorType.CLASS, "js-add-comment", this
-                .getElement());
+        String description = "'Add comment' button";
+        return UiElement.getInstance(description, UiElement.LocatorType.CLASS, "js-add-comment", this.getElement());
     }
 
     @Override
@@ -70,8 +70,12 @@ public class CardView extends UiView implements CardViewValidatable {
 
     @Override
     public String getMemberInitials() {
-        return UiElement.getInstance("Member initials", UiElement.LocatorType.CLASS, "member-initials", this
-                .getElement()).getText();
+        return getMemberInitialsElement().getText();
+    }
+
+    private UiElement getMemberInitialsElement() {
+        String description = "Member initials";
+        return UiElement.getInstance(description, UiElement.LocatorType.CLASS, "member-initials", this.getElement());
     }
 
     @Override
@@ -80,14 +84,18 @@ public class CardView extends UiView implements CardViewValidatable {
     }
 
     private UiElement getEditDescriptionLinkElement() {
-        return UiElement.getInstance("Edit description", UiElement.LocatorType.CLASS, "js-edit-desc", this.getElement
-                ());
+        String description = "Edit description";
+        return UiElement.getInstance(description, UiElement.LocatorType.CLASS, "js-edit-desc", this.getElement());
     }
 
     @Override
     public String getList() {
-        return UiElement.getInstance("List", UiElement.LocatorType.CLASS, "js-open-move-from-header",
-                getCurrentListElement()).getText();
+        return getListElement().getText();
+    }
+
+    private UiElement getListElement() {
+        String locatorValue = "js-open-move-from-header";
+        return UiElement.getInstance("List", UiElement.LocatorType.CLASS, locatorValue, getCurrentListElement());
     }
 
     private UiElement getCurrentListElement() {
@@ -101,19 +109,28 @@ public class CardView extends UiView implements CardViewValidatable {
 
     @Override
     public String getAddCommentLabel() {
-        return UiElement.getInstance("'Add comment' label", UiElement.LocatorType.TAG, "h3",
-                getAddCommentSectionElement()).getText();
+        return getAddCommentLabelElement().getText();
+    }
+
+    private UiElement getAddCommentLabelElement() {
+        String description = "'Add comment' label";
+        return UiElement.getInstance(description, UiElement.LocatorType.TAG, "h3", getAddCommentSectionElement());
     }
 
     private UiElement getAddCommentSectionElement() {
-        return UiElement.getInstance("'Add comment' section", UiElement.LocatorType.CLASS, "add-comment-section",
-                this.getElement());
+        String description = "'Add comment' section";
+        String locatorValue = "add-comment-section";
+        return UiElement.getInstance(description, UiElement.LocatorType.CLASS, locatorValue, this.getElement());
     }
 
     @Override
     public Boolean isAddCommentIconDisplayed() {
-        return UiElement.getInstance("'Add comment' icon", UiElement.LocatorType.CLASS, "icon-comment", this
-                .getElement()).isDisplayed();
+        return getAddCommentIconElement().isDisplayed();
+    }
+
+    private UiElement getAddCommentIconElement() {
+        String description = "'Add comment' icon";
+        return UiElement.getInstance(description, UiElement.LocatorType.CLASS, "icon-comment", this.getElement());
     }
 
     @Override
@@ -130,9 +147,8 @@ public class CardView extends UiView implements CardViewValidatable {
     @Override
     public String getNumber() {
         if (cardNumber == null) {
-            String baseUri = String.format("%s/%s", VIEW_URI, getId());
             String uri = UiHost.getInstance().getUri();
-            int idIndexStart = baseUri.length() + 1;
+            int idIndexStart = String.format("%s/%s", VIEW_URI, getId()).length() + 1;
             int idIndexEnd = uri.indexOf("-", idIndexStart);
             cardNumber = uri.substring(idIndexStart, idIndexEnd);
         }

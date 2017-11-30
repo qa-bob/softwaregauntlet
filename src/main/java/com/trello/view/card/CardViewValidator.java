@@ -20,6 +20,7 @@ public class CardViewValidator extends Validator {
     @Override
     protected void executeVerifications() {
         String commentVerifyDesc = "Is 'Add comment' icon displayed?";
+
         verify("'List' label", expected.getListMessage(), actual.getListMessage());
         verify("List", expected.getList(), actual.getList());
         verify("'Edit description' href", expected.getEditDescriptionHref(), actual.getEditDescriptionHref());
