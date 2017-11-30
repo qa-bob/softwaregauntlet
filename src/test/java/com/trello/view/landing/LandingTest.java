@@ -19,7 +19,7 @@ public class LandingTest extends GauntletTest {
     public void smoke(TrelloUserDefinition userDefinition) {
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
         LandingViewExpected expected = LandingViewExpected.getInstance();
-        given(user);
+        given(userDefinition);
         when();
         LandingView actual = LoginView.directNav().login(user);
         then(LandingViewValidator.getInstance(expected, actual).validate());
