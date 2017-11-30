@@ -70,17 +70,27 @@ public class BoardView extends UiView implements BoardViewValidatable {
     }
 
     public List<TrelloCard> getCards() {
-        List<TrelloCard> cards = new ArrayList<>();
-        List<TrelloCard> regionCards = new ArrayList<>();
-        List<UiElement> elements = UiElement.getList("Card", UiElement.LocatorType.CLASS, "list-card", this
-                .getElement());
+        return getCardDetails(getCardRegionData(getCardRegionElements()));
+    }
+
+    private List<UiElement> getCardRegionElements() {
+        return UiElement.getList("Card", UiElement.LocatorType.CLASS, "list-card", this.getElement());
+    }
+
+    private List<TrelloCard> getCardRegionData(List<UiElement> elements) {
+        List<TrelloCard> cardRegions = new ArrayList<>();
         int ordinal = 0;
         //noinspection unused
         for (UiElement element : elements) {
             ordinal++;
-            regionCards.add(CardRegion.getInstance(ordinal, this.getElement()).toData());
+            cardRegions.add(CardRegion.getInstance(ordinal, this.getElement()).toData());
         }
-        for (TrelloCard regionCard : regionCards) {
+        return cardRegions;
+    }
+
+    private List<TrelloCard> getCardDetails(List<TrelloCard> cardRegions) {
+        List<TrelloCard> cards = new ArrayList<>();
+        for (TrelloCard regionCard : cardRegions) {
             cards.add(CardView.directNav(regionCard).toData());
         }
         return cards;
