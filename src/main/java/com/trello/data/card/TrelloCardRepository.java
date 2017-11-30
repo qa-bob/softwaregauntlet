@@ -41,12 +41,12 @@ public class TrelloCardRepository {
     }
 
     private TrelloCard getLatestIdentifiedCard(TrelloCardValidatable card) {
-        UiRegion.suppressConstructionLogging(true);
         TrelloCard existingCard = null;
         if (card.getId() != null) {
+            UiRegion.suppressConstructionLogging(true);
             existingCard = CardView.directNav(card).toData();
+            UiRegion.suppressConstructionLogging(false);
         }
-        UiRegion.suppressConstructionLogging(false);
         return existingCard;
     }
 
@@ -54,16 +54,19 @@ public class TrelloCardRepository {
         UiRegion.suppressConstructionLogging(true);
         Integer queueNumber = takeANumber();
         waitYourTurn(queueNumber);
+        TrelloCard candidate = identifyEquivalentCard(card);
+        UiRegion.suppressConstructionLogging(false);
+        discardNumber(queueNumber);
+        return candidate;
+    }
+
+    private TrelloCard identifyEquivalentCard(TrelloCardValidatable card) {
         for (TrelloCard candidate : cards) {
             if (candidate.equivalent(card)) {
                 cards.remove(candidate);
-                discardNumber(queueNumber);
-                UiRegion.suppressConstructionLogging(false);
                 return candidate;
             }
         }
-        UiRegion.suppressConstructionLogging(false);
-        discardNumber(queueNumber);
         return null;
     }
 
@@ -83,14 +86,17 @@ public class TrelloCardRepository {
     }
 
     public TrelloCard add(TrelloCardDefinition card) {
-        TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         UiRegion.suppressConstructionLogging(true);
-        TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
-        LoginView.directNav().login(user);
-        TrelloCard identifiedCard = BoardView.directNav().inList(card.getList()).addCard(card).inList(card.getList())
-                .clickCard(card).toData();
+        TrelloUser anyUser = TrelloUserRepository.getInstance().query();
+        LoginView.directNav().login(anyUser);
+        TrelloCard identifiedCard = addCard(card);
         BoardView.directNav().logout();
         UiRegion.suppressConstructionLogging(false);
         return identifiedCard;
+    }
+
+    private TrelloCard addCard(TrelloCardDefinition card) {
+        return BoardView.directNav().inList(card.getList()).addCard(card).inList(card.getList())
+                    .clickCard(card).toData();
     }
 }

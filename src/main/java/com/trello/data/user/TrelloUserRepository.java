@@ -10,4 +10,8 @@ public class TrelloUserRepository {
     public TrelloUser query(TrelloUserDefinition userDefinition) {
         return user.equivalent(userDefinition) ? user : null;
     }
+
+    public TrelloUser query() {
+        return query(TrelloUserDefinition.getInstance());
+    }
 }
