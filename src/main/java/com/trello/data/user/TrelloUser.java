@@ -1,9 +1,6 @@
 package com.trello.data.user;
 
 public class TrelloUser extends TrelloUserValidatable {
-    private final String username = "cstockto@teksystems.com";
-    private final String password = "T3kSystem$";
-    private final String initials = "T";
 
     public static TrelloUser getInstance() {
         return new TrelloUser();
@@ -11,16 +8,16 @@ public class TrelloUser extends TrelloUserValidatable {
 
     @Override
     public String getPassword() {
-        return password;
+        return "T3kSystem$";
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return "cstockto@teksystems.com";
     }
 
     @Override
     public String getInitials() {
-        return initials;
+        return "T";
     }
 }

@@ -11,6 +11,16 @@ public abstract class TrelloUserValidatable {
 
     @Override
     public String toString() {
-        return new Gson().toJson(this);
+        String details = new Gson().toJson(this);
+        return String.format("Trello User: %s", details.replace("{}", "{any}"));
+    }
+
+    boolean equivalent(TrelloUserDefinition comparator) {
+        if (comparator == null) {
+            return true;
+        }
+        boolean equivalent = comparator.getUsername() == null || comparator.getUsername().equals(getUsername());
+        equivalent &= comparator.getInitials() == null || comparator.getInitials().equals(getInitials());
+        return equivalent;
     }
 }
