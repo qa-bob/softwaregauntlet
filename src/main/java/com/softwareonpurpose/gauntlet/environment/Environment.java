@@ -16,16 +16,18 @@ package com.softwareonpurpose.gauntlet.environment;
 public class Environment {
 
     private static EnvironmentDefinition environment;
-
     private Environment() {
     }
 
     public static EnvironmentDefinition getInstance() {
         if (environment == null) {
-            String environment = System.getProperty("env");
-            switch (environment) {
+            String env = System.getProperty("env");
+            switch (env) {
+                case DevIntegrationEnvironment.NAME:
+                    environment = DevIntegrationEnvironment.getInstance();
+                    break;
                 default:
-                    Environment.environment = ProductionEnvironment.getInstance();
+                    environment = ProductionEnvironment.getInstance();
             }
         }
         return environment;
