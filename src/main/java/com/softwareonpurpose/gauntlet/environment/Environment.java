@@ -26,6 +26,9 @@ public class Environment {
                 case DevIntegrationEnvironment.NAME:
                     environment = DevIntegrationEnvironment.getInstance();
                     break;
+                case AutomatedAcceptanceEnvironment.NAME:
+                    environment=AutomatedAcceptanceEnvironment.getInstance();
+                    break;
                 default:
                     environment = ProductionEnvironment.getInstance();
             }
