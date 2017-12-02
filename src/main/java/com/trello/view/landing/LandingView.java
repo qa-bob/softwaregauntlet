@@ -1,5 +1,6 @@
 package com.trello.view.landing;
 
+import com.softwareonpurpose.gauntlet.environment.Environment;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
@@ -8,7 +9,7 @@ import com.trello.view.region.header.TrelloHeader;
 
 public class LandingView extends UiView implements LandingViewValidatable {
     private static final String DESCRIPTION = "'Landing' view";
-    private static final String VIEW_URI = "https://trello.com/";
+    private static final String VIEW_URI = Environment.getInstance().getTrelloDomain();
     private static final String LOCATOR_VALUE = "body";
     private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
 
@@ -18,7 +19,7 @@ public class LandingView extends UiView implements LandingViewValidatable {
 
     @Override
     protected boolean confirmElementStates() {
-        boolean confirmed = UiHost.getInstance().getUri().equals(VIEW_URI);
+        boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);
         confirmed &= getMemberBoardsElement().isDisplayed();
         return confirmed;
     }
