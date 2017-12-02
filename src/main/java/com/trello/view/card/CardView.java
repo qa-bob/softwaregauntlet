@@ -1,5 +1,6 @@
 package com.trello.view.card;
 
+import com.softwareonpurpose.gauntlet.environment.Environment;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
@@ -9,9 +10,10 @@ import com.trello.view.card.move.CardMoveModal;
 
 public class CardView extends UiView implements CardViewValidatable {
     private static final String DESCRIPTION = "'Card' view";
-    private static final String VIEW_URI = "https://trello.com/c";
     private static final String LOCATOR_TYPE = UiElement.LocatorType.CLASS;
     private static final String LOCATOR_VALUE = "window";
+    private static String DOMAIN_URL = Environment.getInstance().getTrelloDomain();
+    private static final String VIEW_URI = String.format("%s/c", DOMAIN_URL);
     private String cardId;
     private String cardNumber;
 
