@@ -16,6 +16,7 @@ package com.softwareonpurpose.gauntlet.environment;
 public class Environment {
 
     private static EnvironmentDefinition environment;
+
     private Environment() {
     }
 
@@ -27,7 +28,10 @@ public class Environment {
                     environment = DevIntegrationEnvironment.getInstance();
                     break;
                 case AutomatedAcceptanceEnvironment.NAME:
-                    environment=AutomatedAcceptanceEnvironment.getInstance();
+                    environment = AutomatedAcceptanceEnvironment.getInstance();
+                    break;
+                case CapacityEnvironment.NAME:
+                    environment = CapacityEnvironment.getInstance();
                     break;
                 default:
                     environment = ProductionEnvironment.getInstance();
