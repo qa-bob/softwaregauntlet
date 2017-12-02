@@ -1,7 +1,8 @@
 package com.softwareonpurpose.gauntlet.environment;
 
 public class AutomatedAcceptanceEnvironment extends EnvironmentDefinition {
-    static final String NAME = "auto";
+    @SuppressWarnings("SpellCheckingInspection")
+    static final String NAME = "qaauto";
 
     private AutomatedAcceptanceEnvironment() {
         super("https://trello.com");
