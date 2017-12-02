@@ -33,6 +33,9 @@ public class Environment {
                 case CapacityEnvironment.NAME:
                     environment = CapacityEnvironment.getInstance();
                     break;
+                case ManualAcceptanceEnvironment.NAME:
+                    environment = ManualAcceptanceEnvironment.getInstance();
+                    break;
                 default:
                     environment = ProductionEnvironment.getInstance();
             }
