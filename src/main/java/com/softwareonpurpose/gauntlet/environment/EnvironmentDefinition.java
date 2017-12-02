@@ -15,4 +15,13 @@ package com.softwareonpurpose.gauntlet.environment;
 
 public abstract class EnvironmentDefinition {
 
+    private final String TRELLO_DOMAIN;
+
+    EnvironmentDefinition(String trelloDomain) {
+        TRELLO_DOMAIN = trelloDomain;
+    }
+
+    public String getTrelloDomain() {
+        return TRELLO_DOMAIN;
+    }
 }

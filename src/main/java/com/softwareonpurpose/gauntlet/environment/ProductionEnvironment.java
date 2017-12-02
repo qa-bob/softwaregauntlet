@@ -16,6 +16,7 @@ package com.softwareonpurpose.gauntlet.environment;
 public class ProductionEnvironment extends EnvironmentDefinition {
 
     private ProductionEnvironment() {
+        super("https://trello.com");
     }
 
     public static ProductionEnvironment getInstance() {

@@ -1,5 +1,6 @@
 package com.trello.view.login;
 
+import com.softwareonpurpose.gauntlet.environment.Environment;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
@@ -10,7 +11,9 @@ public class LoginView extends UiView implements LoginViewValidatable {
     private static final String DESCRIPTION = "'Login' view";
     private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
     private static final String LOCATOR_VALUE = "body";
-    private static final String VIEW_URI = "https://trello.com/login";
+    private static final String DOMAIN = Environment.getInstance().getTrelloDomain();
+    private static final String RELATIVE_PATH = "login";
+    private static final String VIEW_URI = String.format("%s/%s", DOMAIN, RELATIVE_PATH);
 
     @SuppressWarnings("WeakerAccess")
     public LoginView() {
@@ -24,7 +27,7 @@ public class LoginView extends UiView implements LoginViewValidatable {
 
     @Override
     protected boolean confirmElementStates() {
-        boolean confirmed = UiHost.getInstance().getUri().equals(VIEW_URI);
+        boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);
         confirmed &= "Landing-Marquee".equals(this.getElement().getAttribute("data-track-group"));
         confirmed &= getLoginButtonElement().isDisplayed();
         return confirmed;
@@ -136,6 +139,7 @@ public class LoginView extends UiView implements LoginViewValidatable {
 
     private UiElement getAccountLinkElement() {
         String description = "'Create account' link text";
+        //noinspection SpellCheckingInspection
         return UiElement.getInstance(description, UiElement.LocatorType.ID, "signup", this.getElement());
     }
 }
