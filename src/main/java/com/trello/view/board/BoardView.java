@@ -1,5 +1,6 @@
 package com.trello.view.board;
 
+import com.softwareonpurpose.gauntlet.environment.Environment;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardView extends UiView implements BoardViewValidatable {
-    private static final String VIEW_URI = "https://trello.com/b/mFnfsTwp/application-project";
+    private static final String DOMAIN_URL = Environment.getInstance().getTrelloDomain();
+    @SuppressWarnings("SpellCheckingInspection")
+    private static final String VIEW_URI = String.format("%s/b/mFnfsTwp/application-project", DOMAIN_URL);
     private static final String DESCRIPTION = "'Board' view";
     private static final String LOCATOR_TYPE = UiElement.LocatorType.CLASS;
     private static final String LOCATOR_VALUE = "body-board-view";
