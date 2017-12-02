@@ -3,11 +3,11 @@ package com.softwareonpurpose.gauntlet.environment;
 class CapacityEnvironment extends EnvironmentDefinition {
     static final String NAME = "capacity";
 
-    CapacityEnvironment() {
+    private CapacityEnvironment() {
         super("https://trello.com");
     }
 
-    public static EnvironmentDefinition getInstance() {
+    public static CapacityEnvironment getInstance() {
         return new CapacityEnvironment();
     }
 }

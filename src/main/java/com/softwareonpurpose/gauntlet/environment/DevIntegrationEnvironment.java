@@ -7,7 +7,7 @@ class DevIntegrationEnvironment extends EnvironmentDefinition {
         super("https://trello.com");
     }
 
-    public static EnvironmentDefinition getInstance() {
+    public static DevIntegrationEnvironment getInstance() {
         return new DevIntegrationEnvironment();
     }
 }

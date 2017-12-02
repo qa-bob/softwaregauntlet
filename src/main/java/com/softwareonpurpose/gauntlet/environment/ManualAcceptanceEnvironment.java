@@ -8,7 +8,7 @@ class ManualAcceptanceEnvironment extends EnvironmentDefinition {
         super("https://trello.com");
     }
 
-    public static EnvironmentDefinition getInstance() {
+    public static ManualAcceptanceEnvironment getInstance() {
         return new ManualAcceptanceEnvironment();
     }
 }

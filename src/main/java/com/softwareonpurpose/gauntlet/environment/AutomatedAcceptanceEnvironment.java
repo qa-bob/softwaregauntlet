@@ -8,7 +8,7 @@ public class AutomatedAcceptanceEnvironment extends EnvironmentDefinition {
         super("https://trello.com");
     }
 
-    public static EnvironmentDefinition getInstance() {
+    public static AutomatedAcceptanceEnvironment getInstance() {
         return new AutomatedAcceptanceEnvironment();
     }
 }
