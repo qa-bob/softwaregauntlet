@@ -1,5 +1,5 @@
-group 'com.teksystemsgs'
-version '0.0.1-SNAPSHOT'
+group 'com.softwareonpurpose'
+version '1.0.1'
 
 apply plugin: 'java'
 
@@ -19,8 +19,8 @@ dependencies {
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.1.1.Final'
     compile 'org.jboss.resteasy:resteasy-client:3.1.1.Final'
     compile files('./src/main/resources/indentmanager-0.0.1.jar')
-    compile files('./src/main/resources/validator4test-0.0.1.jar')
-    compile files('./src/main/resources/uinavigator-1.0.jar')
+    compile files('./src/main/resources/validator4test-1.0.0.jar')
+    compile files('./src/main/resources/uinavigator-1.0.2.jar')
     compile files('./src/main/resources/traceability4test-0.0.1.jar')
 }
 
@@ -33,9 +33,11 @@ test {
     useTestNG()
 }
 
-task development(type: Test) {
+task debug(type: Test) {
     description = "Tests under development or being debugged"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -48,6 +50,8 @@ task development(type: Test) {
 task evt(type: Test) {
     description = "Environment Validation"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -60,6 +64,8 @@ task evt(type: Test) {
 task bvt(type: Test) {
     description = "EVT and DEBUG tests"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -73,6 +79,8 @@ task bvt(type: Test) {
 task sprint(type: Test) {
     description = "Sprint validation"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -85,6 +93,8 @@ task sprint(type: Test) {
 task release(type: Test) {
     description = "Release validation"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -97,6 +107,8 @@ task release(type: Test) {
 task production(type: Test) {
     description = "Production validation (non-destructive)"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -109,6 +121,8 @@ task production(type: Test) {
 task regression(type: Test) {
     description = "All tests"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
     useTestNG()
 }

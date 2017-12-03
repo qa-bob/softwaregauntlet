@@ -34,20 +34,21 @@ import java.util.stream.Collectors;
 public abstract class GauntletTest {
 
     private final CoverageReport report;
-    private final String className;
+    private final String classname;
     private Logger logger;
     private String testMethodName;
     private String requirements;
 
     protected GauntletTest() {
-        this.className = this.getClass().getSimpleName();
-        report = CoverageReport.getInstance(className);
+        this.classname = this.getClass().getSimpleName();
+        String coverageFile = String.format("%s.application", classname);
+        report = CoverageReport.getInstance(coverageFile);
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
     }
 
     private void initializeUiHost() {
-        String browser = System.getProperty("browser");
+        String browser = System.getProperty("host");
         if (browser != null) {
             switch (browser) {
                 case "ie":
@@ -78,7 +79,7 @@ public abstract class GauntletTest {
         String scenario = compileScenario(result);
         for (String requirement : requirementList) {
             requirement = requirement != null ? requirement.replace(".", "|") : null;
-            String test = String.format("%s.%s", className, testMethodName);
+            String test = String.format("%s.%s", classname, testMethodName);
             report.addEntry(test, scenario, requirement);
         }
         setRequirements(null);
@@ -151,7 +152,8 @@ public abstract class GauntletTest {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
-        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
+        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in
+        // Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
         public static final String SPRINT = "sprint";           //  Validates acceptance criteria for current sprint
     }
