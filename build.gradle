@@ -29,13 +29,10 @@ task wrapper(type: Wrapper) {
 }
 
 test {
-<<<<<<< HEAD
-=======
     description = "All tests"
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
->>>>>>> master
     maxParallelForks = 4
     useTestNG()
 }
