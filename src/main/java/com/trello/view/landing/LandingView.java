@@ -17,6 +17,11 @@ public class LandingView extends UiView implements LandingViewValidatable {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 
+    public static LandingView directNav() {
+        UiView.instantiateView(LandingView.class).load();
+        return UiView.expect(LandingView.class);
+    }
+
     @Override
     protected boolean confirmElementStates() {
         boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);

@@ -87,11 +87,11 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
         return UiElement.getInstance("Title", UiElement.LocatorType.CLASS, "pop-over-header-title");
     }
 
-    void move(String list) {
+    public CardView move(String list) {
         getListSelectElement().set(list);
         CardMoveModal modal = UiView.expect(CardMoveModal.class);
         modal.clickMoveButton();
-        UiView.expect(CardView.class);
+        return UiView.expect(CardView.class);
     }
 
     private void clickMoveButton() {

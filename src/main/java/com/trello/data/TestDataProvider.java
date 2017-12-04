@@ -1,5 +1,6 @@
 package com.trello.data;
 
+import com.softwareonpurpose.uinavigator.UiRegion;
 import com.trello.data.card.TrelloCard;
 import com.trello.data.card.TrelloCardDefinition;
 import com.trello.data.card.TrelloCardRepository;
@@ -13,7 +14,9 @@ public class TestDataProvider {
     private Logger logger;
 
     private TestDataProvider() {
+        UiRegion.suppressConstructionLogging(true);
         repository = TrelloCardRepository.getInstance();
+        UiRegion.suppressConstructionLogging(true);
     }
 
     public static TestDataProvider getInstance() {
@@ -24,10 +27,12 @@ public class TestDataProvider {
     }
 
     public TrelloCard get(TrelloCardValidatable card) {
+        UiRegion.suppressConstructionLogging(true);
         TrelloCard identified = repository.query(card);
         if (identified == null) {
             identified = addCard(card);
         }
+        UiRegion.suppressConstructionLogging(false);
         getLogger().info("TEST CARD ACQUIRED:");
         getLogger().info("");
         return identified;
@@ -37,7 +42,9 @@ public class TestDataProvider {
         TrelloCard identified;
         String title = card.getTitle() == null ? "TEK User Story" : card.getTitle();
         String list = card.getList() == null ? "To Do" : card.getList();
+        UiRegion.suppressConstructionLogging(true);
         identified = repository.add(TrelloCardDefinition.getInstance().withInList(list).withTitle(title));
+        UiRegion.suppressConstructionLogging(false);
         return identified;
     }
 
@@ -49,6 +56,9 @@ public class TestDataProvider {
     }
 
     public TrelloCard get() {
-        return get(TrelloCardDefinition.getInstance());
+        UiRegion.suppressConstructionLogging(true);
+        TrelloCard identifiedCard = get(TrelloCardDefinition.getInstance());
+        UiRegion.suppressConstructionLogging(false);
+        return identifiedCard;
     }
 }

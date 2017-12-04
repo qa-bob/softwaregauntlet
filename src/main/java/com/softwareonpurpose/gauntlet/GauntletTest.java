@@ -33,7 +33,8 @@ import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
 
-    private final CoverageReport report;
+    private final CoverageReport applicationCoverage;
+    private final CoverageReport requirementsCoverage;
     private final String classname;
     private Logger logger;
     private String testMethodName;
@@ -41,8 +42,10 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         this.classname = this.getClass().getSimpleName();
-        String coverageFile = String.format("%s.application", classname);
-        report = CoverageReport.getInstance(coverageFile);
+        String appCoverageFile = String.format("%s.application", classname);
+        String reqCoverageFile = String.format("%s.requirements", classname);
+        applicationCoverage = CoverageReport.getInstance(appCoverageFile);
+        requirementsCoverage = CoverageReport.getInstance(reqCoverageFile);
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
     }
@@ -78,9 +81,12 @@ public abstract class GauntletTest {
         }
         String scenario = compileScenario(result);
         for (String requirement : requirementList) {
-            requirement = requirement != null ? requirement.replace(".", "|") : null;
             String test = String.format("%s.%s", classname, testMethodName);
-            report.addEntry(test, scenario, requirement);
+            if (requirement != null) {
+                requirement = requirement.replace(".", "|");
+                requirementsCoverage.addEntry(test, scenario, requirement);
+            }
+            applicationCoverage.addEntry(test, scenario, null);
         }
         setRequirements(null);
     }
@@ -101,7 +107,8 @@ public abstract class GauntletTest {
 
     @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
-        report.write();
+        applicationCoverage.write();
+        requirementsCoverage.write();
     }
 
     @SuppressWarnings("unused")
@@ -187,6 +194,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Database {
+        public static final String TRELLO = "trello";
 
         //  public final static String DATABASE_NAME = "[database name]";
     }

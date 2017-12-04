@@ -1,6 +1,5 @@
 package com.trello.view.card;
 
-import com.trello.data.card.TrelloCard;
 import com.trello.data.card.TrelloCardValidatable;
 import com.trello.data.user.TrelloUser;
 
@@ -14,7 +13,7 @@ public class CardViewExpected implements CardViewValidatable {
         this.card = card;
     }
 
-    public static CardViewExpected getInstance(TrelloUser user, TrelloCard card) {
+    public static CardViewExpected getInstance(TrelloUser user, TrelloCardValidatable card) {
         return new CardViewExpected(user, card);
     }
 

@@ -11,12 +11,24 @@ import org.testng.annotations.Test;
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.LANDING})
 public class LandingTest extends GauntletTest {
     @DataProvider
-    public static Object[][] smokeScenarios() {
+    public static Object[][] fromLoginScenarios() {
         return new Object[][]{{TrelloUserDefinition.getInstance()}};
     }
 
-    @Test(groups = {TestType.EVT}, dataProvider = "smokeScenarios")
-    public void smoke(TrelloUserDefinition userDefinition) {
+    @Test(groups = {TestType.EVT})
+    public void smoke() {
+        TrelloUserDefinition anyUser = TrelloUserDefinition.getInstance();
+        TrelloUser user = TrelloUserRepository.getInstance().query(anyUser);
+        LandingViewExpected expected = LandingViewExpected.getInstance();
+        given(anyUser);
+        when();
+        LoginView.directNav().login(user);
+        LandingView actual = LandingView.directNav();
+        then(LandingViewValidator.getInstance(expected, actual).validate());
+    }
+
+    @Test(groups = {TestType.EVT}, dataProvider = "fromLoginScenarios")
+    public void fromLogin(TrelloUserDefinition userDefinition) {
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
         LandingViewExpected expected = LandingViewExpected.getInstance();
         given(userDefinition);
