@@ -13,7 +13,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.CARD_MOVE})
-public class CardMoveTest extends GauntletTest {
+public class CardMoveModalTest extends GauntletTest {
 
     @DataProvider
     public static Object[][] smokeScenarios() {
@@ -23,6 +23,7 @@ public class CardMoveTest extends GauntletTest {
 
     @Test(groups = {TestType.EVT}, dataProvider = "smokeScenarios")
     public void smoke(TrelloCardDefinition cardDefinition) {
+        setRequirements("User Story #5005|User Story #5006");
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
         TrelloCard card = TestDataProvider.getInstance().get();

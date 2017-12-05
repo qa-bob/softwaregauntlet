@@ -8,7 +8,7 @@ import com.trello.view.login.LoginView;
 import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.BOARD})
-public class BoardTest extends GauntletTest {
+public class BoardViewTest extends GauntletTest {
     @Test(groups = {TestType.EVT})
     public void smoke() {
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();

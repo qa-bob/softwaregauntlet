@@ -39,11 +39,12 @@ public abstract class GauntletTest {
     private Logger logger;
     private String testMethodName;
     private String requirements;
+    private boolean areRequirementsTraced;
 
     protected GauntletTest() {
         this.classname = this.getClass().getSimpleName();
-        String appCoverageFile = String.format("%s.application", classname);
-        String reqCoverageFile = String.format("%s.requirements", classname);
+        String appCoverageFile = String.format("application.%s", classname);
+        String reqCoverageFile = String.format("requirements.%s", classname);
         applicationCoverage = CoverageReport.getInstance(appCoverageFile);
         requirementsCoverage = CoverageReport.getInstance(reqCoverageFile);
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
@@ -83,6 +84,7 @@ public abstract class GauntletTest {
         for (String requirement : requirementList) {
             String test = String.format("%s.%s", classname, testMethodName);
             if (requirement != null) {
+                areRequirementsTraced = true;
                 requirement = requirement.replace(".", "|");
                 requirementsCoverage.addEntry(test, scenario, requirement);
             }
@@ -108,7 +110,9 @@ public abstract class GauntletTest {
     @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
         applicationCoverage.write();
-        requirementsCoverage.write();
+        if (areRequirementsTraced) {
+            requirementsCoverage.write();
+        }
     }
 
     @SuppressWarnings("unused")

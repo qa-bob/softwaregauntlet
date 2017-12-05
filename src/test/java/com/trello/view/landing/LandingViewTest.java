@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.LANDING})
-public class LandingTest extends GauntletTest {
+public class LandingViewTest extends GauntletTest {
     @DataProvider
     public static Object[][] fromLoginScenarios() {
         return new Object[][]{{TrelloUserDefinition.getInstance()}};
@@ -27,8 +27,9 @@ public class LandingTest extends GauntletTest {
         then(LandingViewValidator.getInstance(expected, actual).validate());
     }
 
-    @Test(groups = {TestType.EVT}, dataProvider = "fromLoginScenarios")
+    @Test(groups = {TestType.RELEASE}, dataProvider = "fromLoginScenarios")
     public void fromLogin(TrelloUserDefinition userDefinition) {
+        setRequirements("User Story #5002");
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
         LandingViewExpected expected = LandingViewExpected.getInstance();
         given(userDefinition);

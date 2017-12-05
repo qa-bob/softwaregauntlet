@@ -25,8 +25,9 @@ public class CardMoveTest extends GauntletTest {
                 {TrelloCardDefinition.getInstance().withTitle(TITLE).withInList(IN_REVIEW), DONE}};
     }
 
-    @Test(groups = {TestType.RELEASE}, dataProvider = "moveScenarios")
+    @Test(groups = {TestType.RELEASE, TestType.SPRINT}, dataProvider = "moveScenarios")
     public void fromCardMoveModal(TrelloCardDefinition cardDefinition, String newList) {
+        setRequirements("System ID #9004.User Story #5007|System ID #9005.User Story #5008");
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
         TrelloCard card = TestDataProvider.getInstance().get(cardDefinition);
