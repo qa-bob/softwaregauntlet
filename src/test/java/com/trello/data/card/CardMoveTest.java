@@ -10,7 +10,7 @@ import com.trello.view.login.LoginView;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.Database.TRELLO})
+@Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.DataEntity.CARD})
 public class CardMoveTest extends GauntletTest {
 
     @DataProvider

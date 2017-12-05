@@ -74,13 +74,13 @@ public abstract class GauntletTest {
     }
 
     private void addCoverageEntry(ITestResult result) {
-        List<String> requirementList;
-        if (requirements == null) {
-            requirementList = Collections.singletonList(null);
-        } else {
-            requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
-        }
+        List<String> requirementList = parseRequirements();
         String scenario = compileScenario(result);
+        addEntriesToCoverageReports(requirementList, scenario);
+        setRequirements(null);
+    }
+
+    private void addEntriesToCoverageReports(List<String> requirementList, String scenario) {
         for (String requirement : requirementList) {
             String test = String.format("%s.%s", classname, testMethodName);
             if (requirement != null) {
@@ -90,7 +90,16 @@ public abstract class GauntletTest {
             }
             applicationCoverage.addEntry(test, scenario, null);
         }
-        setRequirements(null);
+    }
+
+    private List<String> parseRequirements() {
+        List<String> requirementList;
+        if (requirements == null) {
+            requirementList = Collections.singletonList(null);
+        } else {
+            requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
+        }
+        return requirementList;
     }
 
     private String compileScenario(ITestResult result) {
@@ -163,8 +172,7 @@ public abstract class GauntletTest {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
-        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in
-        // Production
+        public static final String PRODUCTION = "production";   //  Benign (alters NO data) executable in Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
         public static final String SPRINT = "sprint";           //  Validates acceptance criteria for current sprint
     }
@@ -174,7 +182,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Application {
-        public static final String TRELLO = "trello";
+        public static final String TRELLO = "trello_app";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -184,33 +192,22 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class View {
-        public static final String CARD_MOVE = "card_move";
-        public static final String CARD = "card";
-        public static final String LANDING = "landing";
-        public static final String LOGIN = "login";
-        public static final String BOARD = "board";
+        public static final String CARD_MOVE = "card_move_view";
+        public static final String CARD = "card_view";
+        public static final String LANDING = "landing_view";
+        public static final String LOGIN = "login_view";
+        public static final String BOARD = "board_view";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
 
     /**
-     * Names of Databases supporting applications under test
+     * Names of Data Entities supporting applications under test
      */
     @SuppressWarnings("unused")
-    public class Database {
-        public static final String TRELLO = "trello";
+    public class DataEntity {
+        public static final String CARD = "card_data";
 
         //  public final static String DATABASE_NAME = "[database name]";
     }
-
-    /**
-     * Validation targets
-     */
-    @SuppressWarnings("unused")
-    public class Validatee {
-
-        public static final String VIEW = "view";
-        public static final String DATA_ENTITY = "[data_entity_name]";
-    }
-
 }

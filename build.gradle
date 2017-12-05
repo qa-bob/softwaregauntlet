@@ -36,6 +36,15 @@ test {
     useTestNG()
 }
 
+task regression(type: Test) {
+    description = "All tests"
+    systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
+    maxParallelForks = 4
+    useTestNG()
+}
+
 task debug(type: Test) {
     description = "Tests under development or being debugged"
     systemProperties['env'] = System.properties["env"]
@@ -121,11 +130,16 @@ task production(type: Test) {
     }
 }
 
-task regression(type: Test) {
-    description = "All tests"
+task data_card(type: Test) {
+    description = "Card data validation"
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
-    useTestNG()
+
+    def groupsToInclude = []
+    groupsToInclude.add('card_data')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+    }
 }
