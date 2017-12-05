@@ -26,10 +26,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
 
@@ -70,36 +66,18 @@ public abstract class GauntletTest {
     @AfterMethod(alwaysRun = true)
     public void terminateExecution(ITestResult result) {
         UiHost.quitInstance();
-        addCoverageEntry(result);
+        addCoverage(result);
     }
 
-    private void addCoverageEntry(ITestResult result) {
-        List<String> requirementList = parseRequirements();
+    private void addCoverage(ITestResult result) {
         String scenario = compileScenario(result);
-        addEntriesToCoverageReports(requirementList, scenario);
+        String test = String.format("%s.%s", classname, testMethodName);
+        if (requirements != null) {
+            areRequirementsTraced = true;
+            requirementsCoverage.addEntries(test, scenario, requirements);
+        }
+        applicationCoverage.addEntry(test, scenario, null);
         setRequirements(null);
-    }
-
-    private void addEntriesToCoverageReports(List<String> requirementList, String scenario) {
-        for (String requirement : requirementList) {
-            String test = String.format("%s.%s", classname, testMethodName);
-            if (requirement != null) {
-                areRequirementsTraced = true;
-                requirement = requirement.replace(".", "|");
-                requirementsCoverage.addEntry(test, scenario, requirement);
-            }
-            applicationCoverage.addEntry(test, scenario, null);
-        }
-    }
-
-    private List<String> parseRequirements() {
-        List<String> requirementList;
-        if (requirements == null) {
-            requirementList = Collections.singletonList(null);
-        } else {
-            requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
-        }
-        return requirementList;
     }
 
     private String compileScenario(ITestResult result) {

@@ -13,10 +13,11 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.CARD})
 public class CardViewTest extends GauntletTest {
+    private final static String CARD_TITLE = "Card View Test";
 
     @DataProvider
     public static Object[][] smokeScenarios() {
-        return new Object[][]{{TrelloCardDefinition.getInstance()}};
+        return new Object[][]{{TrelloCardDefinition.getInstance().withTitle(CARD_TITLE)}};
     }
 
     @DataProvider
@@ -25,10 +26,9 @@ public class CardViewTest extends GauntletTest {
         String IN_PROGRESS = "In Progress";
         String IN_REVIEW = "In Review";
         String DONE = "Done";
-        String CARD_VIEW_TEST = "Card View Test";
-        return new Object[][]{{TrelloCardDefinition.getInstance().withInList(TO_DO).withTitle(CARD_VIEW_TEST),
-                IN_PROGRESS}, {TrelloCardDefinition.getInstance().withInList(IN_PROGRESS).withTitle(CARD_VIEW_TEST),
-                IN_REVIEW}, {TrelloCardDefinition.getInstance().withInList(IN_REVIEW).withTitle(CARD_VIEW_TEST), DONE}};
+        return new Object[][]{{TrelloCardDefinition.getInstance().withInList(TO_DO).withTitle(CARD_TITLE),
+                IN_PROGRESS}, {TrelloCardDefinition.getInstance().withInList(IN_PROGRESS).withTitle(CARD_TITLE),
+                IN_REVIEW}, {TrelloCardDefinition.getInstance().withInList(IN_REVIEW).withTitle(CARD_TITLE), DONE}};
     }
 
     @Test(groups = {TestType.EVT}, dataProvider = "smokeScenarios")

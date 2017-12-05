@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.DataEntity.CARD})
-public class CardMoveTest extends GauntletTest {
+public class CardMoveDataTest extends GauntletTest {
 
     @DataProvider
     public static Object[][] moveScenarios() {

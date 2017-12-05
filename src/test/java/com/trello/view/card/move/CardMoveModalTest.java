@@ -17,7 +17,7 @@ public class CardMoveModalTest extends GauntletTest {
 
     @DataProvider
     public static Object[][] smokeScenarios() {
-        String TITLE = "Card Move View Test";
+        String TITLE = "Card Move Modal Test";
         return new Object[][]{{TrelloCardDefinition.getInstance().withTitle(TITLE)}};
     }
 
