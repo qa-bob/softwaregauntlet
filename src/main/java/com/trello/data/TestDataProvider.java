@@ -33,7 +33,8 @@ public class TestDataProvider {
             identified = addCard(card);
         }
         UiRegion.suppressConstructionLogging(false);
-        getLogger().info("TEST CARD ACQUIRED:");
+        getLogger().info("TEST DATA ACQUIRED:");
+        getLogger().info(identified.toString());
         getLogger().info("");
         return identified;
     }
