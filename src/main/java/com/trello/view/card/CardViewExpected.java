@@ -28,7 +28,7 @@ public class CardViewExpected implements CardViewValidatable {
     }
 
     private String formatForUrl(String title) {
-        return title.toLowerCase().replace(" ", "-");
+        return title.toLowerCase().replace(" ", "-").replace("(", "").replace(")", "");
     }
 
     @Override
