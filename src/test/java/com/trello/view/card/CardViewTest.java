@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.CARD})
 public class CardViewTest extends GauntletTest {
-    private final static String CARD_TITLE = "Card View Test";
+    private final static String CARD_TITLE = String.format("%s - %s", System.getProperty("env"), "Card View Test");
 
     @DataProvider
     public static Object[][] smokeScenarios() {

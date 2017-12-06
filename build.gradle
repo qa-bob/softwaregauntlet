@@ -143,3 +143,17 @@ task data_card(type: Test) {
         groupsToInclude.each { String group -> includeGroups group }
     }
 }
+
+task capacity(type: Test) {
+    description = "Capacity testing"
+    systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
+    maxParallelForks = 4
+
+    def groupsToInclude = []
+    groupsToInclude.add('capacity')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+    }
+}
