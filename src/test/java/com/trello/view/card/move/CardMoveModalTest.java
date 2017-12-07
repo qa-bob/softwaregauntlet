@@ -26,7 +26,7 @@ public class CardMoveModalTest extends GauntletTest {
         setRequirements("User Story #5005|User Story #5006");
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
-        TrelloCard card = TestDataProvider.getInstance().get();
+        TrelloCard card = TestDataProvider.getInstance().get(cardDefinition);
         CardMoveModalExpected expected = CardMoveModalExpected.getInstance(card);
         given(userDefinition);
         given(cardDefinition);
