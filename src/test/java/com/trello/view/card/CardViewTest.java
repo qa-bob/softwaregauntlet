@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 public class CardViewTest extends GauntletTest {
 
     @DataProvider
-    public static Object[][] smokeScenarios() {
+    public static Object[][] smokeScenario() {
         final String CARD_TITLE = String.format("(%s %s) %s", System.getProperty("env"), TestType.EVT, "Card View Test");
         return new Object[][]{{TrelloCardDefinition.getInstance().withTitle(CARD_TITLE)}};
     }
@@ -32,7 +32,7 @@ public class CardViewTest extends GauntletTest {
                 IN_REVIEW}, {TrelloCardDefinition.getInstance().withInList(IN_REVIEW).withTitle(CARD_TITLE), DONE}};
     }
 
-    @Test(groups = {TestType.EVT}, dataProvider = "smokeScenarios")
+    @Test(groups = {TestType.EVT}, dataProvider = "smokeScenario")
     public void smoke(TrelloCardDefinition testCardDefinition) {
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);

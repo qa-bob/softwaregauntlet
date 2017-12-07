@@ -32,7 +32,7 @@ test {
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
+    maxParallelForks = 2
     useTestNG()
 }
 
@@ -41,7 +41,7 @@ task regression(type: Test) {
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
+    maxParallelForks = 2
     useTestNG()
 }
 
@@ -50,7 +50,7 @@ task debug(type: Test) {
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
+    maxParallelForks = 2
 
     def groupsToInclude = []
     groupsToInclude.add('under_development')
@@ -64,7 +64,7 @@ task evt(type: Test) {
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
+    maxParallelForks = 2
 
     def groupsToInclude = []
     groupsToInclude.add('evt')
@@ -78,7 +78,7 @@ task bvt(type: Test) {
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
+    maxParallelForks = 2
 
     def groupsToInclude = []
     groupsToInclude.add('evt')
@@ -93,7 +93,7 @@ task sprint(type: Test) {
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
+    maxParallelForks = 2
 
     def groupsToInclude = []
     groupsToInclude.add('sprint')
@@ -107,7 +107,7 @@ task release(type: Test) {
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
+    maxParallelForks = 2
 
     def groupsToInclude = []
     groupsToInclude.add('release')
@@ -121,7 +121,7 @@ task production(type: Test) {
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
+    maxParallelForks = 2
 
     def groupsToInclude = []
     groupsToInclude.add('production')
