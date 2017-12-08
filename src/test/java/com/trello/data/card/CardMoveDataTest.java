@@ -15,7 +15,11 @@ public class CardMoveDataTest extends GauntletTest {
 
     @DataProvider
     public static Object[][] moveScenarios() {
-        String TITLE = String.format("(%s %s and %s) %s", System.getProperty("env"), TestType.RELEASE, TestType.SPRINT, "Card Move Data Test");
+        String environment = System.getProperty("env");
+        String suite_1 = TestType.RELEASE;
+        String suite_2 = TestType.SPRINT;
+        String testClass = "Card Move Data Test";
+        String TITLE = String.format("(%s %s and %s) %s", environment, suite_1, suite_2, testClass);
         String TO_DO = "To Do";
         String IN_PROGRESS = "In Progress";
         String IN_REVIEW = "In Review";
