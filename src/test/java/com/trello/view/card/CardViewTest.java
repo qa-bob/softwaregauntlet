@@ -13,14 +13,14 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.CARD})
 public class CardViewTest extends GauntletTest {
+    private static String testClass = "Card View Test";
+    private static String environment = System.getProperty("env");
     private TrelloUserRepository userRepository = TrelloUserRepository.getInstance();
     private TestDataProvider testDataProvider = TestDataProvider.getInstance();
 
     @DataProvider
     public static Object[][] smokeScenario() {
-        String environment = System.getProperty("env");
         String suite = TestType.EVT;
-        String testClass = "Card View Test";
         final String CARD_TITLE = String.format("(%s %s) %s", environment, suite, testClass);
         return new Object[][]{
                 {TrelloCardDefinition.getInstance().withTitle(CARD_TITLE)}
@@ -29,7 +29,9 @@ public class CardViewTest extends GauntletTest {
 
     @DataProvider
     public static Object[][] moveScenarios() {
-        final String CARD_TITLE = String.format("(%s %s and %s) %s", System.getProperty("env"), TestType.RELEASE, TestType.SPRINT, "Card View Test");
+        String suite_1 = TestType.RELEASE;
+        String suite_2 = TestType.SPRINT;
+        final String CARD_TITLE = String.format("(%s %s and %s) %s", environment, suite_1, suite_2, testClass);
         String TO_DO = "To Do";
         String IN_PROGRESS = "In Progress";
         String IN_REVIEW = "In Review";
