@@ -13,11 +13,18 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.CARD})
 public class CardViewTest extends GauntletTest {
+    private TrelloUserRepository userRepository = TrelloUserRepository.getInstance();
+    private TestDataProvider testDataProvider = TestDataProvider.getInstance();
 
     @DataProvider
     public static Object[][] smokeScenario() {
-        final String CARD_TITLE = String.format("(%s %s) %s", System.getProperty("env"), TestType.EVT, "Card View Test");
-        return new Object[][]{{TrelloCardDefinition.getInstance().withTitle(CARD_TITLE)}};
+        String environment = System.getProperty("env");
+        String suite = TestType.EVT;
+        String testClass = "Card View Test";
+        final String CARD_TITLE = String.format("(%s %s) %s", environment, suite, testClass);
+        return new Object[][]{
+                {TrelloCardDefinition.getInstance().withTitle(CARD_TITLE)}
+        };
     }
 
     @DataProvider
@@ -27,16 +34,18 @@ public class CardViewTest extends GauntletTest {
         String IN_PROGRESS = "In Progress";
         String IN_REVIEW = "In Review";
         String DONE = "Done";
-        return new Object[][]{{TrelloCardDefinition.getInstance().withInList(TO_DO).withTitle(CARD_TITLE),
-                IN_PROGRESS}, {TrelloCardDefinition.getInstance().withInList(IN_PROGRESS).withTitle(CARD_TITLE),
-                IN_REVIEW}, {TrelloCardDefinition.getInstance().withInList(IN_REVIEW).withTitle(CARD_TITLE), DONE}};
+        return new Object[][]{
+                {TrelloCardDefinition.getInstance().withInList(TO_DO).withTitle(CARD_TITLE), IN_PROGRESS}
+                , {TrelloCardDefinition.getInstance().withInList(IN_PROGRESS).withTitle(CARD_TITLE), IN_REVIEW}
+                , {TrelloCardDefinition.getInstance().withInList(IN_REVIEW).withTitle(CARD_TITLE), DONE}
+        };
     }
 
     @Test(groups = {TestType.EVT}, dataProvider = "smokeScenario")
     public void smoke(TrelloCardDefinition testCardDefinition) {
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
-        TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
-        TrelloCard card = TestDataProvider.getInstance().get(testCardDefinition);
+        TrelloUser user = userRepository.query(userDefinition);
+        TrelloCard card = testDataProvider.get(testCardDefinition);
         CardViewExpected expected = CardViewExpected.getInstance(user, card);
         given(userDefinition);
         given(testCardDefinition);
@@ -50,8 +59,8 @@ public class CardViewTest extends GauntletTest {
     public void fromCardMoveModal(TrelloCardDefinition cardDefinition, String newList) {
         this.setRequirements("SysID #9001.User Story #5001|SysId #9001.User Story #5003|User Story #5004");
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
-        TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
-        TrelloCard card = TestDataProvider.getInstance().get(cardDefinition);
+        TrelloUser user = userRepository.query(userDefinition);
+        TrelloCard card = testDataProvider.get(cardDefinition);
         TrelloCardDefinition expectedCard = card.toDefinition().withInList(newList);
         CardViewExpected expected = CardViewExpected.getInstance(user, expectedCard);
         given(userDefinition);
