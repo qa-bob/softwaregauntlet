@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.LANDING})
 public class LandingViewTest extends GauntletTest {
+    private TrelloUserRepository userRepository = TrelloUserRepository.getInstance();
+
     @DataProvider
     public static Object[][] fromLoginScenarios() {
         return new Object[][]{{TrelloUserDefinition.getInstance()}};
@@ -18,7 +20,7 @@ public class LandingViewTest extends GauntletTest {
     @Test(groups = {TestType.EVT})
     public void smoke() {
         TrelloUserDefinition anyUser = TrelloUserDefinition.getInstance();
-        TrelloUser user = TrelloUserRepository.getInstance().query(anyUser);
+        TrelloUser user = userRepository.query(anyUser);
         LandingViewExpected expected = LandingViewExpected.getInstance();
         given(anyUser);
         when();
@@ -30,7 +32,7 @@ public class LandingViewTest extends GauntletTest {
     @Test(groups = {TestType.RELEASE}, dataProvider = "fromLoginScenarios")
     public void fromLogin(TrelloUserDefinition userDefinition) {
         setRequirements("User Story #5002");
-        TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
+        TrelloUser user = userRepository.query(userDefinition);
         LandingViewExpected expected = LandingViewExpected.getInstance();
         given(userDefinition);
         when();
