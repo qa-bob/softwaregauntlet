@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.BOARD})
 public class BoardViewTest extends GauntletTest {
-    @Test(groups = {TestType.EVT})
+    @Test(groups = {TestType.EVT, TestType.PRODUCTION})
     public void smoke() {
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);

@@ -45,7 +45,7 @@ public class CardViewTest extends GauntletTest {
         };
     }
 
-    @Test(groups = {TestType.EVT, TestType.DEV}, dataProvider = "smokeScenario")
+    @Test(groups = {TestType.EVT, TestType.DEV, TestType.PRODUCTION}, dataProvider = "smokeScenario")
     public void smoke(TrelloCardDefinition testCardDefinition) {
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = userRepository.query(userDefinition);

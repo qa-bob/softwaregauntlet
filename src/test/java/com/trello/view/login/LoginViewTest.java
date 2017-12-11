@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.LOGIN})
 public class LoginViewTest extends GauntletTest {
-    @Test(groups = {TestType.EVT})
+    @Test(groups = {TestType.EVT, TestType.PRODUCTION})
     public void smoke() {
         LoginViewExpected expected = LoginViewExpected.getInstance();
         when();

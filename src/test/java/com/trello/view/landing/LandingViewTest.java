@@ -17,7 +17,7 @@ public class LandingViewTest extends GauntletTest {
         return new Object[][]{{TrelloUserDefinition.getInstance()}};
     }
 
-    @Test(groups = {TestType.EVT})
+    @Test(groups = {TestType.EVT, TestType.PRODUCTION})
     public void smoke() {
         TrelloUserDefinition anyUser = TrelloUserDefinition.getInstance();
         TrelloUser user = userRepository.query(anyUser);
