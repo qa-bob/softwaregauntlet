@@ -32,7 +32,7 @@ public class CardViewTest extends GauntletTest {
     public static Object[][] moveScenarios() {
         String suite_1 = TestType.RELEASE;
         String suite_2 = TestType.SPRINT;
-        String format = (environment == null || "".equals(environment)) ? "(%s%s and %s) %s" : "((%s %s and %s) %s";
+        String format = (environment == null || "".equals(environment)) ? "(%s%s and %s) %s" : "(%s %s and %s) %s";
         final String CARD_TITLE = String.format(format, environment, suite_1, suite_2, testClass);
         String TO_DO = "To Do";
         String IN_PROGRESS = "In Progress";
