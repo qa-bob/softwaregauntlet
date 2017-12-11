@@ -14,6 +14,8 @@
 package com.softwareonpurpose.gauntlet.environment;
 
 public class ProductionEnvironment extends EnvironmentDefinition {
+    @SuppressWarnings("SpellCheckingInspection")
+    static final String NAME = "production";
 
     private ProductionEnvironment() {
         super("https://trello.com");

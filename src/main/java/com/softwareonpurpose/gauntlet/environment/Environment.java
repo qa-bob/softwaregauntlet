@@ -39,6 +39,9 @@ public class Environment {
                 case BetaAcceptanceEnvironment.NAME:
                     environment = BetaAcceptanceEnvironment.getInstance();
                     break;
+                case ProductionEnvironment.NAME:
+                    environment = ProductionEnvironment.getInstance();
+                    break;
                 default:
                     environment = ProductionEnvironment.getInstance();
             }
