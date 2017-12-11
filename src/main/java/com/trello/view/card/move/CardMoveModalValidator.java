@@ -25,7 +25,6 @@ public class CardMoveModalValidator extends Validator {
         verify("'List' label", expected.getListLabel(), actual.getListLabel());
         verify("List", expected.getList(), actual.getList());
         verify("'Position' label", expected.getPositionLabel(), actual.getPositionLabel());
-        verify("Position", expected.getPosition(), actual.getPosition());
         verify("'Move button' label", expected.getMoveButtonLabel(), actual.getMoveButtonLabel());
     }
 }
