@@ -4,17 +4,17 @@ import com.trello.data.card.TrelloCardValidatable;
 import com.trello.data.user.TrelloUser;
 
 public class CardViewExpected implements CardViewValidatable {
-    private final TrelloCardValidatable card;
-    private final TrelloUser user;
+    private final TrelloCardValidatable expectedCard;
+    private final TrelloUser expectedUser;
     private CardViewCopy copy;
 
-    private CardViewExpected(TrelloUser user, TrelloCardValidatable card) {
-        this.user = user;
-        this.card = card;
+    private CardViewExpected(TrelloUser expectedUser, TrelloCardValidatable expectedCard) {
+        this.expectedUser = expectedUser;
+        this.expectedCard = expectedCard;
     }
 
-    public static CardViewExpected getInstance(TrelloUser user, TrelloCardValidatable card) {
-        return new CardViewExpected(user, card);
+    public static CardViewExpected getInstance(TrelloUser expectedUser, TrelloCardValidatable expectedCard) {
+        return new CardViewExpected(expectedUser, expectedCard);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class CardViewExpected implements CardViewValidatable {
 
     private String getDetailHref() {
         String hrefFormat = "https://trello.com/c/%s/%s-%s#";
-        return String.format(hrefFormat, card.getId(), card.getNumber(), formatForUrl(card.getTitle()));
+        return String.format(hrefFormat, expectedCard.getId(), expectedCard.getNumber(), formatForUrl(expectedCard.getTitle()));
     }
 
     private String formatForUrl(String title) {
@@ -50,7 +50,7 @@ public class CardViewExpected implements CardViewValidatable {
 
     @Override
     public String getMemberInitials() {
-        return user.getInitials();
+        return expectedUser.getInitials();
     }
 
     @Override
@@ -60,12 +60,12 @@ public class CardViewExpected implements CardViewValidatable {
 
     @Override
     public String getList() {
-        return card.getList();
+        return expectedCard.getList();
     }
 
     @Override
     public String getListMessage() {
-        return String.format("%s %s", getCopy().getListMessage(), card.getList());
+        return String.format("%s %s", getCopy().getListMessage(), expectedCard.getList());
     }
 
     @Override
@@ -80,16 +80,16 @@ public class CardViewExpected implements CardViewValidatable {
 
     @Override
     public String getId() {
-        return card.getId();
+        return expectedCard.getId();
     }
 
     @Override
     public String getNumber() {
-        return card.getNumber();
+        return expectedCard.getNumber();
     }
 
     @Override
     public String getTitle() {
-        return card.getTitle();
+        return expectedCard.getTitle();
     }
 }

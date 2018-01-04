@@ -24,5 +24,4 @@ public interface CardViewValidatable {
     String getNumber();
 
     String getTitle();
-
 }
