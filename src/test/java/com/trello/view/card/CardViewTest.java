@@ -13,20 +13,13 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.TRELLO, GauntletTest.View.CARD})
 public class CardViewTest extends GauntletTest {
+    private static final String SUITE = TestType.EVT;
     private static String testClass = "Card View Test";
     private static String environment = System.getProperty("env");
+    private static final String FORMAT = (environment == null || "".equals(environment)) ? "(%s%s) %s" : "(%s %s) %s ";
+    private static final String CARD_TITLE = String.format(FORMAT, environment, SUITE, testClass);
     private TrelloUserRepository userRepository = TrelloUserRepository.getInstance();
     private TestDataProvider testDataProvider = TestDataProvider.getInstance();
-
-    @DataProvider
-    public static Object[][] smokeScenario() {
-        String suite = TestType.EVT;
-        String format = (environment == null || "".equals(environment)) ? "(%s%s) %s" : "(%s %s) %s";
-        final String CARD_TITLE = String.format(format, environment, suite, testClass);
-        return new Object[][]{
-                {TrelloCardDefinition.getInstance().withTitle(CARD_TITLE)}
-        };
-    }
 
     @DataProvider
     public static Object[][] moveScenarios() {
@@ -45,9 +38,10 @@ public class CardViewTest extends GauntletTest {
         };
     }
 
-    @Test(groups = {TestType.EVT, TestType.DEV, TestType.PRODUCTION}, dataProvider = "smokeScenario")
+    @Test(groups = {TestType.EVT, TestType.PRODUCTION})
     public void smoke(TrelloCardDefinition testCardDefinition) {
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
+        TrelloCardDefinition.getInstance().withTitle(CARD_TITLE);
         TrelloUser user = userRepository.query(userDefinition);
         TrelloCard card = testDataProvider.get(testCardDefinition);
         CardViewExpected expected = CardViewExpected.getInstance(user, card);
