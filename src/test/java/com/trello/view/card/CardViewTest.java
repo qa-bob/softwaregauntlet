@@ -1,7 +1,7 @@
 package com.trello.view.card;
 
 import com.softwareonpurpose.gauntlet.GauntletTest;
-import com.trello.data.TestDataProvider;
+import com.trello.data.TrelloCardProvider;
 import com.trello.data.card.TrelloCard;
 import com.trello.data.card.TrelloCardDefinition;
 import com.trello.data.user.TrelloUser;
@@ -19,7 +19,7 @@ public class CardViewTest extends GauntletTest {
     private static final String FORMAT = (environment == null || "".equals(environment)) ? "(%s%s) %s" : "(%s %s) %s ";
     private static final String CARD_TITLE = String.format(FORMAT, environment, SUITE, testClass);
     private TrelloUserRepository userRepository = TrelloUserRepository.getInstance();
-    private TestDataProvider testDataProvider = TestDataProvider.getInstance();
+    private TrelloCardProvider trelloCardProvider = TrelloCardProvider.getInstance();
 
     @DataProvider
     public static Object[][] moveScenarios() {
@@ -39,11 +39,12 @@ public class CardViewTest extends GauntletTest {
     }
 
     @Test(groups = {TestType.EVT, TestType.PRODUCTION})
-    public void smoke(TrelloCardDefinition testCardDefinition) {
+    public void smoke() {
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
+        TrelloCardDefinition testCardDefinition = TrelloCardDefinition.getInstance();
         TrelloCardDefinition.getInstance().withTitle(CARD_TITLE);
         TrelloUser user = userRepository.query(userDefinition);
-        TrelloCard card = testDataProvider.get(testCardDefinition);
+        TrelloCard card = trelloCardProvider.get(testCardDefinition);
         CardViewExpected expected = CardViewExpected.getInstance(user, card);
         given(userDefinition);
         given(testCardDefinition);
@@ -58,7 +59,7 @@ public class CardViewTest extends GauntletTest {
         this.setRequirements("SysID #9001.User Story #5001|SysId #9001.User Story #5003|User Story #5004");
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = userRepository.query(userDefinition);
-        TrelloCard card = testDataProvider.get(cardDefinition);
+        TrelloCard card = trelloCardProvider.get(cardDefinition);
         TrelloCardDefinition expectedCard = card.toDefinition().withInList(newList);
         CardViewExpected expected = CardViewExpected.getInstance(user, expectedCard);
         given(userDefinition);

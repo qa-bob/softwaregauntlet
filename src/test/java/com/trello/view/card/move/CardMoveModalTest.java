@@ -1,7 +1,7 @@
 package com.trello.view.card.move;
 
 import com.softwareonpurpose.gauntlet.GauntletTest;
-import com.trello.data.TestDataProvider;
+import com.trello.data.TrelloCardProvider;
 import com.trello.data.card.TrelloCard;
 import com.trello.data.card.TrelloCardDefinition;
 import com.trello.data.user.TrelloUser;
@@ -30,7 +30,7 @@ public class CardMoveModalTest extends GauntletTest {
         setRequirements("User Story #5005|User Story #5006");
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
-        TrelloCard card = TestDataProvider.getInstance().get(cardDefinition);
+        TrelloCard card = TrelloCardProvider.getInstance().get(cardDefinition);
         CardMoveModalExpected expected = CardMoveModalExpected.getInstance(card);
         given(userDefinition);
         given(cardDefinition);

@@ -8,20 +8,20 @@ import com.trello.data.card.TrelloCardValidatable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestDataProvider {
-    private static TestDataProvider provider;
+public class TrelloCardProvider {
+    private static TrelloCardProvider provider;
     private final TrelloCardRepository repository;
     private Logger logger;
 
-    private TestDataProvider() {
+    private TrelloCardProvider() {
         UiRegion.suppressConstructionLogging(true);
         repository = TrelloCardRepository.getInstance();
         UiRegion.suppressConstructionLogging(true);
     }
 
-    public static TestDataProvider getInstance() {
+    public static TrelloCardProvider getInstance() {
         if (provider == null) {
-            provider = new TestDataProvider();
+            provider = new TrelloCardProvider();
         }
         return provider;
     }
