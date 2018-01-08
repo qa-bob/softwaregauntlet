@@ -27,15 +27,15 @@ public abstract class TrelloCardValidatable {
         } else if (comparator.getId() != null) {
             return comparator.getId().equals(getId());
         }
-        boolean equivalent = isEquivalent(comparator.getList(), getList());
-        equivalent &= isEquivalent(comparator.getTitle(), getTitle());
-        equivalent &= isEquivalent(comparator.getPosition(), getPosition());
-        equivalent &= isEquivalent(comparator.getBoard(), getBoard());
-        equivalent &= isEquivalent(comparator.getNumber(), getNumber());
+        boolean equivalent = equivalent(comparator.getList(), getList());
+        equivalent &= equivalent(comparator.getTitle(), getTitle());
+        equivalent &= equivalent(comparator.getPosition(), getPosition());
+        equivalent &= equivalent(comparator.getBoard(), getBoard());
+        equivalent &= equivalent(comparator.getNumber(), getNumber());
         return equivalent;
     }
 
-    private boolean isEquivalent(String comparatorValue, String thisValue) {
+    private boolean equivalent(Object comparatorValue, Object thisValue) {
         return comparatorValue == null || comparatorValue.equals(thisValue);
     }
 
