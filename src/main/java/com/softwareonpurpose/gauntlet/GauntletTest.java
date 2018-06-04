@@ -13,7 +13,7 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet;
 
-import com.softwareonpurpose.traceability4test.CoverageReport;
+import com.softwareonpurpose.coverage4test.CoverageReport;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
 import com.softwareonpurpose.validator4test.Validator;
@@ -29,8 +29,7 @@ import java.lang.reflect.Method;
 
 public abstract class GauntletTest {
 
-    private final CoverageReport applicationCoverage;
-    private final CoverageReport requirementsCoverage;
+    private final CoverageReport report;
     private final String classname;
     private Logger logger;
     private String testMethodName;
@@ -39,10 +38,7 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         this.classname = this.getClass().getSimpleName();
-        String appCoverageFile = String.format("application.%s", classname);
-        String reqCoverageFile = String.format("requirements.%s", classname);
-        applicationCoverage = CoverageReport.getInstance(appCoverageFile);
-        requirementsCoverage = CoverageReport.getInstance(reqCoverageFile);
+        report = CoverageReport.construct(classname);
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
     }
@@ -71,12 +67,6 @@ public abstract class GauntletTest {
 
     private void addCoverage(ITestResult result) {
         String scenario = compileScenario(result);
-        String test = String.format("%s.%s", classname, testMethodName);
-        if (requirements != null) {
-            areRequirementsTraced = true;
-            requirementsCoverage.addEntries(test, scenario, requirements);
-        }
-        applicationCoverage.addEntry(test, scenario, null);
         setRequirements(null);
     }
 
@@ -96,9 +86,7 @@ public abstract class GauntletTest {
 
     @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
-        applicationCoverage.write();
         if (areRequirementsTraced) {
-            requirementsCoverage.write();
         }
     }
 
@@ -187,5 +175,15 @@ public abstract class GauntletTest {
         public static final String CARD = "card_data";
 
         //  public final static String DATABASE_NAME = "[database name]";
+    }
+
+    /**
+     * Validation targets
+     */
+    @SuppressWarnings("unused")
+    public class TestSubject {
+
+        public static final String VIEW = "view";
+        public static final String DATA_ENTITY = "[data_entity_name]";
     }
 }
