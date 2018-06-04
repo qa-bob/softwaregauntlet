@@ -35,16 +35,23 @@ public class CardMoveDataTest extends GauntletTest {
     @Test(groups = {TestType.RELEASE, TestType.SPRINT}, dataProvider = "moveScenarios")
     public void fromCardMoveModal(TrelloCardDefinition cardDefinition, String newList) {
         setRequirements("System ID #9004.User Story #5007|System ID #9005.User Story #5008");
+
         TrelloUserDefinition userDefinition = TrelloUserDefinition.getInstance();
         TrelloUser user = TrelloUserRepository.getInstance().query(userDefinition);
         TrelloCard card = TrelloCardProvider.getInstance().get(cardDefinition);
+
         TrelloCardDefinition expected = card.toDefinition().withInList(newList);
+
         given(userDefinition);
         given(cardDefinition);
+
         when();
+
         LoginView.directNav().login(user);
         CardView.directNav(card).clickMove().move(newList);
+
         TrelloCard actual = TrelloCardRepository.getInstance().query(card);
+
         then(TrelloCardValidator.getInstance(expected, actual).validate());
     }
 }
