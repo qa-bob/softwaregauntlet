@@ -26,6 +26,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
 
@@ -34,7 +38,6 @@ public abstract class GauntletTest {
     private Logger logger;
     private String testMethodName;
     private String requirements;
-    private boolean areRequirementsTraced;
 
     protected GauntletTest() {
         this.classname = this.getClass().getSimpleName();
@@ -62,11 +65,21 @@ public abstract class GauntletTest {
     @AfterMethod(alwaysRun = true)
     public void terminateExecution(ITestResult result) {
         UiHost.quitInstance();
-        addCoverage(result);
+        addCoverageEntry(result);
     }
 
-    private void addCoverage(ITestResult result) {
+    private void addCoverageEntry(ITestResult result) {
+        List<String> requirementList;
+        if (requirements == null) {
+            requirementList = Collections.singletonList(null);
+        } else {
+            requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
+        }
         String scenario = compileScenario(result);
+        for (String requirement : requirementList) {
+            requirement = requirement != null ? requirement.replace(".", "|") : null;
+            report.addEntry(testMethodName, scenario, requirement);
+        }
         setRequirements(null);
     }
 
@@ -86,8 +99,7 @@ public abstract class GauntletTest {
 
     @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
-        if (areRequirementsTraced) {
-        }
+        report.write();
     }
 
     @SuppressWarnings("unused")
@@ -138,7 +150,8 @@ public abstract class GauntletTest {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
-        public static final String PRODUCTION = "production";   //  Benign (alters NO data) executable in Production
+        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in
+        // Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
         public static final String SPRINT = "sprint";           //  Validates acceptance criteria for current sprint
     }
@@ -148,7 +161,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Application {
-        public static final String TRELLO = "trello_app";
+        public static final String TRELLO = "trello";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -158,21 +171,20 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class View {
-        public static final String CARD_MOVE = "card_move_view";
-        public static final String CARD = "card_view";
-        public static final String LANDING = "landing_view";
-        public static final String LOGIN = "login_view";
-        public static final String BOARD = "board_view";
+        public static final String LANDING = "landing";
+        public static final String BOARD = "board";
+        public static final String LOGIN = "login";
+        public static final String CARD_MOVE = "card_move";
+        public static final String CARD = "card";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
 
     /**
-     * Names of Data Entities supporting applications under test
+     * Names of Databases supporting applications under test
      */
     @SuppressWarnings("unused")
-    public class DataEntity {
-        public static final String CARD = "card_data";
+    public class Database {
 
         //  public final static String DATABASE_NAME = "[database name]";
     }
@@ -185,5 +197,6 @@ public abstract class GauntletTest {
 
         public static final String VIEW = "view";
         public static final String DATA_ENTITY = "[data_entity_name]";
+        public static final String CARD = "card";
     }
 }
