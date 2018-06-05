@@ -13,6 +13,7 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet;
 
+import com.google.gson.Gson;
 import com.softwareonpurpose.coverage4test.CoverageReport;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
@@ -87,14 +88,14 @@ public abstract class GauntletTest {
         if (result.getParameters().length == 0) {
             return null;
         }
-        StringBuilder scenario = new StringBuilder();
-        for (Object participant : result.getParameters()) {
-            String participantDescription = participant.toString();
-            String formattedDescription = participantDescription.substring(0, 1).equals("{") ? participantDescription
-                    : String.format("{%s}", participantDescription);
-            scenario.append(formattedDescription);
+        StringBuilder scenarioBuilder = new StringBuilder();
+        for (Object scenarioParameter : result.getParameters()) {
+            String parameterJson = new Gson().toJson(scenarioParameter);
+            parameterJson = parameterJson.contains("{") ? parameterJson : String.format("{%s}", parameterJson);
+            scenarioBuilder.append(parameterJson).append(",");
         }
-        return scenario.toString();
+        String scenario = scenarioBuilder.toString();
+        return scenario.lastIndexOf(",") >= 0 ? scenario.substring(0, scenario.lastIndexOf(",")) : scenario;
     }
 
     @AfterClass(alwaysRun = true)

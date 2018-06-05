@@ -1,5 +1,5 @@
 group 'com.softwareonpurpose'
-version '1.0.6'
+version '1.1.0'
 
 apply plugin: 'java'
 
@@ -18,7 +18,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:3.11.0'
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.1.4.Final'
     compile 'org.jboss.resteasy:resteasy-client:3.1.4.Final'
-    compile files('./src/main/resources/coverage4test-1.0.0.jar')
+    compile files('./src/main/resources/coverage4test-1.0.1.jar')
     compile files('./src/main/resources/uinavigator-1.0.3.jar')
     compile files('./src/main/resources/validator4test-1.0.1.jar')
 }
