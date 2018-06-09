@@ -13,7 +13,6 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet;
 
-import com.google.gson.Gson;
 import com.softwareonpurpose.coverage4test.CoverageReport;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
@@ -35,13 +34,12 @@ import java.util.stream.Collectors;
 public abstract class GauntletTest {
 
     private final CoverageReport report;
-    private final String classname;
     private Logger logger;
     private String testMethodName;
     private String requirements;
 
     protected GauntletTest() {
-        this.classname = this.getClass().getSimpleName();
+        String classname = this.getClass().getSimpleName();
         report = CoverageReport.construct(classname.replace("Test", ""));
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
@@ -89,10 +87,11 @@ public abstract class GauntletTest {
             return null;
         }
         StringBuilder scenarioBuilder = new StringBuilder();
-        for (Object scenarioParameter : result.getParameters()) {
-            String parameterJson = new Gson().toJson(scenarioParameter);
-            parameterJson = parameterJson.contains("{") ? parameterJson : String.format("{%s}", parameterJson);
-            scenarioBuilder.append(parameterJson).append(",");
+        for (Object participant : result.getParameters()) {
+            String participantDescription = participant.toString().replace("\\\"", "\"");
+            String formattedDescription = participantDescription.substring(0, 1).equals("{") ? participantDescription
+                    : String.format("{%s}", participantDescription);
+            scenarioBuilder.append(formattedDescription);
         }
         String scenario = scenarioBuilder.toString();
         return scenario.lastIndexOf(",") >= 0 ? scenario.substring(0, scenario.lastIndexOf(",")) : scenario;
@@ -125,7 +124,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("WeakerAccess")
     protected void confirm(String testResult) {
-        Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
+        Assert.assertEquals(testResult, Validator.PASS, testResult);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
                 getTestMethodName()));
     }
