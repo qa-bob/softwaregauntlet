@@ -1,8 +1,8 @@
 package com.trello.view.login;
 
-import com.softwareonpurpose.validator4test.Validator;
+import com.softwareonpurpose.calibrator4test.Calibrator;
 
-public class LoginViewValidator extends Validator {
+public class LoginViewValidator extends Calibrator {
     private static final String DESCRIPTION = "'Login' view";
     private final LoginViewValidatable expected;
     private final LoginViewValidatable actual;

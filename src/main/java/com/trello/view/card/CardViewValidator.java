@@ -1,8 +1,8 @@
 package com.trello.view.card;
 
-import com.softwareonpurpose.validator4test.Validator;
+import com.softwareonpurpose.calibrator4test.Calibrator;
 
-public class CardViewValidator extends Validator {
+public class CardViewValidator extends Calibrator {
     private static final String DESCRIPTION = "'Card' view";
     private final CardViewValidatable expected;
     private final CardViewValidatable actual;

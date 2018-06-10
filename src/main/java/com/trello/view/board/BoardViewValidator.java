@@ -1,16 +1,16 @@
 package com.trello.view.board;
 
+import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.uinavigator.UiRegion;
-import com.softwareonpurpose.validator4test.Validator;
-import com.trello.view.region.header.TrelloHeaderValidator;
+import com.trello.view.region.header.TrelloHeaderCalibrator;
 
-public class BoardViewValidator extends Validator {
+public class BoardViewValidator extends Calibrator {
     private static final String DESCRIPTION = "'Board' view";
 
     private BoardViewValidator(BoardViewExpected expected, BoardView actual) {
         super(DESCRIPTION, expected, actual);
         UiRegion.suppressConstructionLogging(true);
-        addChildValidator(TrelloHeaderValidator.getInstance(expected.inHeader(), actual.inHeader(), this));
+        addChildCalibrator(TrelloHeaderCalibrator.getInstance(expected.inHeader(), actual.inHeader(), this));
         UiRegion.suppressConstructionLogging(false);
     }
 

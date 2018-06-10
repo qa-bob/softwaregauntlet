@@ -1,8 +1,8 @@
 package com.trello.view.card.move;
 
-import com.softwareonpurpose.validator4test.Validator;
+import com.softwareonpurpose.calibrator4test.Calibrator;
 
-public class CardMoveModalValidator extends Validator {
+public class CardMoveModalValidator extends Calibrator {
     private static final String DESCRIPTION = "'Card Move' modal";
     private final CardMoveModalValidatable expected;
     private final CardMoveModalValidatable actual;

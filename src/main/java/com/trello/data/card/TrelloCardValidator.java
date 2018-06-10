@@ -1,8 +1,8 @@
 package com.trello.data.card;
 
-import com.softwareonpurpose.validator4test.Validator;
+import com.softwareonpurpose.calibrator4test.Calibrator;
 
-public class TrelloCardValidator extends Validator {
+public class TrelloCardValidator extends Calibrator {
     private static final String DESCRIPTION = "Trello Card";
     private final TrelloCardValidatable actual;
     private final TrelloCardValidatable expected;

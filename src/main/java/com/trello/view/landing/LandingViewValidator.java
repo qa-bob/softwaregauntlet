@@ -1,18 +1,18 @@
 package com.trello.view.landing;
 
+import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.uinavigator.UiRegion;
-import com.softwareonpurpose.validator4test.Validator;
 import com.trello.view.landing.content.LandingContentValidator;
-import com.trello.view.region.header.TrelloHeaderValidator;
+import com.trello.view.region.header.TrelloHeaderCalibrator;
 
-public class LandingViewValidator extends Validator {
+public class LandingViewValidator extends Calibrator {
     private static final String DESCRIPTION = "'Landing' view";
 
     private LandingViewValidator(LandingViewExpected expected, LandingView actual) {
         super(DESCRIPTION, expected, actual);
         UiRegion.suppressConstructionLogging(true);
-        addChildValidator(TrelloHeaderValidator.getInstance(expected.inHeader(), actual.inHeader(), this));
-        addChildValidator(LandingContentValidator.getInstance(expected.inContent(), actual.inContent(), this));
+        addChildCalibrator(TrelloHeaderCalibrator.getInstance(expected.inHeader(), actual.inHeader(), this));
+        addChildCalibrator(LandingContentValidator.getInstance(expected.inContent(), actual.inContent(), this));
         UiRegion.suppressConstructionLogging(false);
     }
 
