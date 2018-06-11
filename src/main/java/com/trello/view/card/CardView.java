@@ -26,7 +26,7 @@ public class CardView extends UiView implements CardViewValidatable {
         String cardNumber = card.getNumber();
         String cardTitle = card.getTitle().toLowerCase().replace(" ", "-");
         String relativeCardUri = String.format("%s/%s-%s", cardId, cardNumber, cardTitle);
-        UiView.instantiateView(CardView.class).load(relativeCardUri);
+        UiView.construct(CardView.class).load(relativeCardUri);
         return UiView.expect(CardView.class);
     }
 

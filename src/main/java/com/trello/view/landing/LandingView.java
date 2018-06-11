@@ -18,7 +18,7 @@ public class LandingView extends UiView implements LandingViewValidatable {
     }
 
     public static LandingView directNav() {
-        UiView.instantiateView(LandingView.class).load();
+        UiView.construct(LandingView.class).load();
         return UiView.expect(LandingView.class);
     }
 
