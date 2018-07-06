@@ -20,6 +20,7 @@ public class CardMoveModal extends UiView implements CardMoveModalValidatable {
         boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);
         confirmed &= getTitleElement().isDisplayed();
         confirmed &= "Move Card".equals(getTitle());
+        confirmed &= getMoveButtonElement().waitUntilVisible();
         return confirmed;
     }
 
