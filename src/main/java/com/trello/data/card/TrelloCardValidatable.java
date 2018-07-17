@@ -17,8 +17,7 @@ public abstract class TrelloCardValidatable {
 
     @Override
     public String toString() {
-        String details = new Gson().toJson(this);
-        return String.format("Trello Card: %s", details.replace("{}", "{any}"));
+        return new Gson().toJson(this);
     }
 
     public boolean equivalent(TrelloCardValidatable comparator) {

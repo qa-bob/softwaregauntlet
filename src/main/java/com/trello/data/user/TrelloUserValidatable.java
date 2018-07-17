@@ -1,6 +1,7 @@
 package com.trello.data.user;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public abstract class TrelloUserValidatable {
 
@@ -10,7 +11,7 @@ public abstract class TrelloUserValidatable {
 
     @Override
     public String toString() {
-        String details = new Gson().toJson(this);
+        String details = new GsonBuilder().disableHtmlEscaping().create().toJson(this);
         return String.format("Trello User: %s", details.replace("{}", "{any}"));
     }
 
