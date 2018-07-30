@@ -8,15 +8,7 @@ public interface LoginViewValidatable {
 
     String getPasswordLabel();
 
-    String getPasswordPlaceholder();
-
     String getLoginButtonLabel();
 
-    String getForgotPasswordMessage();
-
-    String getResetLinkText();
-
     String getSsoLoginText();
-
-    String getCreateAccountLinkText();
 }

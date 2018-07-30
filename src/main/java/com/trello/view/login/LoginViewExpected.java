@@ -30,23 +30,8 @@ public class LoginViewExpected implements LoginViewValidatable {
     }
 
     @Override
-    public String getPasswordPlaceholder() {
-        return getCopy().getPasswordPlaceholder();
-    }
-
-    @Override
     public String getLoginButtonLabel() {
         return getCopy().getLoginButtonLabel();
-    }
-
-    @Override
-    public String getForgotPasswordMessage() {
-        return getCopy().getForgotPasswordMessage();
-    }
-
-    @Override
-    public String getResetLinkText() {
-        return getCopy().getResetLinkText();
     }
 
     @Override
@@ -54,8 +39,4 @@ public class LoginViewExpected implements LoginViewValidatable {
         return getCopy().getSsoLoginText();
     }
 
-    @Override
-    public String getCreateAccountLinkText() {
-        return getCopy().getCreateAccountLinkText();
-    }
 }

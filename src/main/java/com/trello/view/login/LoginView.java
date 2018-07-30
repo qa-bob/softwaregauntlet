@@ -87,34 +87,8 @@ public class LoginView extends UiView implements LoginViewValidatable {
     }
 
     @Override
-    public String getPasswordPlaceholder() {
-        return getPasswordElement().getTip();
-    }
-
-    @Override
     public String getLoginButtonLabel() {
         return getLoginButtonElement().getAttribute("value");
-    }
-
-    @Override
-    public String getForgotPasswordMessage() {
-        return getForgetPasswordMessageElement().getText();
-    }
-
-    private UiElement getForgetPasswordMessageElement() {
-        String desc = "'Forgot password' message";
-        String locatorValue = "login-forget-password";
-        return UiElement.getInstance(desc, UiElement.LocatorType.CLASS, locatorValue, this.getElement());
-    }
-
-    @Override
-    public String getResetLinkText() {
-        return getResetLinkElement().getText();
-    }
-
-    private UiElement getResetLinkElement() {
-        String description = "'Reset' link text";
-        return UiElement.getInstance(description, UiElement.LocatorType.TAG, "a", getForgetPasswordMessageElement());
     }
 
     @Override
@@ -130,16 +104,5 @@ public class LoginView extends UiView implements LoginViewValidatable {
     private UiElement getLoginPasswordContainerElement() {
         String desc = "'Login password' container";
         return UiElement.getInstance(desc, UiElement.LocatorType.CLASS, "login-password-container", this.getElement());
-    }
-
-    @Override
-    public String getCreateAccountLinkText() {
-        return getAccountLinkElement().getText();
-    }
-
-    private UiElement getAccountLinkElement() {
-        String description = "'Create account' link text";
-        //noinspection SpellCheckingInspection
-        return UiElement.getInstance(description, UiElement.LocatorType.ID, "signup", this.getElement());
     }
 }

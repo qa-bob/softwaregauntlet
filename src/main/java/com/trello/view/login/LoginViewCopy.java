@@ -28,27 +28,12 @@ public class LoginViewCopy {
         return getSource().getPassword();
     }
 
-    String getPasswordPlaceholder() {
-        return String.format("%s %s", getSource().getForExample(), getSource().getPasswordExample());
-    }
-
     String getLoginButtonLabel() {
         return getSource().getLogInCapitalized();
-    }
-
-    String getForgotPasswordMessage() {
-        return String.format("%s? %s.", getSource().getForgotPassword(), getSource().getReset());
-    }
-
-    String getResetLinkText() {
-        return String.format("%s.", getSource().getReset());
     }
 
     String getSsoLoginText() {
         return String.format("%s %s", getSource().getLogIn(), getSource().withSso());
     }
 
-    String getCreateAccountLinkText() {
-        return String.format("%s %s %s.", getSource().getCreate(), getSource().getAppName(), getSource().getAccount());
-    }
 }
