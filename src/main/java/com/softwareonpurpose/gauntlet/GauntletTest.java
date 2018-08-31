@@ -197,5 +197,6 @@ public abstract class GauntletTest {
         public static final String VIEW = "view";
         public static final String DATA_ENTITY = "[data_entity_name]";
         public static final String CARD = "card";
+        public static final String COPY = "copy";
     }
 }

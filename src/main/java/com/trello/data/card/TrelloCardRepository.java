@@ -1,5 +1,6 @@
 package com.trello.data.card;
 
+import com.softwareonpurpose.uinavigator.UiHost;
 import com.trello.data.user.TrelloUser;
 import com.trello.data.user.TrelloUserDefinition;
 import com.trello.data.user.TrelloUserRepository;
@@ -7,12 +8,11 @@ import com.trello.view.board.BoardView;
 import com.trello.view.card.CardView;
 import com.trello.view.login.LoginView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TrelloCardRepository {
     private static TrelloCardRepository repository;
-    private static List<Integer> queueNumbers = new ArrayList<>();
+    private static boolean acquiringInstance = false;
     private final List<TrelloCard> cards;
 
     private TrelloCardRepository() {
@@ -22,12 +22,17 @@ public class TrelloCardRepository {
         BoardView board = BoardView.directNav();
         cards = board.getCards();
         BoardView.directNav().logout();
+        UiHost.quitInstance();
     }
 
     public static TrelloCardRepository getInstance() {
-        if (repository == null) {
+        if (repository == null && !acquiringInstance) {
+            acquiringInstance = true;
             repository = new TrelloCardRepository();
+            acquiringInstance = false;
         }
+        //noinspection WhileLoopSpinsOnField,StatementWithEmptyBody
+        while(acquiringInstance);
         return repository;
     }
 

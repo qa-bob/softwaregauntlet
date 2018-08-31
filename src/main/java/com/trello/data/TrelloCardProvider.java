@@ -10,13 +10,10 @@ import org.slf4j.LoggerFactory;
 
 public class TrelloCardProvider {
     private static TrelloCardProvider provider;
-    private final TrelloCardRepository repository;
+    private TrelloCardRepository repository;
     private Logger logger;
 
     private TrelloCardProvider() {
-        UiRegion.suppressConstructionLogging(true);
-        repository = TrelloCardRepository.getInstance();
-        UiRegion.suppressConstructionLogging(true);
     }
 
     public static TrelloCardProvider getInstance() {
@@ -28,7 +25,7 @@ public class TrelloCardProvider {
 
     public TrelloCard get(TrelloCardValidatable card) {
         UiRegion.suppressConstructionLogging(true);
-        TrelloCard identified = repository.query(card);
+        TrelloCard identified = getRepository().query(card);
         if (identified == null) {
             identified = addCard(card);
         }
@@ -39,12 +36,21 @@ public class TrelloCardProvider {
         return identified;
     }
 
+    private TrelloCardRepository getRepository() {
+        if (repository == null) {
+            UiRegion.suppressConstructionLogging(true);
+            repository = TrelloCardRepository.getInstance();
+            UiRegion.suppressConstructionLogging(true);
+        }
+        return repository;
+    }
+
     private TrelloCard addCard(TrelloCardValidatable card) {
         TrelloCard identified;
         String title = card.getTitle() == null ? "TEK User Story" : card.getTitle();
         String list = card.getList() == null ? "To Do" : card.getList();
         UiRegion.suppressConstructionLogging(true);
-        identified = repository.add(TrelloCardDefinition.getInstance().withInList(list).withTitle(title));
+        identified = getRepository().add(TrelloCardDefinition.getInstance().withInList(list).withTitle(title));
         UiRegion.suppressConstructionLogging(false);
         return identified;
     }

@@ -6,6 +6,7 @@ import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
 import com.trello.data.card.TrelloCard;
 import com.trello.data.card.TrelloCardValidatable;
+import com.trello.view.card.copy.CardCopyModal;
 import com.trello.view.card.move.CardMoveModal;
 
 public class CardView extends UiView implements CardViewValidatable {
@@ -17,6 +18,9 @@ public class CardView extends UiView implements CardViewValidatable {
     private String cardId;
     private String cardNumber;
 
+    /***
+     * @deprecated Replace use of this constructor with getInstance() creation method
+     */
     public CardView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
@@ -175,5 +179,14 @@ public class CardView extends UiView implements CardViewValidatable {
         String list = moveModal.getList();
         String position = moveModal.getPosition();
         return TrelloCard.getInstance(id, number, title, board, list, position);
+    }
+
+    public CardCopyModal clickCopy() {
+        getCopyElement().click();
+        return CardCopyModal.expect(CardCopyModal.class);
+    }
+
+    private UiElement getCopyElement() {
+        return UiElement.getInstance("'Copy Menu' item", UiElement.LocatorType.CLASS, "js-copy-card", this.getElement());
     }
 }
